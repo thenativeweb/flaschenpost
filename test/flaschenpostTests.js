@@ -9,7 +9,7 @@ var flaschenpost = require('../lib/flaschenpost'),
 suite('flaschenpost', function () {
   suiteSetup(function () {
     flaschenpost.setupNode({
-      host: 'localhost',
+      hostname: 'localhost',
       port: 3000,
       id: '12a30e3632a51fdab4fedd07bcc219b433e17343'
     });
@@ -47,7 +47,7 @@ suite('flaschenpost', function () {
       assert.that(messageAsJson.id, is.ofType('number'));
       assert.that(messageAsJson.timestamp, is.ofType('string'));
       assert.that(messageAsJson.module, is.equalTo('flaschenpost'));
-      assert.that(messageAsJson.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
+      assert.that(messageAsJson.node, is.equalTo({ hostname: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
       assert.that(messageAsJson.uuid, is.equalTo('1fd68e8d-10d0-4f56-b30d-6b88c02d1012'));
       assert.that(messageAsJson.level, is.equalTo('info'));
       assert.that(messageAsJson.message, is.equalTo('foo'));
@@ -80,4 +80,22 @@ suite('flaschenpost', function () {
     });
     logger[level]('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
   }));
+
+  test('throws an error if no uuid is given, but metadata are given.', function () {
+    var logger = flaschenpost.getLogger({
+      module: 'flaschenpost'
+    });
+    assert.that(function () {
+      logger.info('foo', { bar: 'baz' });
+    }, is.throwing());
+  });
+
+  test('throws an error if no uuid is given and no metadata are given.', function () {
+    var logger = flaschenpost.getLogger({
+      module: 'flaschenpost'
+    });
+    assert.that(function () {
+      logger.info('foo');
+    }, is.throwing());
+  });
 });
