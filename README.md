@@ -47,6 +47,26 @@ The transports need to be compatible to the transports of the [winston](https://
 
 *Note: A console logger is added automatically.*
 
+### Parsing messages
+
+flaschenpost creates log messages as a stringified JSON object.
+
+```javascript
+{
+  id: 0,
+  timestamp: '2013-05-25T10:59:41.380Z',
+  module: 'flaschenpost',
+  node: {
+    host: 'localhost',
+    port: 3000,
+    id: '12a30e3632a51fdab4fedd07bcc219b433e17343'
+  },
+  uuid: '1fd68e8d-10d0-4f56-b30d-6b88c02d1012',
+  level: 'debug',
+  message: 'foo',
+  metadata: {}
+}```
+
 ## Running the tests
 
 flaschenpost has been developed using TDD. To run the tests, go to the folder where you have installed flaschenpost to and run `npm test`. You need to have [mocha](https://github.com/visionmedia/mocha) installed.
