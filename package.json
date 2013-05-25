@@ -6,6 +6,7 @@
   "main": "lib/flaschenpost.js",
   "private": true,
   "dependencies": {
+    "underscore": "1.4.4",
     "winston": "0.7.1"
   },
   "devDependencies": {

@@ -80,6 +80,21 @@ suite('flaschenpost', function () {
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { bar: 'baz' });
     });
 
+    test('logs errors correctly.', function (done) {
+      flaschenpost.add(TestTransport, function (level, message) {
+        var messageAsJson = JSON.parse(message);
+        assert.that(messageAsJson.metadata.name, is.equalTo('Error'));
+        assert.that(messageAsJson.metadata.message, is.equalTo('foo'));
+        flaschenpost.remove(TestTransport);
+        done();
+      });
+
+      var logger = flaschenpost.getLogger({
+        module: 'flaschenpost'
+      });
+      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', new Error('foo'));
+    });
+
     test('logs with the correct level.', cases([
       [ 'fatal' ],
       [ 'error' ],
