@@ -117,6 +117,23 @@ suite('flaschenpost', function () {
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', new Error('foo'));
     });
 
+    test('logs errors correctly when they appear recursively.', function (done) {
+      flaschenpost.add(TestTransport, function (level, message) {
+        var messageAsJson = JSON.parse(message);
+        assert.that(messageAsJson.metadata, is.ofType('object'));
+        assert.that(messageAsJson.metadata.error, is.ofType('object'));
+        assert.that(messageAsJson.metadata.error.name, is.equalTo('Error'));
+        assert.that(messageAsJson.metadata.error.message, is.equalTo('foo'));
+        flaschenpost.remove(TestTransport);
+        done();
+      });
+
+      var logger = flaschenpost.getLogger({
+        module: 'flaschenpost'
+      });
+      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { error: new Error('foo') });
+    });
+
     test('logs with the correct level.', cases([
       [ 'fatal' ],
       [ 'error' ],
