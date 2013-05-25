@@ -70,6 +70,8 @@ flaschenpost creates log messages as a stringified JSON object.
 }
 ```
 
+*Note: If you did not call `setupNode`, flaschenpost will skip the `node` property.*
+
 ## Running the tests
 
 flaschenpost has been developed using TDD. To run the tests, go to the folder where you have installed flaschenpost to and run `npm test`. You need to have [mocha](https://github.com/visionmedia/mocha) installed.
