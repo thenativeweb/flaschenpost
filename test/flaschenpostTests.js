@@ -80,6 +80,28 @@ suite('flaschenpost', function () {
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { bar: 'baz' });
     });
 
+    test('omits metadata when no metadata are given.', function (done) {
+      flaschenpost.add(TestTransport, function (level, message) {
+        assert.that(level, is.equalTo('info'));
+        var messageAsJson = JSON.parse(message);
+        assert.that(messageAsJson.id, is.ofType('number'));
+        assert.that(messageAsJson.timestamp, is.ofType('string'));
+        assert.that(messageAsJson.module, is.equalTo('flaschenpost'));
+        assert.that(messageAsJson.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
+        assert.that(messageAsJson.uuid, is.equalTo('1fd68e8d-10d0-4f56-b30d-6b88c02d1012'));
+        assert.that(messageAsJson.level, is.equalTo('info'));
+        assert.that(messageAsJson.message, is.equalTo('foo'));
+        assert.that(messageAsJson.metadata, is.undefined());
+        flaschenpost.remove(TestTransport);
+        done();
+      });
+
+      var logger = flaschenpost.getLogger({
+        module: 'flaschenpost'
+      });
+      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
+    });
+
     test('logs errors correctly.', function (done) {
       flaschenpost.add(TestTransport, function (level, message) {
         var messageAsJson = JSON.parse(message);
