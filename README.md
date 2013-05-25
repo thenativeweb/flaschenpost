@@ -4,11 +4,48 @@ flaschenpost is a logger for distributed network applications.
 
 ## Installation
 
-TODO
+At the moment, installation of this module must be made manually.
 
 ## Quick start
 
-TODO
+The first thing you need to do is to add a reference to the flaschenpost module and call its `setupNode` function to make the network node known to the logger.
+
+Afterwards you can use the `getLogger` function to get a specific logger instance for the module you are currently working on.
+
+```javascript
+var flaschenpost = require('flaschenpost');
+flaschenpost.setupNode({
+  host: 'localhost',
+  port: 3000,
+  id: '12a30e3632a51fdab4fedd07bcc219b433e17343'
+});
+
+var logger = flaschenpost.getLogger('foo');
+```
+
+Afterwards, you can use the functions `fatal`, `error`, `warn`, `info` and `debug`. You need to provide a `uuid` and a `message`. Optionally you can also specify a `metadata` object.
+
+```javascript
+logger.info('571f7ea7-aea3-4c51-b5ab-a23980e12859', 'bar', { bar: 'baz' });
+```
+
+### Adding and removing transports
+
+To redirect log messages to specific targets, you need to register transports on flaschenpost using the `add` function. Besides the transport constructor, you also need to specify an `options` object. The concrete parameters depend on the transport used.
+
+```javascript
+flaschenpost.add(FooTransport, { bar: 'baz' });
+```
+
+To remove a transport, you need to call the `remove` function and specify the transport constructor.
+
+```javascript
+flaschenpost.remove(FooTransport);
+```
+
+The transports need to be compatible to the transports of the [winston](https://github.com/flatiron/winston) project.
+
+*Note: A console logger is added automatically.*
 
 ## Running the tests
 
