@@ -47,7 +47,7 @@ flaschenpost.remove(FooTransport);
 
 The transports need to be compatible to the transports of the [winston](https://github.com/flatiron/winston) project.
 
-*Note: A console logger is added automatically.*
+*Note: A console logger is added automatically when running in `development` mode.*
 
 ### Parsing messages
 
