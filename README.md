@@ -2,6 +2,8 @@
 
 flaschenpost is a logger for distributed network applications.
 
+![flaschenpost](https://github.com/thenativeweb/flaschenpost/raw/master/images/logo.jpg "flaschenpost")
+
 ## Installation
 
 At the moment, installation of this module must be made manually.
