@@ -22,7 +22,7 @@ flaschenpost.setupNode({
   id: '12a30e3632a51fdab4fedd07bcc219b433e17343'
 });
 
-var logger = flaschenpost.getLogger('foo');
+var logger = flaschenpost.getLogger({ module: 'foo' });
 ```
 
 Afterwards, you can use the functions `fatal`, `error`, `warn`, `info` and `debug`. You need to provide a `uuid` and a `message`. Optionally you can also specify a `metadata` object.
