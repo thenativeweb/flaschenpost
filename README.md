@@ -67,7 +67,8 @@ flaschenpost creates log messages as a stringified JSON object.
   level: 'debug',
   message: 'foo',
   metadata: {}
-}```
+}
+```
 
 ## Running the tests
 
