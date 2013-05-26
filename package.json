@@ -6,6 +6,7 @@
   "main": "lib/flaschenpost.js",
   "private": true,
   "dependencies": {
+    "hexaring": "git+ssh://git@github.com:thenativeweb/hexaring.git",
     "underscore": "1.4.4",
     "winston": "0.7.1"
   },

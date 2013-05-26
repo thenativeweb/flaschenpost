@@ -62,7 +62,8 @@ suite('flaschenpost', function () {
       flaschenpost.add(TestTransport, function (level, message) {
         assert.that(level, is.equalTo('info'));
         var messageAsJson = JSON.parse(message);
-        assert.that(messageAsJson.id, is.ofType('number'));
+        assert.that(messageAsJson.id, is.ofType('string'));
+        assert.that(messageAsJson.id.length, is.equalTo(40));
         assert.that(messageAsJson.timestamp, is.ofType('string'));
         assert.that(messageAsJson.module, is.equalTo('flaschenpost'));
         assert.that(messageAsJson.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
@@ -84,7 +85,8 @@ suite('flaschenpost', function () {
       flaschenpost.add(TestTransport, function (level, message) {
         assert.that(level, is.equalTo('info'));
         var messageAsJson = JSON.parse(message);
-        assert.that(messageAsJson.id, is.ofType('number'));
+        assert.that(messageAsJson.id, is.ofType('string'));
+        assert.that(messageAsJson.id.length, is.equalTo(40));
         assert.that(messageAsJson.timestamp, is.ofType('string'));
         assert.that(messageAsJson.module, is.equalTo('flaschenpost'));
         assert.that(messageAsJson.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));

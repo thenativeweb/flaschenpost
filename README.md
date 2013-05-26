@@ -55,7 +55,7 @@ flaschenpost creates log messages as a stringified JSON object.
 
 ```javascript
 {
-  id: 0,
+  id: '0000000000000000000000000000000000000000',
   timestamp: '2013-05-25T10:59:41.380Z',
   module: 'flaschenpost',
   node: {
