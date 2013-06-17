@@ -31,6 +31,16 @@ Afterwards, you can use the functions `fatal`, `error`, `warn`, `info` and `debu
 logger.info('571f7ea7-aea3-4c51-b5ab-a23980e12859', 'bar', { bar: 'baz' });
 ```
 
+### Using log levels
+
+Usually, the log levels do have the following meanings:
+
+- `fatal`: Used to report unrecoverable errors that require the application to quit
+- `error`: Used to report errors that the application may recover from, typically used in error handling functions
+- `warn`: Used to report issues that may be a problem
+- `info`: Used to report high-level application workflow
+- `debug`: Used to report low-level application workflow and inner state of the application
+
 ### Adding and removing transports
 
 To redirect log messages to specific targets, you need to register transports on flaschenpost using the `add` function. Besides the transport constructor, you also need to specify an `options` object. The concrete parameters depend on the transport used.
