@@ -35,11 +35,11 @@ logger.info('571f7ea7-aea3-4c51-b5ab-a23980e12859', 'bar', { bar: 'baz' });
 
 Usually, the log levels do have the following meanings:
 
-- `fatal`: Used to report unrecoverable errors that require the application to quit
-- `error`: Used to report errors that the application may recover from, typically used in error handling functions
-- `warn`: Used to report issues that may be a problem
-- `info`: Used to report high-level application workflow
-- `debug`: Used to report low-level application workflow and inner state of the application
+- `fatal` is used to report unrecoverable errors that require the application to shutdown.
+- `error` is used to report errors that *may* be recoverable, typically used inside error handlers.
+- `warn` is used to report issues that *may* be a problem.
+- `info` is used to report high-level workflow and state details.
+- `debug` is used to report low-level workflow and state details.
 
 ### Adding and removing transports
 
