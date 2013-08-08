@@ -73,7 +73,7 @@ flaschenpost creates log messages as a stringified JSON object.
 {
   id: '0000000000000000000000000000000000000000',
   timestamp: '2013-05-25T10:59:41.380Z',
-  module: 'flaschenpost',
+  module: 'flaschenpost@0.0.1',
   node: {
     host: 'localhost',
     port: 3000,
