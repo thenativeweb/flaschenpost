@@ -173,4 +173,16 @@ suite('flaschenpost', function () {
       }, is.throwing());
     });
   });
+
+  suite('middleware', function () {
+    test('returns a logging stream compatible to Express.', function () {
+      var middleware = flaschenpost.middleware({
+        module: 'foo',
+        uuid: '11ed349a-fa70-42d4-946c-7da473bc3566'
+      });
+      assert.that(middleware, is.ofType('object'));
+      assert.that(middleware.stream, is.ofType('object'));
+      assert.that(middleware.stream.write, is.ofType('function'));
+    });
+  });
 });

@@ -82,6 +82,19 @@ flaschenpost creates log messages as a stringified JSON object.
 
 *Note: If you did not call `setupNode`, flaschenpost will skip the `node` property.*
 
+### Connecting to Express
+
+In an Express based application you may use flaschenpost as logger for Express as well. For that you need to call the `middleware` function and hand its result over to the Express logger.
+
+```javascript
+app.use(express.logger(flaschenpost.middleware({
+  module: 'foo/express',
+  uuid: 'b5b347b3-f9e0-4a2b-9444-0127f0d0e6bd'
+})));
+```
+
+By default, all Express log messages are logged using the `info` log level.
+
 ## Running the tests
 
 flaschenpost has been developed using TDD. To run the tests, go to the folder where you have installed flaschenpost to and run `npm test`. You need to have [mocha](https://github.com/visionmedia/mocha) installed.
