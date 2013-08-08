@@ -25,7 +25,7 @@ flaschenpost.setupNode({
 var logger = flaschenpost.getLogger({ module: 'foo' });
 ```
 
-Optionally, you can also specify a version:
+Optionally, you can also specify a version.
 
 ```javascript
 var logger = flaschenpost.getLogger({ module: 'foo', version: '0.0.1' });
