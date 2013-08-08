@@ -25,6 +25,12 @@ flaschenpost.setupNode({
 var logger = flaschenpost.getLogger({ module: 'foo' });
 ```
 
+Optionally, you can also specify a version:
+
+```javascript
+var logger = flaschenpost.getLogger({ module: 'foo', version: '0.0.1' });
+```
+
 Afterwards, you can use the functions `fatal`, `error`, `warn`, `info` and `debug`. You need to provide a `uuid` and a `message`. Optionally you can also specify a `metadata` object.
 
 ```javascript
@@ -89,9 +95,12 @@ In an Express based application you may use flaschenpost as logger for Express a
 ```javascript
 app.use(express.logger(flaschenpost.middleware({
   module: 'foo/express',
+  version: '0.0.1'
   uuid: 'b5b347b3-f9e0-4a2b-9444-0127f0d0e6bd'
 })));
 ```
+
+*Please note that `version` is optional.*
 
 By default, all Express log messages are logged using the `info` log level.
 
