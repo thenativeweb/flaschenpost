@@ -22,12 +22,6 @@ flaschenpost.setupNode({
   id: '12a30e3632a51fdab4fedd07bcc219b433e17343'
 });
 
-var logger = flaschenpost.getLogger({ module: 'foo' });
-```
-
-Optionally, you can also specify a version.
-
-```javascript
 var logger = flaschenpost.getLogger({ module: 'foo', version: '0.0.1' });
 ```
 
@@ -99,8 +93,6 @@ app.use(express.logger(flaschenpost.middleware({
   uuid: 'b5b347b3-f9e0-4a2b-9444-0127f0d0e6bd'
 })));
 ```
-
-*Please note that `version` is optional.*
 
 By default, all Express log messages are logged using the `info` log level.
 

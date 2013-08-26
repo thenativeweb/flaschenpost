@@ -7,6 +7,24 @@ var flaschenpost = require('../lib/flaschenpost'),
     TestTransport = require('./TestTransport');
 
 suite('flaschenpost', function () {
+  suite('getLogger', function () {
+    test('throws an error when no module is given.', function () {
+      assert.that(function () {
+        flaschenpost.getLogger({
+          version: '0.0.1'
+        });
+      }, is.throwing());
+    });
+
+    test('throws an error when no version is given.', function () {
+      assert.that(function () {
+        flaschenpost.getLogger({
+          module: 'flaschenpost'
+        });
+      }, is.throwing());
+    });
+  });
+
   suite('when not running on a node', function () {
     test('does not put the node object into a log message.', function (done) {
       flaschenpost.add(TestTransport, function (level, message) {
@@ -18,7 +36,8 @@ suite('flaschenpost', function () {
       });
 
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { bar: 'baz' });
     });
@@ -35,7 +54,8 @@ suite('flaschenpost', function () {
 
     test('create returns an object with log functions.', function () {
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
 
       assert.that(logger, is.ofType('object'));
@@ -53,35 +73,13 @@ suite('flaschenpost', function () {
       });
 
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
     });
 
     test('logs all required information.', function (done) {
-      flaschenpost.add(TestTransport, function (level, message) {
-        assert.that(level, is.equalTo('info'));
-        var messageAsJson = JSON.parse(message);
-        assert.that(messageAsJson.id, is.ofType('string'));
-        assert.that(messageAsJson.id.length, is.equalTo(40));
-        assert.that(messageAsJson.timestamp, is.ofType('string'));
-        assert.that(messageAsJson.module, is.equalTo('flaschenpost'));
-        assert.that(messageAsJson.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
-        assert.that(messageAsJson.uuid, is.equalTo('1fd68e8d-10d0-4f56-b30d-6b88c02d1012'));
-        assert.that(messageAsJson.level, is.equalTo('info'));
-        assert.that(messageAsJson.message, is.equalTo('foo'));
-        assert.that(messageAsJson.metadata, is.equalTo({ bar: 'baz' }));
-        flaschenpost.remove(TestTransport);
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
-      });
-      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { bar: 'baz' });
-    });
-
-    test('logs the version number if given.', function (done) {
       flaschenpost.add(TestTransport, function (level, message) {
         assert.that(level, is.equalTo('info'));
         var messageAsJson = JSON.parse(message);
@@ -112,7 +110,7 @@ suite('flaschenpost', function () {
         assert.that(messageAsJson.id, is.ofType('string'));
         assert.that(messageAsJson.id.length, is.equalTo(40));
         assert.that(messageAsJson.timestamp, is.ofType('string'));
-        assert.that(messageAsJson.module, is.equalTo('flaschenpost'));
+        assert.that(messageAsJson.module, is.equalTo('flaschenpost@0.0.1'));
         assert.that(messageAsJson.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
         assert.that(messageAsJson.uuid, is.equalTo('1fd68e8d-10d0-4f56-b30d-6b88c02d1012'));
         assert.that(messageAsJson.level, is.equalTo('info'));
@@ -123,7 +121,8 @@ suite('flaschenpost', function () {
       });
 
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
     });
@@ -138,7 +137,8 @@ suite('flaschenpost', function () {
       });
 
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', new Error('foo'));
     });
@@ -155,7 +155,8 @@ suite('flaschenpost', function () {
       });
 
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { error: new Error('foo') });
     });
@@ -174,14 +175,16 @@ suite('flaschenpost', function () {
       });
 
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       logger[level]('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
     }));
 
     test('throws an error if no uuid is given, but metadata are given.', function () {
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       assert.that(function () {
         logger.info('foo', { bar: 'baz' });
@@ -190,7 +193,8 @@ suite('flaschenpost', function () {
 
     test('throws an error if no uuid is given and no metadata are given.', function () {
       var logger = flaschenpost.getLogger({
-        module: 'flaschenpost'
+        module: 'flaschenpost',
+        version: '0.0.1'
       });
       assert.that(function () {
         logger.info('foo');
@@ -202,6 +206,7 @@ suite('flaschenpost', function () {
     test('returns a logging stream compatible to Express.', function () {
       var middleware = flaschenpost.middleware({
         module: 'foo',
+        version: '0.0.1',
         uuid: '11ed349a-fa70-42d4-946c-7da473bc3566'
       });
       assert.that(middleware, is.ofType('object'));
