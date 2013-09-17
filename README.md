@@ -59,6 +59,19 @@ The transports need to be compatible to the transports of the [winston](https://
 
 *Note: A console logger is added automatically when running in `development` mode.*
 
+#### The schleuse transport
+
+flaschenpost contains a transport for sending messages to [schleuse](https://github.com/thenativeweb/schleuse). To use it, call `add` and provide a properly configured `flaschenpost.transports.schleuse` transport.
+
+```javascript
+flaschenpost.add(flaschenpost.transports.schleuse, {
+  host: 'localhost',
+  port: 1200
+});
+```
+
+*Please note that at the moment only http is supported, hence be careful when logging sensitive information.*
+
 ### Parsing messages
 
 flaschenpost creates log messages as a stringified JSON object.
