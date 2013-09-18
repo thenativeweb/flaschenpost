@@ -15,6 +15,7 @@ module.exports = function (grunt) {
 
     mochaTestConfig: {
       options: {
+        bail: true,
         reporter: 'spec',
         ui: 'tdd'
       }

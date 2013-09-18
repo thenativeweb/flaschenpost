@@ -16,6 +16,7 @@
     "grunt-contrib-jshint": "0.1.1",
     "grunt-contrib-watch": "0.2.0",
     "grunt-mocha-test": "0.2.0",
+    "nock": "0.22.1",
     "node-assertthat": "0.0.20"
   },
   "scripts": {
