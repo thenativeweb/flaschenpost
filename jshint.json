@@ -3,7 +3,6 @@
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
-  "es5": true,
   "forin": true,
   "globalstrict": true,
   "immed": true,

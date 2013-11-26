@@ -10,22 +10,23 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
-      files: ['test/**/*.js']
-    },
-
-    mochaTestConfig: {
-      options: {
-        bail: true,
-        reporter: 'spec',
-        ui: 'tdd'
+      test: {
+        options: {
+          bail: true,
+          reporter: 'spec',
+          ui: 'tdd'
+        },
+        src: ['test/**/*.js']
       }
     },
 
     watch: {
-      options: {
+      scripts: {
         files: [ '**/*.js', '!node_modules/**/*.js' ],
         tasks: [ 'default' ],
-        interrupt: true
+        options: {
+          interrupt: true
+        }
       }
     }
   });
