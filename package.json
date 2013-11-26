@@ -8,7 +8,6 @@
   "dependencies": {
     "hexaring": "git+ssh://git@github.com:thenativeweb/hexaring.git",
     "memwatch": "0.2.2",
-    "underscore": "1.4.4",
     "winston": "0.7.1"
   },
   "devDependencies": {
