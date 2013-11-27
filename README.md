@@ -41,36 +41,28 @@ Usually, the log levels do have the following meanings:
 - `info` is used to report high-level workflow and state details.
 - `debug` is used to report low-level workflow and state details.
 
-### Adding and removing transports
+### Adding and removing targets
 
-To redirect log messages to specific targets, you need to register transports on flaschenpost using the `add` function. Besides the transport constructor, you also need to specify an `options` object. The concrete parameters depend on the transport used.
-
-```javascript
-flaschenpost.add(FooTransport, { bar: 'baz' });
-```
-
-To remove a transport, you need to call the `remove` function and specify the transport constructor.
+To redirect log messages to specific targets, you need to register them on flaschenpost using the `pipe` function. Depending on the target, you may also need to give an `options` object to the constructor.
 
 ```javascript
-flaschenpost.remove(FooTransport);
+flaschenpost.pipe(new flaschenpost.targets.Console());
 ```
 
-The transports need to be compatible to the transports of the [winston](https://github.com/flatiron/winston) project.
-
-*Note: A console logger is added automatically when running in `development` mode.*
-
-#### The schleuse transport
-
-flaschenpost contains a transport for sending messages to [schleuse](https://github.com/thenativeweb/schleuse). To use it, call `add` and provide a properly configured `flaschenpost.transports.schleuse` transport.
+To remove a target, you need to call the `unpipe` function and specify the target instance you created previously.
 
 ```javascript
-flaschenpost.add(flaschenpost.transports.schleuse, {
-  host: 'localhost',
-  port: 1200
-});
+var consoleTarget = new flaschenpost.targets.Console();
+flaschenpost.pipe(consoleTarget);
+// ...
+flaschenpost.unpipe(consoleTarget);
 ```
 
-*Please note that at the moment only http is supported, hence be careful when logging sensitive information.*
+*Note: A console target is added automatically when running in `development` mode.*
+
+### Creating custom targets
+
+To create a custom target all you need to do is to implements a [writable stream](http://nodejs.org/api/stream.html#stream_class_stream_writable_1).
 
 ### Parsing messages
 
@@ -79,7 +71,7 @@ flaschenpost creates log messages as a stringified JSON object.
 ```javascript
 {
   id: '0000000000000000000000000000000000000000',
-  timestamp: '2013-05-25T10:59:41.380Z',
+  timestamp: 1385553628329,
   module: 'flaschenpost@0.0.1',
   node: {
     host: 'localhost',
