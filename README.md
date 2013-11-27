@@ -62,7 +62,31 @@ flaschenpost.unpipe(consoleTarget);
 
 ### Creating custom targets
 
-To create a custom target all you need to do is to implements a [writable stream](http://nodejs.org/api/stream.html#stream_class_stream_writable_1).
+To create a custom target all you need to do is to implement a [writable stream](http://nodejs.org/api/stream.html#stream_class_stream_writable_1) and enable `object mode`. Hence the following sample is the basic version of any target.
+
+```javascript
+'use strict';
+
+var stream = require('stream'),
+    util = require('util');
+
+var Writable = stream.Writable;
+
+var Target = function (options) {
+  options = options || {};
+  options.objectMode = true;
+
+  Writable.call(this, options);
+};
+
+util.inherits(Target, Writable);
+
+Target.prototype._write = function (chunk, encoding, callback) {
+  // ...
+};
+
+module.exports = Target;
+```
 
 ### Parsing messages
 
