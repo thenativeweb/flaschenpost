@@ -88,9 +88,7 @@ Target.prototype._write = function (chunk, encoding, callback) {
 module.exports = Target;
 ```
 
-### Parsing messages
-
-flaschenpost creates log messages as a stringified JSON object.
+You receive the log message inside the `chunk` parameter as an object with the following format. You can safely ignore the `encoding` parameter.
 
 ```javascript
 {
@@ -109,7 +107,9 @@ flaschenpost creates log messages as a stringified JSON object.
 }
 ```
 
-*Note: If you did not call `setupNode`, flaschenpost will skip the `node` property.*
+Once you are finished handling the log message, you *MUST* call the `callback` of the `_write` function.
+
+*Note: If you did not call `setupNode`, flaschenpost will omit the `node` property of the log message.*
 
 ### Connecting to Express
 
