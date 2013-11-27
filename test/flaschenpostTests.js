@@ -39,8 +39,7 @@ suite('flaschenpost', function () {
   });
 
   test('pipes to the registered writable streams.', function (done) {
-    flaschenpost.once('readable', function () {
-      flaschenpost.read();
+    flaschenpost.once('data', function () {
       done();
     });
 
@@ -53,8 +52,7 @@ suite('flaschenpost', function () {
 
   suite('when not running on a node', function () {
     test('does not put the node object into a log message.', function (done) {
-      flaschenpost.once('readable', function () {
-        var message = flaschenpost.read();
+      flaschenpost.once('data', function (message) {
         assert.that(message.level, is.equalTo('info'));
         assert.that(message.node, is.undefined());
         done();
@@ -79,8 +77,7 @@ suite('flaschenpost', function () {
     });
 
     test('logs all required information.', function (done) {
-      flaschenpost.once('readable', function () {
-        var message = flaschenpost.read();
+      flaschenpost.once('data', function (message) {
         assert.that(message.level, is.equalTo('info'));
         assert.that(message.id, is.ofType('string'));
         assert.that(message.id.length, is.equalTo(40));
@@ -102,9 +99,7 @@ suite('flaschenpost', function () {
     });
 
     test('omits metadata when no metadata are given.', function (done) {
-      flaschenpost.once('readable', function () {
-        var message = flaschenpost.read();
-
+      flaschenpost.once('data', function (message) {
         assert.that(message.level, is.equalTo('info'));
         assert.that(message.id, is.ofType('string'));
         assert.that(message.id.length, is.equalTo(40));
@@ -126,8 +121,7 @@ suite('flaschenpost', function () {
     });
 
     test('logs errors correctly.', function (done) {
-      flaschenpost.once('readable', function () {
-        var message = flaschenpost.read();
+      flaschenpost.once('data', function (message) {
         assert.that(message.metadata.name, is.equalTo('Error'));
         assert.that(message.metadata.message, is.equalTo('foo'));
         done();
@@ -141,8 +135,7 @@ suite('flaschenpost', function () {
     });
 
     test('logs errors correctly when they appear recursively.', function (done) {
-      flaschenpost.once('readable', function () {
-        var message = flaschenpost.read();
+      flaschenpost.once('data', function (message) {
         assert.that(message.metadata, is.ofType('object'));
         assert.that(message.metadata.error, is.ofType('object'));
         assert.that(message.metadata.error.name, is.equalTo('Error'));
@@ -164,8 +157,7 @@ suite('flaschenpost', function () {
       [ 'info' ],
       [ 'debug' ]
     ], function (level, done) {
-      flaschenpost.once('readable', function () {
-        var message = flaschenpost.read();
+      flaschenpost.once('data', function (message) {
         assert.that(message.level, is.equalTo(level));
         done();
       });
