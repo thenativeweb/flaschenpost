@@ -8,7 +8,8 @@
   "dependencies": {
     "chalk": "0.3.0",
     "hexaring": "git+ssh://git@github.com:thenativeweb/hexaring.git",
-    "memwatch": "0.2.2"
+    "memwatch": "0.2.2",
+    "moment": "2.4.0"
   },
   "devDependencies": {
     "cases": "0.0.2",
