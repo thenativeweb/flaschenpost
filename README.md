@@ -83,12 +83,16 @@ util.inherits(Target, Writable);
 
 Target.prototype._write = function (chunk, encoding, callback) {
   // ...
+
+  callback();
 };
 
 module.exports = Target;
 ```
 
-You receive the log message inside the `chunk` parameter as an object with the following format. You can safely ignore the `encoding` parameter.
+Add your message handling logic inside the `_write` function. While the `chunk` parameter contains the log message object, you can safely ignore the `encoding` parameter. Once you are finished handling the log message, you must run the `callback` function.
+
+The log message is given using the following format.
 
 ```javascript
 {
@@ -106,8 +110,6 @@ You receive the log message inside the `chunk` parameter as an object with the f
   metadata: {}
 }
 ```
-
-Once you are finished handling the log message, you *MUST* call the `callback` of the `_write` function.
 
 *Note: If you did not call `setupNode`, flaschenpost will omit the `node` property of the log message.*
 
