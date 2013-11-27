@@ -73,7 +73,7 @@ var stream = require('stream'),
 var Writable = stream.Writable;
 
 var Target = function (options) {
-  options = options || {};
+  options = options || {};
   options.objectMode = true;
 
   Writable.call(this, options);
