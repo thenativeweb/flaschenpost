@@ -6,7 +6,7 @@ var isError = require('../lib/isError');
 
 suite('isError', function () {
   test('returns false for normal objects.', function () {
-    assert.that(isError({}), is.false());
+    assert.that(isError({ }), is.false());
   });
 
   test('returns false for normal objects with name and message property.', function () {
