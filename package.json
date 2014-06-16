@@ -1,6 +1,6 @@
 {
   "name": "flaschenpost",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "flaschenpost is a logger for distributed network applications.",
   "contributors": [
     {
