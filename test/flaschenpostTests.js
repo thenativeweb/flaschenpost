@@ -7,24 +7,26 @@ var flaschenpost = require('../lib/flaschenpost');
 
 suite('flaschenpost', function () {
   suite('getLogger', function () {
-    test('throws an error when no module is given.', function () {
+    test('throws an error when no module is given.', function (done) {
       assert.that(function () {
         flaschenpost.getLogger({
           version: '0.0.1'
         });
       }, is.throwing());
+      done();
     });
 
-    test('throws an error when no version is given.', function () {
+    test('throws an error when no version is given.', function (done) {
       assert.that(function () {
         flaschenpost.getLogger({
           module: 'flaschenpost'
         });
       }, is.throwing());
+      done();
     });
   });
 
-  test('returns an object with logging functions.', function () {
+  test('returns an object with logging functions.', function (done) {
     var logger = flaschenpost.getLogger({
       module: 'flaschenpost',
       version: '0.0.1'
@@ -36,6 +38,7 @@ suite('flaschenpost', function () {
     assert.that(logger.warn, is.ofType('function'));
     assert.that(logger.info, is.ofType('function'));
     assert.that(logger.debug, is.ofType('function'));
+    done();
   });
 
   test('pipes to the registered writable streams.', function (done) {
@@ -169,7 +172,7 @@ suite('flaschenpost', function () {
       logger[level]('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
     }));
 
-    test('throws an error if no uuid is given, but metadata are given.', function () {
+    test('throws an error if no uuid is given, but metadata are given.', function (done) {
       var logger = flaschenpost.getLogger({
         module: 'flaschenpost',
         version: '0.0.1'
@@ -177,9 +180,10 @@ suite('flaschenpost', function () {
       assert.that(function () {
         logger.info('foo', { bar: 'baz' });
       }, is.throwing('UUID is missing.'));
+      done();
     });
 
-    test('throws an error if no uuid is given and no metadata are given.', function () {
+    test('throws an error if no uuid is given and no metadata are given.', function (done) {
       var logger = flaschenpost.getLogger({
         module: 'flaschenpost',
         version: '0.0.1'
@@ -187,11 +191,12 @@ suite('flaschenpost', function () {
       assert.that(function () {
         logger.info('foo');
       }, is.throwing('UUID is missing.'));
+      done();
     });
   });
 
   suite('middleware', function () {
-    test('returns a logging stream compatible to Express.', function () {
+    test('returns a logging stream compatible to Express.', function (done) {
       var middleware = flaschenpost.middleware({
         module: 'foo',
         version: '0.0.1',
@@ -200,6 +205,7 @@ suite('flaschenpost', function () {
       assert.that(middleware, is.ofType('object'));
       assert.that(middleware.stream, is.ofType('object'));
       assert.that(middleware.stream.write, is.ofType('function'));
+      done();
     });
   });
 });

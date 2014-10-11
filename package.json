@@ -23,8 +23,8 @@
     "cases": "0.1.1",
     "grunt": "0.4.5",
     "nock": "0.34.1",
-    "node-assertthat": "0.2.0",
-    "tourism": "0.1.0"
+    "node-assertthat": "0.2.1",
+    "tourism": "0.7.3"
   },
   "repository": {
     "type": "git",

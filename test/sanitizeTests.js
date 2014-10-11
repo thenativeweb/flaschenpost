@@ -5,7 +5,7 @@ var assert = require('node-assertthat');
 var sanitize = require('../lib/sanitize');
 
 suite('sanitize', function () {
-  test('does nothing to normal objects.', function () {
+  test('does nothing to normal objects.', function (done) {
     var actual = sanitize({
       foo: 'bar'
     });
@@ -13,9 +13,10 @@ suite('sanitize', function () {
     assert.that(actual, is.equalTo({
       foo: 'bar'
     }));
+    done();
   });
 
-  test('converts error objects to normal ones.', function () {
+  test('converts error objects to normal ones.', function (done) {
     var actual = sanitize(new Error('foo'));
 
     assert.that(actual, is.ofType('object'));
@@ -23,9 +24,10 @@ suite('sanitize', function () {
     assert.that(actual.code, is.undefined());
     assert.that(actual.message, is.equalTo('foo'));
     assert.that(actual.stack, is.ofType('string'));
+    done();
   });
 
-  test('converts recursive objects.', function () {
+  test('converts recursive objects.', function (done) {
     var actual = sanitize({
       error: new Error('foo'),
       data: 'bar'
@@ -38,5 +40,6 @@ suite('sanitize', function () {
     assert.that(actual.error.message, is.equalTo('foo'));
     assert.that(actual.error.stack, is.ofType('string'));
     assert.that(actual.data, is.equalTo('bar'));
+    done();
   });
 });
