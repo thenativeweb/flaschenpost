@@ -4,7 +4,7 @@ var stream = require('stream');
 
 var assert = require('node-assertthat');
 
-var letter = require('../lib/letter');
+var letter = require('../../lib/letter');
 
 var Transform = stream.Transform;
 
@@ -101,6 +101,29 @@ suite('letter', function () {
 
       letter.once('data', function (paragraph) {
         assert.that(paragraph.metadata, is.equalTo(expected.data.metadata));
+        done();
+      });
+
+      letter.write(expected);
+    });
+
+    test('returns a paragraph with metadata with correctly transformed error objects.', function (done) {
+      var expected = {
+        level: 'info',
+        message: 'App started.',
+        data: {
+          metadata: {
+            foo: 'bar',
+            err: new Error('foobar')
+          }
+        }
+      };
+
+      letter.once('data', function (paragraph) {
+        assert.that(paragraph.metadata.err, is.ofType('object'));
+        assert.that(paragraph.metadata.err.name, is.equalTo('Error'));
+        assert.that(paragraph.metadata.err.message, is.equalTo('foobar'));
+        assert.that(paragraph.metadata.err.stack, is.ofType('string'));
         done();
       });
 

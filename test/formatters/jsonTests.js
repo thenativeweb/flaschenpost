@@ -1,0 +1,57 @@
+'use strict';
+
+var stream = require('stream');
+
+var assert = require('node-assertthat');
+
+var json = require('../../lib/formatters/json');
+
+var Transform = stream.Transform;
+
+suite('json', function () {
+  test('is a transform stream.', function (done) {
+    assert.that(json, is.instanceOf(Transform));
+    done();
+  });
+
+  test('transforms a paragraph to a serialized JSON string.', function (done) {
+    var paragraph = {
+      id: 0,
+      timestamp: 1415024939974,
+      level: 'info',
+      message: 'App started.',
+      module: {
+        name: 'foo',
+        version: '0.0.1'
+      },
+      file: 'app.js',
+      metadata: {
+        foo: 'bar'
+      }
+    };
+
+    json.once('data', function (data) {
+      assert.that(data, is.equalTo([
+        /*eslint-disable nodeca/indent*/
+        '{',
+          '"id":0,',
+          '"timestamp":1415024939974,',
+          '"level":"info",',
+          '"message":"App started.",',
+          '"module":{',
+            '"name":"foo",',
+            '"version":"0.0.1"',
+          '},',
+          '"file":"app.js",',
+          '"metadata":{',
+            '"foo":"bar"',
+          '}',
+        '}'
+        /*eslint-enable nodeca/indent*/
+      ].join('')));
+      done();
+    });
+
+    json.write(paragraph);
+  });
+});
