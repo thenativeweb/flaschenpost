@@ -18,7 +18,11 @@ suite('letter', function () {
     test('returns a paragraph.', function (done) {
       var expected = {
         level: 'info',
-        message: 'App started.'
+        message: 'App started.',
+        module: {
+          name: 'foo',
+          version: '0.0.1'
+        }
       };
 
       letter.once('data', function (paragraph) {
@@ -27,7 +31,7 @@ suite('letter', function () {
         assert.that(paragraph.timestamp, is.not.undefined());
         assert.that(paragraph.level, is.equalTo(expected.level));
         assert.that(paragraph.message, is.equalTo(expected.message));
-        assert.that(paragraph.module, is.undefined());
+        assert.that(paragraph.module, is.equalTo(expected.module));
         assert.that(paragraph.file, is.undefined());
         assert.that(paragraph.metadata, is.undefined());
         done();
@@ -42,6 +46,10 @@ suite('letter', function () {
         message: 'App {{foo}} started.',
         data: {
           foo: 'bar'
+        },
+        module: {
+          name: 'foo',
+          version: '0.0.1'
         }
       };
 
@@ -55,29 +63,15 @@ suite('letter', function () {
       letter.write(input);
     });
 
-    test('returns a paragraph with module information if they are given.', function (done) {
-      var expected = {
-        level: 'info',
-        message: 'App started.',
-        module: {
-          name: 'foo',
-          version: '0.0.1'
-        }
-      };
-
-      letter.once('data', function (paragraph) {
-        assert.that(paragraph.module, is.equalTo(expected.module));
-        done();
-      });
-
-      letter.write(expected);
-    });
-
     test('returns a paragraph with file information if they are given.', function (done) {
       var expected = {
         level: 'info',
         message: 'App started.',
-        file: __filename
+        file: __filename,
+        module: {
+          name: 'foo',
+          version: '0.0.1'
+        }
       };
 
       letter.once('data', function (paragraph) {
@@ -96,6 +90,10 @@ suite('letter', function () {
           metadata: {
             foo: 'bar'
           }
+        },
+        module: {
+          name: 'foo',
+          version: '0.0.1'
         }
       };
 
@@ -116,6 +114,10 @@ suite('letter', function () {
             foo: 'bar',
             err: new Error('foobar')
           }
+        },
+        module: {
+          name: 'foo',
+          version: '0.0.1'
         }
       };
 
@@ -131,6 +133,15 @@ suite('letter', function () {
     });
 
     test('increments the paragraph id by 1.', function (done) {
+      var input = {
+        level: 'info',
+        message: 'App started.',
+        module: {
+          name: 'foo',
+          version: '0.0.1'
+        }
+      };
+
       letter.once('data', function (paragraph) {
         var firstId = paragraph.id;
 
@@ -143,8 +154,8 @@ suite('letter', function () {
         });
       });
 
-      letter.write({ message: 'foo' });
-      letter.write({ message: 'bar' });
+      letter.write(input);
+      letter.write(input);
     });
   });
 });

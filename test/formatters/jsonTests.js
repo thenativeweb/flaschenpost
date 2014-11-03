@@ -4,11 +4,17 @@ var stream = require('stream');
 
 var assert = require('node-assertthat');
 
-var json = require('../../lib/formatters/json');
+var Json = require('../../lib/formatters/Json');
 
 var Transform = stream.Transform;
 
-suite('json', function () {
+suite('Json', function () {
+  var json;
+
+  suiteSetup(function () {
+    json = new Json();
+  });
+
   test('is a transform stream.', function (done) {
     assert.that(json, is.instanceOf(Transform));
     done();

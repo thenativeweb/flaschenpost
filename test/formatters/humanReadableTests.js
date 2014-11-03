@@ -5,11 +5,17 @@ var stream = require('stream');
 var assert = require('node-assertthat'),
     chalk = require('chalk');
 
-var humanReadable = require('../../lib/formatters/humanReadable');
+var HumanReadable = require('../../lib/formatters/HumanReadable');
 
 var Transform = stream.Transform;
 
-suite('humanReadable', function () {
+suite('HumanReadable', function () {
+  var humanReadable;
+
+  suiteSetup(function () {
+    humanReadable = new HumanReadable();
+  });
+
   test('is a transform stream.', function (done) {
     assert.that(humanReadable, is.instanceOf(Transform));
     done();
