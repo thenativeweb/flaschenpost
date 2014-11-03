@@ -10,21 +10,25 @@
     {
       "name": "Matthias Wagler",
       "email": "matthias.wagler@thenativeweb.io"
+    },
+    {
+      "name": "Michael Scherer",
+      "email": "mail@michael-scherer.net"
     }
   ],
   "main": "lib/flaschenpost.js",
   "private": true,
   "dependencies": {
-    "chalk": "0.4.0",
-    "hexaring": "thenativeweb/hexaring#0.1.0",
-    "moment": "2.7.0"
+    "lodash": "2.4.1",
+    "markup-js": "1.5.21",
+    "varname": "1.0.2"
   },
   "devDependencies": {
-    "cases": "0.1.1",
     "grunt": "0.4.5",
-    "nock": "0.34.1",
-    "node-assertthat": "0.2.1",
-    "tourism": "0.7.3"
+    "node-assertthat": "0.2.2",
+    "nodeenv": "0.1.3",
+    "sinon": "1.11.1",
+    "tourism": "0.9.3"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,31 @@
+{
+  "fatal": {
+    "color": "blue",
+    "stream": "stderr",
+    "enabled": true
+  },
+
+  "error": {
+    "color": "red",
+    "stream": "stderr",
+    "enabled": true
+  },
+
+  "warn": {
+    "color": "yellow",
+    "stream": "stderr",
+    "enabled": true
+  },
+
+  "info": {
+    "color": "green",
+    "stream": "stdout",
+    "enabled": true
+  },
+
+  "debug": {
+    "color": "white",
+    "stream": "stdout",
+    "enabled": false
+  }
+}

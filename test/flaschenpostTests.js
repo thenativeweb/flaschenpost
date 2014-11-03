@@ -1,211 +1,125 @@
 'use strict';
 
-var assert = require('node-assertthat'),
-    cases = require('cases');
+var assert = require('node-assertthat');
 
-var flaschenpost = require('../lib/flaschenpost');
+var flaschenpost = require('../lib/flaschenpost'),
+    letter = require('../lib/letter'),
+    packageJson = require('../package.json');
 
 suite('flaschenpost', function () {
-  suite('getLogger', function () {
-    test('throws an error when no module is given.', function (done) {
-      assert.that(function () {
-        flaschenpost.getLogger({
-          version: '0.0.1'
-        });
-      }, is.throwing());
-      done();
-    });
-
-    test('throws an error when no version is given.', function (done) {
-      assert.that(function () {
-        flaschenpost.getLogger({
-          module: 'flaschenpost'
-        });
-      }, is.throwing());
-      done();
-    });
+  setup(function () {
+    flaschenpost.initialize();
   });
 
-  test('returns an object with logging functions.', function (done) {
-    var logger = flaschenpost.getLogger({
-      module: 'flaschenpost',
-      version: '0.0.1'
-    });
-
-    assert.that(logger, is.ofType('object'));
-    assert.that(logger.fatal, is.ofType('function'));
-    assert.that(logger.error, is.ofType('function'));
-    assert.that(logger.warn, is.ofType('function'));
-    assert.that(logger.info, is.ofType('function'));
-    assert.that(logger.debug, is.ofType('function'));
+  test('is an object.', function (done) {
+    assert.that(flaschenpost, is.ofType('object'));
     done();
   });
 
-  test('pipes to the registered writable streams.', function (done) {
-    flaschenpost.once('data', function () {
+  suite('initialize', function () {
+    test('is a function.', function (done) {
+      assert.that(flaschenpost.initialize, is.ofType('function'));
+      done();
+    });
+  });
+
+  suite('use', function () {
+    test('is a function.', function (done) {
+      assert.that(flaschenpost.use, is.ofType('function'));
       done();
     });
 
-    var logger = flaschenpost.getLogger({
-      module: 'flaschenpost',
-      version: '0.0.1'
-    });
-    logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
-  });
-
-  suite('when not running on a node', function () {
-    test('does not put the node object into a log message.', function (done) {
-      flaschenpost.once('data', function (message) {
-        assert.that(message.level, is.equalTo('info'));
-        assert.that(message.node, is.undefined());
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-
-      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { bar: 'baz' });
-    });
-  });
-
-  suite('when running on a node', function () {
-    suiteSetup(function () {
-      flaschenpost.setupNode({
-        host: 'localhost',
-        port: 3000,
-        id: '12a30e3632a51fdab4fedd07bcc219b433e17343'
-      });
-    });
-
-    test('logs all required information.', function (done) {
-      flaschenpost.once('data', function (message) {
-        assert.that(message.level, is.equalTo('info'));
-        assert.that(message.id, is.ofType('string'));
-        assert.that(message.id.length, is.equalTo(40));
-        assert.that(message.timestamp, is.ofType('number'));
-        assert.that(message.module, is.equalTo('flaschenpost@0.0.1'));
-        assert.that(message.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
-        assert.that(message.uuid, is.equalTo('1fd68e8d-10d0-4f56-b30d-6b88c02d1012'));
-        assert.that(message.level, is.equalTo('info'));
-        assert.that(message.message, is.equalTo('foo'));
-        assert.that(message.metadata, is.equalTo({ bar: 'baz' }));
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { bar: 'baz' });
-    });
-
-    test('omits metadata when no metadata are given.', function (done) {
-      flaschenpost.once('data', function (message) {
-        assert.that(message.level, is.equalTo('info'));
-        assert.that(message.id, is.ofType('string'));
-        assert.that(message.id.length, is.equalTo(40));
-        assert.that(message.timestamp, is.ofType('number'));
-        assert.that(message.module, is.equalTo('flaschenpost@0.0.1'));
-        assert.that(message.node, is.equalTo({ host: 'localhost', port: 3000, id: '12a30e3632a51fdab4fedd07bcc219b433e17343' }));
-        assert.that(message.uuid, is.equalTo('1fd68e8d-10d0-4f56-b30d-6b88c02d1012'));
-        assert.that(message.level, is.equalTo('info'));
-        assert.that(message.message, is.equalTo('foo'));
-        assert.that(message.metadata, is.undefined());
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
-    });
-
-    test('logs errors correctly.', function (done) {
-      flaschenpost.once('data', function (message) {
-        assert.that(message.metadata.name, is.equalTo('Error'));
-        assert.that(message.metadata.message, is.equalTo('foo'));
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', new Error('foo'));
-    });
-
-    test('logs errors correctly when they appear recursively.', function (done) {
-      flaschenpost.once('data', function (message) {
-        assert.that(message.metadata, is.ofType('object'));
-        assert.that(message.metadata.error, is.ofType('object'));
-        assert.that(message.metadata.error.name, is.equalTo('Error'));
-        assert.that(message.metadata.error.message, is.equalTo('foo'));
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-      logger.info('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo', { error: new Error('foo') });
-    });
-
-    test('logs with the correct level.', cases([
-      [ 'fatal' ],
-      [ 'error' ],
-      [ 'warn' ],
-      [ 'info' ],
-      [ 'debug' ]
-    ], function (level, done) {
-      flaschenpost.once('data', function (message) {
-        assert.that(message.level, is.equalTo(level));
-        done();
-      });
-
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-      logger[level]('1fd68e8d-10d0-4f56-b30d-6b88c02d1012', 'foo');
-    }));
-
-    test('throws an error if no uuid is given, but metadata are given.', function (done) {
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
+    test('throws an error when an unknown key is specified.', function (done) {
       assert.that(function () {
-        logger.info('foo', { bar: 'baz' });
-      }, is.throwing('UUID is missing.'));
-      done();
-    });
-
-    test('throws an error if no uuid is given and no metadata are given.', function (done) {
-      var logger = flaschenpost.getLogger({
-        module: 'flaschenpost',
-        version: '0.0.1'
-      });
-      assert.that(function () {
-        logger.info('foo');
-      }, is.throwing('UUID is missing.'));
+        flaschenpost.use('foo');
+      }, is.throwing('Unknown key \'foo\' specified.'));
       done();
     });
   });
 
-  suite('middleware', function () {
-    test('returns a logging stream compatible to Express.', function (done) {
-      var middleware = flaschenpost.middleware({
-        module: 'foo',
-        version: '0.0.1',
-        uuid: '11ed349a-fa70-42d4-946c-7da473bc3566'
-      });
-      assert.that(middleware, is.ofType('object'));
-      assert.that(middleware.stream, is.ofType('object'));
-      assert.that(middleware.stream.write, is.ofType('function'));
+  suite('getLogger', function () {
+    test('is a function.', function (done) {
+      assert.that(flaschenpost.getLogger, is.ofType('function'));
       done();
+    });
+
+    test('returns an object.', function (done) {
+      assert.that(flaschenpost.getLogger(), is.ofType('object'));
+      done();
+    });
+
+    test('has the levels as log functions.', function (done) {
+      var logger = flaschenpost.getLogger();
+      assert.that(logger.fatal, is.ofType('function'));
+      assert.that(logger.error, is.ofType('function'));
+      assert.that(logger.warn, is.ofType('function'));
+      assert.that(logger.info, is.ofType('function'));
+      assert.that(logger.debug, is.ofType('function'));
+      done();
+    });
+
+    suite('log function', function () {
+      test('throws an error when no message is given.', function (done) {
+        var logger = flaschenpost.getLogger();
+        assert.that(function () {
+          logger.info();
+        }, is.throwing('Message is missing.'));
+        done();
+      });
+
+      test('throws an error when message is not a string.', function (done) {
+        var logger = flaschenpost.getLogger();
+        assert.that(function () {
+          logger.info(42);
+        }, is.throwing('Message must be a string.'));
+        done();
+      });
+
+      test('writes the message to a letter.', function (done) {
+        var logger = flaschenpost.getLogger(__filename);
+
+        flaschenpost.use('module', packageJson);
+
+        letter.once('data', function (paragraph) {
+          assert.that(paragraph, is.ofType('object'));
+          assert.that(paragraph.id, is.ofType('number'));
+          assert.that(paragraph.timestamp, is.not.undefined());
+          assert.that(paragraph.level, is.equalTo('info'));
+          assert.that(paragraph.message, is.equalTo('App bar started.'));
+          assert.that(paragraph.module, is.equalTo({
+            name: packageJson.name,
+            version: packageJson.version
+          }));
+          assert.that(paragraph.file, is.equalTo(__filename));
+          assert.that(paragraph.metadata, is.equalTo({
+            bar: 'baz'
+          }));
+          done();
+        });
+
+        logger.info('App {{foo}} started.', {
+          foo: 'bar',
+          metadata: {
+            bar: 'baz'
+          }
+        });
+      });
+
+      test('does not write a message if the log level is disabled.', function (done) {
+        var logger = flaschenpost.getLogger();
+
+        var counter = 0;
+        letter.once('data', function () {
+          counter++;
+        });
+
+        logger.debug('App started.');
+
+        setTimeout(function () {
+          assert.that(counter, is.equalTo(0));
+          done();
+        }, 0.1 * 1000);
+      });
     });
   });
 });
