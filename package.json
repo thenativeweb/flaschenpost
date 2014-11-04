@@ -1,7 +1,7 @@
 {
   "name": "flaschenpost",
   "version": "0.3.0",
-  "description": "flaschenpost logs messages to the console, either human-readable or as JSON.",
+  "description": "flaschenpost is a logger for cloud-based applications.",
   "contributors": [
     {
       "name": "Golo Roden",
