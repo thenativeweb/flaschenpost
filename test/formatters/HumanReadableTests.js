@@ -31,7 +31,7 @@ suite('HumanReadable', function () {
         name: 'foo',
         version: '0.0.1'
       },
-      file: 'app.js',
+      source: 'app.js',
       metadata: {
         foo: 'bar'
       }

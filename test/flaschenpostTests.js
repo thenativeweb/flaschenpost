@@ -104,7 +104,7 @@ suite('flaschenpost', function () {
             name: packageJson.name,
             version: packageJson.version
           }));
-          assert.that(paragraph.file, is.equalTo(__filename));
+          assert.that(paragraph.source, is.equalTo(__filename));
           assert.that(paragraph.metadata, is.equalTo({
             bar: 'baz'
           }));

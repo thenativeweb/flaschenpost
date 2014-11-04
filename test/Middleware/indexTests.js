@@ -64,22 +64,22 @@ suite('Middleware', function () {
     middleware.write('foobar');
   });
 
-  test('uses \'express\' as default file name.', function (done) {
+  test('uses \'express\' as default source name.', function (done) {
     var middleware = new Middleware('info');
 
     letter.once('data', function (data) {
-      assert.that(data.file, is.equalTo('express'));
+      assert.that(data.source, is.equalTo('express'));
       done();
     });
 
     middleware.write('foobar');
   });
 
-  test('uses the given file name if one is specified.', function (done) {
-    var middleware = new Middleware('info', { file: 'express /baz' });
+  test('uses the given source name if one is specified.', function (done) {
+    var middleware = new Middleware('info', { source: 'express /baz' });
 
     letter.once('data', function (data) {
-      assert.that(data.file, is.equalTo('express /baz'));
+      assert.that(data.source, is.equalTo('express /baz'));
       done();
     });
 

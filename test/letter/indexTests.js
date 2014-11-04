@@ -32,7 +32,7 @@ suite('letter', function () {
         assert.that(paragraph.level, is.equalTo(expected.level));
         assert.that(paragraph.message, is.equalTo(expected.message));
         assert.that(paragraph.module, is.equalTo(expected.module));
-        assert.that(paragraph.file, is.undefined());
+        assert.that(paragraph.source, is.undefined());
         assert.that(paragraph.metadata, is.undefined());
         done();
       });
@@ -63,11 +63,11 @@ suite('letter', function () {
       letter.write(input);
     });
 
-    test('returns a paragraph with file information if they are given.', function (done) {
+    test('returns a paragraph with source information if they are given.', function (done) {
       var expected = {
         level: 'info',
         message: 'App started.',
-        file: __filename,
+        source: __filename,
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -75,7 +75,7 @@ suite('letter', function () {
       };
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph.file, is.equalTo(expected.file));
+        assert.that(paragraph.source, is.equalTo(expected.source));
         done();
       });
 
