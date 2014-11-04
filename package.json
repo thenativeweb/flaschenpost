@@ -1,7 +1,7 @@
 {
   "name": "flaschenpost",
   "version": "0.2.2",
-  "description": "flaschenpost is a logger for distributed network applications.",
+  "description": "flaschenpost logs messages to the console, either human-readable or as JSON.",
   "contributors": [
     {
       "name": "Golo Roden",
