@@ -43,13 +43,6 @@ suite('flaschenpost', function () {
       done();
     });
 
-    test('throws an error if no module has been set.', function (done) {
-      assert.that(function () {
-        flaschenpost.getLogger();
-      }, is.throwing('Module is missing.'));
-      done();
-    });
-
     test('returns an object.', function (done) {
       flaschenpost.use('module', packageJson);
       assert.that(flaschenpost.getLogger(), is.ofType('object'));
