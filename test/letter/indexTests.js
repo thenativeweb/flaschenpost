@@ -123,6 +123,7 @@ suite('letter', function () {
 
       letter.once('data', function (paragraph) {
         assert.that(paragraph.metadata.err, is.ofType('object'));
+        assert.that(paragraph.metadata.err, is.not.instanceOf(Error));
         assert.that(paragraph.metadata.err.name, is.equalTo('Error'));
         assert.that(paragraph.metadata.err.message, is.equalTo('foobar'));
         assert.that(paragraph.metadata.err.stack, is.ofType('string'));
