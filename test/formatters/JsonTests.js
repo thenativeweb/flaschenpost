@@ -52,7 +52,7 @@ suite('Json', function () {
           '"metadata":{',
             '"foo":"bar"',
           '}',
-        '}'
+        '}\n'
         /*eslint-enable nodeca/indent*/
       ].join('')));
       done();
