@@ -16,6 +16,104 @@ First you need to integrate flaschenpost into your application.
 var flaschenpost = require('flaschenpost');
 ```
 
+You need to provide the name and version of your application. For that call the `use` function and specify an appropriate object.
+
+```javascript
+flaschenpost.use('module', {
+  name: 'foo',
+  version: '0.0.1'
+});
+```
+
+Please note that if you specify additional properties, these properties are ignored. This allows you to hand over your `package.json` file.
+
+```javascript
+flaschenpost.use('module', require('./package.json'));
+```
+
+### Using a logger
+
+Once you have set up flaschenpost, you can call its `getLogger` function to acquire a logger.
+
+```javascript
+var logger = flaschenpost.getLogger();
+```
+
+If you want to use multiple loggers in your application, you may provide a string as parameter for `getLogger` that identifies the source from where you send log messages. This *may* be the name of the current file.
+
+```javascript
+var logger = flaschenpost.getLogger(__filename);
+```
+
+Then you can use the functions `fatal`, `error`, `warn`, `info` and `debug` to write log messages. Simply provide the message you want to log as a parameter.
+
+```javascript
+logger.info('App started.');
+```
+
+#### Formatting log messages
+
+If you want to use placeholders in the log message, embrace them in double curly braces. Additionally, specify an object that contains the values.
+
+```javascript
+logger.info('App {{name}} started.', {
+  name: 'foo'
+});
+```
+
+You can use as many placeholders as you like. Values in the object that do not have a counterpart in the log message are ignored.
+
+#### Handling meta data
+
+If you want to provide additional meta data, add a `metadata` key to the parameter object and provide the meta data.
+
+```javascript
+logger.info('App {{name}} started.', {
+  name: 'foo',
+  metadata: {
+    foo: 'bar',
+    baz: 23
+  }
+});
+```
+
+### Enabling and disabling log levels
+
+By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
+
+    $ export LOG_LEVELS=debug,info
+
+### Setting custom log levels
+
+If you want to change the default log levels, i.e. define other log levels, change colors or define which log levels are enabled by default, again use the `use` function of flaschenpost.
+
+```javascript
+flaschenpost.use('levels', {
+  fatal: {
+    color: 'blue',
+    enabled: true
+  },
+  error: {
+    color: 'red',
+    enabled: true
+  },
+  warn: {
+    color: 'yellow',
+    enabled: true
+  },
+  info: {
+    color: 'green',
+    enabled: true
+  },
+  debug: {
+    color: 'white',
+    enabled: false
+  }
+});
+```
+
+### Using the Express middleware
+
 ## Running the build
 
 This module can be built using [Grunt](http://gruntjs.com/). Besides running the tests, this also analyses the code. To run Grunt, go to the folder where you have installed flaschenpost and run `grunt`. You need to have [grunt-cli](https://github.com/gruntjs/grunt-cli) installed.
