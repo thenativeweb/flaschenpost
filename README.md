@@ -130,6 +130,30 @@ app.use(morgan('combined', {
 }));
 ```
 
+## Converting logs into human readable format
+
+As stated in section [Defining the log target](#defining-the-log-target), log entries are written as JSON objects if the application is not connected to a TTY. The purpose of `uncork-flaschenpost` is to convert those JSON data into a human readable format.
+
+### Installation
+
+In order to use the program, you must globally install flaschenpost:
+
+    $ npm install -g flaschenpost
+
+Please note the option `-g` in the command above.
+
+### Quick start
+
+After installing globally, you can easily analyze the contents of an existing log file:
+
+    $ cat myApp.log | uncork-flaschenpost
+
+As you can see, `uncork-flaschenpost` reads incoming log data from `stdin` for and writes the converted output to console.
+
+This allows, e.g., to save logs to file while still beeing able to read them on console:
+
+    $ myApp | tee myApp.log | uncork-flaschenpost
+
 ## Running the build
 
 This module can be built using [Grunt](http://gruntjs.com/). Besides running the tests, this also analyses the code. To run Grunt, go to the folder where you have installed flaschenpost and run `grunt`. You need to have [grunt-cli](https://github.com/gruntjs/grunt-cli) installed.

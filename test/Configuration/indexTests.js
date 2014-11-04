@@ -5,7 +5,8 @@ var assert = require('node-assertthat'),
     sinon = require('sinon');
 
 var Configuration = require('../../lib/Configuration'),
-    defaultLevels = require('../../lib/defaultLevels.json');
+    defaultLevels = require('../../lib/defaultLevels.json'),
+    defaultModule = require('../../lib/defaultModule.json');
 
 suite('Configuration', function () {
   test('is a function.', function (done) {
@@ -19,9 +20,15 @@ suite('Configuration', function () {
   });
 
   suite('module', function () {
-    test('does not exist by default.', function (done) {
+    test('is an object.', function (done) {
       var configuration = new Configuration();
-      assert.that(configuration.module, is.undefined());
+      assert.that(configuration.module, is.ofType('object'));
+      done();
+    });
+
+    test('contains the default module information.', function (done) {
+      var configuration = new Configuration();
+      assert.that(configuration.module, is.equalTo(defaultModule));
       done();
     });
   });
