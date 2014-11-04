@@ -2,13 +2,21 @@
 
 flaschenpost logs messages to the console, either human-readable or as JSON.
 
+*A [/ˈflaʃənˌpɔst/](https://en.wiktionary.org/wiki/Flaschenpost)* is a message written on a scrap of paper, rolled-up and put in an empty bottle and set adrift on the ocean; traditionally, a method used by castaways to advertise their distress to the outside world.*
+
+(from [Wiktionary](https://en.wiktionary.org/wiki/message_in_a_bottle))
+
 ## Installation
 
     $ npm install flaschenpost
 
 ## Quick start
 
-...
+First you need to integrate flaschenpost into your application.
+
+```javascript
+var flaschenpost = require('flaschenpost');
+```
 
 ## Running the build
 

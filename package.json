@@ -17,7 +17,6 @@
     }
   ],
   "main": "lib/flaschenpost.js",
-  "private": true,
   "dependencies": {
     "chalk": "0.5.1",
     "lodash": "2.4.1",
