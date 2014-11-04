@@ -5,8 +5,8 @@ var assert = require('node-assertthat'),
     sinon = require('sinon');
 
 var Configuration = require('../../lib/Configuration'),
-    defaultLevels = require('../../lib/defaultLevels.json'),
-    defaultModule = require('../../lib/defaultModule.json');
+    defaultLevels = require('../../lib/defaults/levels.json'),
+    defaultModule = require('../../lib/defaults/module.json');
 
 suite('Configuration', function () {
   test('is a function.', function (done) {
