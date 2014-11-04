@@ -140,7 +140,7 @@ In order to use the program, you must globally install flaschenpost:
 
     $ npm install -g flaschenpost
 
-Please note the option `-g` in the command above.
+Please note the option `-g`.
 
 ### Quick start
 
@@ -148,7 +148,7 @@ After installing globally, you can easily analyze the contents of an existing lo
 
     $ cat myApp.log | uncork-flaschenpost
 
-As you can see, `uncork-flaschenpost` reads incoming log data from `stdin` for and writes the converted output to console.
+As you can see, `uncork-flaschenpost` reads incoming log data from `stdin` and writes the converted output to console.
 
 This allows, e.g., to save logs to file while still beeing able to read them on console:
 
