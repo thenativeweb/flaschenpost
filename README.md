@@ -116,7 +116,7 @@ flaschenpost.use('levels', {
 
 If you are writing an Express-based application and you use [morgan](https://github.com/expressjs/morgan) as logger, you can integrate flaschenpost.
 
-For that provide the `stream` property when setting up morgan and call flaschenpost's `Middleware` constructor function with the desired log level.
+For that, provide the `stream` property when setting up morgan and call flaschenpost's `Middleware` constructor function with the desired log level.
 
 ```javascript
 app.use(morgan('combined', {
