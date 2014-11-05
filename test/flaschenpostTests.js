@@ -43,13 +43,6 @@ suite('flaschenpost', function () {
       done();
     });
 
-    test('throws an error if no module has been set.', function (done) {
-      assert.that(function () {
-        flaschenpost.getLogger();
-      }, is.throwing('Module is missing.'));
-      done();
-    });
-
     test('returns an object.', function (done) {
       flaschenpost.use('module', packageJson);
       assert.that(flaschenpost.getLogger(), is.ofType('object'));
@@ -105,7 +98,8 @@ suite('flaschenpost', function () {
             version: packageJson.version
           }));
           assert.that(paragraph.source, is.equalTo(__filename));
-          assert.that(paragraph.metadata, is.equalTo({
+          assert.that(paragraph.data, is.equalTo({
+            foo: 'bar',
             bar: 'baz'
           }));
           done();
@@ -113,9 +107,7 @@ suite('flaschenpost', function () {
 
         logger.info('App {{foo}} started.', {
           foo: 'bar',
-          metadata: {
-            bar: 'baz'
-          }
+          bar: 'baz'
         });
       });
 

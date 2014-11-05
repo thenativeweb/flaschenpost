@@ -32,7 +32,7 @@ suite('HumanReadable', function () {
         version: '0.0.1'
       },
       source: 'app.js',
-      metadata: {
+      data: {
         foo: 'bar'
       }
     };
