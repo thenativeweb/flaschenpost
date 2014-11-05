@@ -20,7 +20,7 @@ suite('paragraph', function () {
         name: 'foo',
         version: '0.0.1'
       },
-      metadata: {
+      data: {
         foo: 'bar',
         err: {
           name: 'Error',
@@ -82,14 +82,12 @@ suite('paragraph', function () {
     done();
   });
 
-  test('returns a paragraph with metadata if they are given.', function (done) {
+  test('returns a paragraph with data if they are given.', function (done) {
     var input = {
       level: 'info',
       message: 'App started.',
       data: {
-        metadata: {
-          foo: 'bar'
-        }
+        foo: 'bar'
       },
       module: {
         name: 'foo',
@@ -98,19 +96,17 @@ suite('paragraph', function () {
     };
 
     var actual = paragraph(input);
-    assert.that(actual.metadata, is.equalTo(input.data.metadata));
+    assert.that(actual.data, is.equalTo(input.data));
     done();
   });
 
-  test('returns a paragraph with metadata with correctly transformed error objects.', function (done) {
+  test('returns a paragraph with data with correctly transformed error objects.', function (done) {
     var input = {
       level: 'info',
       message: 'App started.',
       data: {
-        metadata: {
-          foo: 'bar',
-          err: new Error('foobar')
-        }
+        foo: 'bar',
+        err: new Error('foobar')
       },
       module: {
         name: 'foo',
@@ -120,11 +116,11 @@ suite('paragraph', function () {
 
     var actual = paragraph(input);
 
-    assert.that(actual.metadata.err, is.ofType('object'));
-    assert.that(actual.metadata.err, is.not.instanceOf(Error));
-    assert.that(actual.metadata.err.name, is.equalTo('Error'));
-    assert.that(actual.metadata.err.message, is.equalTo('foobar'));
-    assert.that(actual.metadata.err.stack, is.ofType('string'));
+    assert.that(actual.data.err, is.ofType('object'));
+    assert.that(actual.data.err, is.not.instanceOf(Error));
+    assert.that(actual.data.err.name, is.equalTo('Error'));
+    assert.that(actual.data.err.message, is.equalTo('foobar'));
+    assert.that(actual.data.err.stack, is.ofType('string'));
     done();
   });
 });

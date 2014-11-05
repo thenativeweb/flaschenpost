@@ -31,7 +31,7 @@ suite('Json', function () {
         version: '0.0.1'
       },
       file: 'app.js',
-      metadata: {
+      data: {
         foo: 'bar'
       }
     };
@@ -49,10 +49,10 @@ suite('Json', function () {
             '"version":"0.0.1"',
           '},',
           '"file":"app.js",',
-          '"metadata":{',
+          '"data":{',
             '"foo":"bar"',
           '}',
-        '}'
+        '}\n'
         /*eslint-enable nodeca/indent*/
       ].join('')));
       done();
