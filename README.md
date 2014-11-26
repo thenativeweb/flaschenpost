@@ -89,6 +89,10 @@ By default, only the log levels `fatal`, `error`, `warn` and `info` are printed 
 
     $ export LOG_LEVELS=debug,info
 
+If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.
+
+    $ export LOG_LEVELS=*
+
 ### Setting custom log levels
 
 If you want to change the default log levels, i.e. define other log levels, change colors or define which log levels are enabled by default, call the `use` function of flaschenpost.

@@ -93,7 +93,6 @@ suite('Configuration', function () {
       var expected = {
         info: {
           color: 'green',
-          stream: 'stdout',
           enabled: true
         }
       };
@@ -110,7 +109,6 @@ suite('Configuration', function () {
         var input = {
           debug: {
             color: 'green',
-            stream: 'stdout',
             enabled: false
           }
         };
@@ -118,7 +116,39 @@ suite('Configuration', function () {
         var expected = {
           debug: {
             color: 'green',
-            stream: 'stdout',
+            enabled: true
+          }
+        };
+
+        var configuration = new Configuration();
+        configuration.setLevels(input);
+
+        assert.that(configuration.levels, is.equalTo(expected));
+        restore();
+        done();
+      });
+    });
+
+    test('sets all levels if the LOG_LEVELS environment variable contains a \'*\'.', function (done) {
+      nodeenv('LOG_LEVELS', '*', function (restore) {
+        var input = {
+          debug: {
+            color: 'green',
+            enabled: false
+          },
+          info: {
+            color: 'white',
+            enabled: false
+          }
+        };
+
+        var expected = {
+          debug: {
+            color: 'green',
+            enabled: true
+          },
+          info: {
+            color: 'white',
             enabled: true
           }
         };
