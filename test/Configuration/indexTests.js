@@ -129,6 +129,19 @@ suite('Configuration', function () {
       });
     });
 
+    test('throws an error if an unknown level is provided by the LOG_LEVELS environment variable.', function (done) {
+      nodeenv('LOG_LEVELS', 'foobar', function (restore) {
+        assert.that(function () {
+          /*eslint-disable no-new*/
+          new Configuration();
+          /*eslint-enable no-new*/
+        }, is.throwing('Unknown log level foobar.'));
+
+        restore();
+        done();
+      });
+    });
+
     test('sets all levels if the LOG_LEVELS environment variable contains a \'*\'.', function (done) {
       nodeenv('LOG_LEVELS', '*', function (restore) {
         var input = {
