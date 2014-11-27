@@ -6,7 +6,13 @@ flaschenpost is a logger for cloud-based applications.
 
 ## Installation
 
+### As Node.js module
+
     $ npm install flaschenpost
+
+### As CLI
+
+    $ npm install -g flaschenpost
 
 ## Quick start
 
@@ -111,6 +117,12 @@ app.use(morgan('combined', {
   stream: new flaschenpost.Middleware('info', __filename)
 }));
 ```
+
+### Uncorking a flaschenpost
+
+From time to time you may want to inspect log files that contain messages created by flaschenpost. For that, run the CLI tool and provide the log file via stdin.
+
+    $ flaschenpost < foo.log
 
 ## Running the build
 
