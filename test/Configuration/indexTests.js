@@ -238,5 +238,21 @@ suite('Configuration', function () {
       assert.that(configuration.module, is.equalTo(expected));
       done();
     });
+
+    test('throws an error if the module was already configured.', function (done) {
+      var configuration = new Configuration();
+      configuration.setModule({
+        name: 'foo',
+        version: '0.0.1'
+      });
+
+      assert.that(function () {
+        configuration.setModule({
+          name: 'foo',
+          version: '0.0.1'
+        });
+      }, is.throwing('Module already set.'));
+      done();
+    });
   });
 });
