@@ -44,7 +44,7 @@ suite('letter', function () {
       var input = {
         level: 'info',
         message: 'App {{foo}} started.',
-        data: {
+        metadata: {
           foo: 'bar'
         },
         module: {
@@ -86,10 +86,8 @@ suite('letter', function () {
       var expected = {
         level: 'info',
         message: 'App started.',
-        data: {
-          metadata: {
-            foo: 'bar'
-          }
+        metadata: {
+          foo: 'bar'
         },
         module: {
           name: 'foo',
@@ -98,7 +96,7 @@ suite('letter', function () {
       };
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph.metadata, is.equalTo(expected.data.metadata));
+        assert.that(paragraph.metadata, is.equalTo(expected.metadata));
         done();
       });
 
@@ -109,11 +107,9 @@ suite('letter', function () {
       var expected = {
         level: 'info',
         message: 'App started.',
-        data: {
-          metadata: {
-            foo: 'bar',
-            err: new Error('foobar')
-          }
+        metadata: {
+          foo: 'bar',
+          err: new Error('foobar')
         },
         module: {
           name: 'foo',

@@ -106,7 +106,10 @@ suite('flaschenpost', function () {
           }));
           assert.that(paragraph.source, is.equalTo(__filename));
           assert.that(paragraph.metadata, is.equalTo({
-            bar: 'baz'
+            foo: 'bar',
+            metadata: {
+              bar: 'baz'
+            }
           }));
           done();
         });

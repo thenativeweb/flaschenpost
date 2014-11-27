@@ -51,9 +51,22 @@ Then you can use the functions `fatal`, `error`, `warn`, `info` and `debug` to w
 logger.info('App started.');
 ```
 
+#### Handling meta data
+
+If you want to provide additional meta data, use an object as second parameter.
+
+```javascript
+logger.info('App started.', {
+  name: 'foo',
+  bar: {
+    baz: 23
+  }
+});
+```
+
 #### Formatting log messages
 
-If you want to use placeholders in the log message, embrace them in double curly braces. Additionally, specify an object that contains the values.
+If you want to use placeholders in the log message, embrace them in double curly braces. This way you can access any property of the meta data object.
 
 ```javascript
 logger.info('App {{name}} started.', {
@@ -61,21 +74,7 @@ logger.info('App {{name}} started.', {
 });
 ```
 
-You can use as many placeholders as you like. Values in the object that do not have a counterpart in the log message are ignored.
-
-#### Handling meta data
-
-If you want to provide additional meta data, add a `metadata` key to the parameter object and provide the meta data.
-
-```javascript
-logger.info('App {{name}} started.', {
-  name: 'foo',
-  metadata: {
-    foo: 'bar',
-    baz: 23
-  }
-});
-```
+Please note that you can use as many placeholders as you like.
 
 #### Defining the log target
 
