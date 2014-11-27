@@ -19,6 +19,7 @@
   "main": "lib/flaschenpost.js",
   "dependencies": {
     "chalk": "0.5.1",
+    "find-root": "0.1.1",
     "lodash": "2.4.1",
     "markup-js": "1.5.21",
     "moment": "2.8.4",

@@ -57,19 +57,21 @@ suite('Configuration', function () {
 
     test('calls the appropriate setX function.', function (done) {
       var configuration = new Configuration(),
-          spy = sinon.spy(configuration, 'setModule');
+          spy = sinon.spy(configuration, 'setLevels');
 
       var expected = {
-        name: 'foo',
-        version: '0.0.1'
+        info: {
+          color: 'green',
+          enabled: true
+        }
       };
 
-      configuration.set('module', expected);
+      configuration.set('levels', expected);
 
       assert.that(spy.calledOnce, is.true());
       assert.that(spy.calledWith(expected), is.true());
 
-      configuration.setModule.restore();
+      configuration.setLevels.restore();
       done();
     });
   });
@@ -173,86 +175,6 @@ suite('Configuration', function () {
         restore();
         done();
       });
-    });
-  });
-
-  suite('setModule', function () {
-    test('is a function.', function (done) {
-      var configuration = new Configuration();
-      assert.that(configuration.setModule, is.ofType('function'));
-      done();
-    });
-
-    test('throws an error if module is missing.', function (done) {
-      var configuration = new Configuration();
-      assert.that(function () {
-        configuration.setModule();
-      }, is.throwing('Module is missing.'));
-      done();
-    });
-
-    test('throws an error if module name is missing.', function (done) {
-      var configuration = new Configuration();
-      assert.that(function () {
-        configuration.setModule({ version: '0.0.1' });
-      }, is.throwing('Module name is missing.'));
-      done();
-    });
-
-    test('throws an error if module version is missing.', function (done) {
-      var configuration = new Configuration();
-      assert.that(function () {
-        configuration.setModule({ name: 'foo' });
-      }, is.throwing('Module version is missing.'));
-      done();
-    });
-
-    test('sets the given module.', function (done) {
-      var expected = {
-        name: 'foo',
-        version: '0.0.1'
-      };
-
-      var configuration = new Configuration();
-      configuration.setModule(expected);
-
-      assert.that(configuration.module, is.equalTo(expected));
-      done();
-    });
-
-    test('ignores additional values.', function (done) {
-      var expected = {
-        name: 'foo',
-        version: '0.0.1'
-      };
-
-      var input = {
-        name: 'foo',
-        description: 'The ultimate foo module.',
-        version: '0.0.1'
-      };
-
-      var configuration = new Configuration();
-      configuration.setModule(input);
-
-      assert.that(configuration.module, is.equalTo(expected));
-      done();
-    });
-
-    test('throws an error if the module was already configured.', function (done) {
-      var configuration = new Configuration();
-      configuration.setModule({
-        name: 'foo',
-        version: '0.0.1'
-      });
-
-      assert.that(function () {
-        configuration.setModule({
-          name: 'foo',
-          version: '0.0.1'
-        });
-      }, is.throwing('Module already set.'));
-      done();
     });
   });
 });

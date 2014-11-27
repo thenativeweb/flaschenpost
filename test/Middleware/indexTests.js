@@ -13,11 +13,6 @@ var Writable = stream.Writable;
 suite('Middleware', function () {
   setup(function () {
     flaschenpost.initialize();
-
-    flaschenpost.use('module', {
-      name: 'foo',
-      version: '0.0.1'
-    });
   });
 
   test('is a function.', function (done) {
@@ -34,22 +29,31 @@ suite('Middleware', function () {
     done();
   });
 
+  test('throws an error if source is missing.', function (done) {
+    assert.that(function () {
+      /*eslint-disable no-new*/
+      new Middleware('info');
+      /*eslint-enable no-new*/
+    }, is.throwing('Source is missing.'));
+    done();
+  });
+
   test('throws an error if the specified level does not exist.', function (done) {
     assert.that(function () {
       /*eslint-disable no-new*/
-      new Middleware('foo');
+      new Middleware('foo', __filename);
       /*eslint-enable no-new*/
     }, is.throwing('Level is invalid.'));
     done();
   });
 
   test('returns a writable stream.', function (done) {
-    assert.that(new Middleware('info'), is.instanceOf(Writable));
+    assert.that(new Middleware('info', __filename), is.instanceOf(Writable));
     done();
   });
 
   test('writes messages using the specified log level.', function (done) {
-    var middleware = new Middleware('info');
+    var middleware = new Middleware('info', __filename);
 
     letter.once('data', function (data) {
       assert.that(data.level, is.equalTo('info'));
@@ -58,28 +62,6 @@ suite('Middleware', function () {
         name: 'foo',
         version: '0.0.1'
       }));
-      done();
-    });
-
-    middleware.write('foobar');
-  });
-
-  test('uses \'express\' as default source name.', function (done) {
-    var middleware = new Middleware('info');
-
-    letter.once('data', function (data) {
-      assert.that(data.source, is.equalTo('express'));
-      done();
-    });
-
-    middleware.write('foobar');
-  });
-
-  test('uses the given source name if one is specified.', function (done) {
-    var middleware = new Middleware('info', { source: 'express /baz' });
-
-    letter.once('data', function (data) {
-      assert.that(data.source, is.equalTo('express /baz'));
       done();
     });
 

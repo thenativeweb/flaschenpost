@@ -16,30 +16,9 @@ First you need to integrate flaschenpost into your application.
 var flaschenpost = require('flaschenpost');
 ```
 
-You need to provide the name and version of your application. For that call the `use` function and specify an appropriate object.
-
-```javascript
-flaschenpost.use('module', {
-  name: 'foo',
-  version: '0.0.1'
-});
-```
-
-Please note that if you specify additional properties, these properties are ignored. This allows you to hand over your `package.json` file.
-
-```javascript
-flaschenpost.use('module', require('./package.json'));
-```
-
 ### Using a logger
 
-Once you have set up flaschenpost, you can call its `getLogger` function to acquire a logger.
-
-```javascript
-var logger = flaschenpost.getLogger();
-```
-
-If you want to use multiple loggers in your application, you may provide a string as parameter for `getLogger` that identifies the source from where you send log messages. This *may* be the name of the current file.
+Next, call the `getLogger` function to acquire a logger. You have to provide `__filename` as parameter, as this value will be used to detect the appropriate `package.json` file and extract information about the current module.
 
 ```javascript
 var logger = flaschenpost.getLogger(__filename);
@@ -125,11 +104,11 @@ flaschenpost.use('levels', {
 
 If you are writing an Express-based application and you use [morgan](https://github.com/expressjs/morgan) as logger, you can easily integrate flaschenpost into it.
 
-For that, provide the `stream` property when setting up morgan and call the `Middleware` constructor function with the desired log level.
+For that, provide the `stream` property when setting up morgan and call the `Middleware` constructor function with the desired log level and the path to the `package.json` file that shall be used for the module information.
 
 ```javascript
 app.use(morgan('combined', {
-  stream: new flaschenpost.Middleware('info')
+  stream: new flaschenpost.Middleware('info', __filename)
 }));
 ```
 
