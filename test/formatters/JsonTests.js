@@ -22,6 +22,7 @@ suite('Json', function () {
 
   test('transforms a paragraph to a serialized JSON string.', function (done) {
     var paragraph = {
+      pid: 82517,
       id: 0,
       timestamp: 1415024939974,
       level: 'info',
@@ -40,6 +41,7 @@ suite('Json', function () {
       assert.that(data, is.equalTo([
         /*eslint-disable nodeca/indent*/
         '{',
+          '"pid":82517,',
           '"id":0,',
           '"timestamp":1415024939974,',
           '"level":"info",',

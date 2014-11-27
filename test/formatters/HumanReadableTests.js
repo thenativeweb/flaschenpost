@@ -23,6 +23,7 @@ suite('HumanReadable', function () {
 
   test('transforms a paragraph to a human-readable string.', function (done) {
     var paragraph = {
+      pid: 82517,
       id: 0,
       timestamp: 1415024939974,
       level: 'info',
@@ -42,7 +43,7 @@ suite('HumanReadable', function () {
         /*eslint-disable nodeca/indent*/
         'App started. (info)',
         'foo@0.0.1 (app.js)',
-        '15:28:59.974@2014-11-03 #0',
+        '15:28:59.974@2014-11-03 82517#0',
         '{',
         '  "foo": "bar"',
         '}',

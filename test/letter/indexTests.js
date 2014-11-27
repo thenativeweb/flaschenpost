@@ -27,6 +27,7 @@ suite('letter', function () {
 
       letter.once('data', function (paragraph) {
         assert.that(paragraph, is.ofType('object'));
+        assert.that(paragraph.pid, is.equalTo(process.pid));
         assert.that(paragraph.id, is.ofType('number'));
         assert.that(paragraph.timestamp, is.not.undefined());
         assert.that(paragraph.level, is.equalTo(expected.level));
