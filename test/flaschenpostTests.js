@@ -1,9 +1,15 @@
 'use strict';
 
-var assert = require('node-assertthat');
+var stream = require('stream');
+
+var assert = require('node-assertthat'),
+    chalk = require('chalk');
 
 var flaschenpost = require('../lib/flaschenpost'),
+    JsonFormatter = require('../lib/formatters/Json'),
     letter = require('../lib/letter');
+
+var PassThrough = stream.PassThrough;
 
 suite('flaschenpost', function () {
   setup(function () {
@@ -146,6 +152,56 @@ suite('flaschenpost', function () {
   });
 
   suite('uncork', function () {
-    test('...');
+    test('transforms JSON into a human readable format.', function (done) {
+      var inputStream = new JsonFormatter(),
+          outputStream = new PassThrough({ objectMode: true });
+
+      var paragraph = {
+        module: {
+          name: 'foo',
+          version: '0.0.1'
+        },
+        source: __filename,
+        level: 'info',
+        message: 'App started.',
+        metadata: {
+          foo: 'bar'
+        }
+      };
+
+      var counter = 0;
+
+      letter.pipe(inputStream);
+      flaschenpost.uncork(inputStream, outputStream);
+
+      outputStream.on('data', function (data) {
+        counter++;
+
+        assert.that(chalk.stripColor(data).indexOf([
+          /*eslint-disable nodeca/indent*/
+          'App started. (info)',
+          'foo@0.0.1 ('
+          /*eslint-enable nodeca/indent*/
+        ].join('\n')), is.equalTo(0));
+
+        assert.that(chalk.stripColor(data).indexOf([
+          /*eslint-disable nodeca/indent*/
+          '{',
+          '  "foo": "bar"',
+          '}',
+          new Array((process.stdout.columns || 80) + 1).join('\u2500') + '\n'
+          /*eslint-enable nodeca/indent*/
+        ].join('\n')), is.greaterThan(0));
+
+        if (counter === 2) {
+          outputStream.removeAllListeners('data');
+          letter.unpipe(inputStream);
+          done();
+        }
+      });
+
+      letter.write(paragraph);
+      letter.write(paragraph);
+    });
   });
 });
