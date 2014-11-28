@@ -48,13 +48,6 @@ suite('flaschenpost', function () {
       done();
     });
 
-    test('throws an error if source is missing.', function (done) {
-      assert.that(function () {
-        flaschenpost.getLogger();
-      }, is.throwing('Source is missing.'));
-      done();
-    });
-
     test('throws an error if source is not a valid path.', function (done) {
       assert.that(function () {
         flaschenpost.getLogger('foobar');
@@ -103,6 +96,38 @@ suite('flaschenpost', function () {
 
       test('writes the message to a letter.', function (done) {
         var logger = flaschenpost.getLogger(__filename);
+
+        letter.once('data', function (paragraph) {
+          assert.that(paragraph, is.ofType('object'));
+          assert.that(paragraph.pid, is.equalTo(process.pid));
+          assert.that(paragraph.id, is.ofType('number'));
+          assert.that(paragraph.timestamp, is.not.undefined());
+          assert.that(paragraph.level, is.equalTo('info'));
+          assert.that(paragraph.message, is.equalTo('App bar started.'));
+          assert.that(paragraph.module, is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          }));
+          assert.that(paragraph.source, is.equalTo(__filename));
+          assert.that(paragraph.metadata, is.equalTo({
+            foo: 'bar',
+            metadata: {
+              bar: 'baz'
+            }
+          }));
+          done();
+        });
+
+        logger.info('App {{foo}} started.', {
+          foo: 'bar',
+          metadata: {
+            bar: 'baz'
+          }
+        });
+      });
+
+      test('writes the message to a letter even when no filename was specified.', function (done) {
+        var logger = flaschenpost.getLogger();
 
         letter.once('data', function (paragraph) {
           assert.that(paragraph, is.ofType('object'));

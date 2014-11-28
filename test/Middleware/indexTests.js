@@ -6,7 +6,8 @@ var assert = require('node-assertthat');
 
 var flaschenpost = require('../../lib/flaschenpost'),
     letter = require('../../lib/letter'),
-    Middleware = require('../../lib/Middleware');
+    Middleware = require('../../lib/Middleware'),
+    packageJson = require('../../package.json');
 
 var Writable = stream.Writable;
 
@@ -26,15 +27,6 @@ suite('Middleware', function () {
       new Middleware();
       /*eslint-enable no-new*/
     }, is.throwing('Level is missing.'));
-    done();
-  });
-
-  test('throws an error if source is missing.', function (done) {
-    assert.that(function () {
-      /*eslint-disable no-new*/
-      new Middleware('info');
-      /*eslint-enable no-new*/
-    }, is.throwing('Source is missing.'));
     done();
   });
 
@@ -61,6 +53,22 @@ suite('Middleware', function () {
       assert.that(data.module, is.equalTo({
         name: 'foo',
         version: '0.0.1'
+      }));
+      done();
+    });
+
+    middleware.write('foobar');
+  });
+
+  test('writes messages using the specified log level even if no filename was specified.', function (done) {
+    var middleware = new Middleware('info');
+
+    letter.once('data', function (data) {
+      assert.that(data.level, is.equalTo('info'));
+      assert.that(data.message, is.equalTo('foobar'));
+      assert.that(data.module, is.equalTo({
+        name: packageJson.name,
+        version: packageJson.version
       }));
       done();
     });

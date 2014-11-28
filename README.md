@@ -24,7 +24,13 @@ var flaschenpost = require('flaschenpost');
 
 ### Using a logger
 
-Next, call the `getLogger` function to acquire a logger. You have to provide `__filename` as parameter, as this value will be used to detect the appropriate `package.json` file and extract information about the current module.
+Next, call the `getLogger` function to acquire a logger. If you don't provide a parameter flaschenpost identifies the caller automatically.
+
+```javascript
+var logger = flaschenpost.getLogger();
+```
+
+In rare cases you need to specify the caller manually, e.g. if you wrap flaschenpost in your own logging module. In these cases, provide `__filename` as parameter.
 
 ```javascript
 var logger = flaschenpost.getLogger(__filename);
@@ -110,7 +116,15 @@ flaschenpost.use('levels', {
 
 If you are writing an Express-based application and you use [morgan](https://github.com/expressjs/morgan) as logger, you can easily integrate flaschenpost into it.
 
-For that, provide the `stream` property when setting up morgan and call the `Middleware` constructor function with the desired log level and the path to the `package.json` file that shall be used for the module information.
+For that, provide the `stream` property when setting up morgan and call the `Middleware` constructor function with the desired log level.
+
+```javascript
+app.use(morgan('combined', {
+  stream: new flaschenpost.Middleware('info')
+}));
+```
+
+Again, in rare cases it may be necessary to provide the file name of the caller on your own.
 
 ```javascript
 app.use(morgan('combined', {
