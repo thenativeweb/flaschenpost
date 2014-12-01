@@ -2,12 +2,14 @@
 
 var stream = require('stream');
 
-var assert = require('node-assertthat');
+var assert = require('node-assertthat'),
+    express = require('express'),
+    morgan = require('morgan'),
+    request = require('supertest');
 
 var flaschenpost = require('../../lib/flaschenpost'),
     letter = require('../../lib/letter'),
-    Middleware = require('../../lib/Middleware'),
-    packageJson = require('../../package.json');
+    Middleware = require('../../lib/Middleware');
 
 var Writable = stream.Writable;
 
@@ -61,18 +63,29 @@ suite('Middleware', function () {
   });
 
   test('writes messages using the specified log level even if no filename was specified.', function (done) {
-    var middleware = new Middleware('info');
+    var app = express(),
+        counter = 0;
 
-    letter.once('data', function (data) {
-      assert.that(data.level, is.equalTo('info'));
-      assert.that(data.message, is.equalTo('foobar'));
-      assert.that(data.module, is.equalTo({
-        name: packageJson.name,
-        version: packageJson.version
-      }));
-      done();
+    app.use(morgan('combined', {
+      stream: new Middleware('info')
+    }));
+
+    app.get('/', function (req, res) {
+      res.send('foobar');
     });
 
-    middleware.write('foobar');
+    letter.once('data', function (data) {
+      assert.that(data.module, is.equalTo({
+        name: 'foo',
+        version: '0.0.1'
+      }));
+      counter++;
+    });
+
+    request(app).get('/').end(function (err) {
+      assert.that(err, is.equalTo(null));
+      assert.that(counter, is.equalTo(1));
+      done();
+    });
   });
 });
