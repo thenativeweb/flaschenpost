@@ -212,7 +212,7 @@ suite('flaschenpost', function () {
         assert.that(chalk.stripColor(data).indexOf([
           /*eslint-disable nodeca/indent*/
           '{',
-          '  "foo": "bar"',
+          '  foo: \'bar\'',
           '}',
           new Array((process.stdout.columns || 80) + 1).join('\u2500') + '\n'
           /*eslint-enable nodeca/indent*/

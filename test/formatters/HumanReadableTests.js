@@ -45,7 +45,7 @@ suite('HumanReadable', function () {
         'foo@0.0.1 (app.js)',
         '15:28:59.974@2014-11-03 82517#0',
         '{',
-        '  "foo": "bar"',
+        '  foo: \'bar\'',
         '}',
         new Array((process.stdout.columns || 80) + 1).join('\u2500') + '\n'
         /*eslint-enable nodeca/indent*/
