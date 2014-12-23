@@ -13,6 +13,7 @@ suite('HumanReadable', function () {
   var humanReadable;
 
   suiteSetup(function () {
+    chalk.enabled = true;
     humanReadable = new HumanReadable();
   });
 
