@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('node-assertthat');
+var assert = require('assertthat');
 
 var sanitize = require('../../lib/letter/sanitizeMetadata');
 

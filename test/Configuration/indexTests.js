@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('node-assertthat'),
+var assert = require('assertthat'),
     nodeenv = require('nodeenv'),
     sinon = require('sinon');
 

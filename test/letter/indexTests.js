@@ -2,7 +2,7 @@
 
 var stream = require('stream');
 
-var assert = require('node-assertthat');
+var assert = require('assertthat');
 
 var letter = require('../../lib/letter');
 
@@ -140,11 +140,11 @@ suite('letter', function () {
         }
       };
 
-      letter.once('data', function (paragraph) {
-        var firstId = paragraph.id;
+      letter.once('data', function (firstParagraph) {
+        var firstId = firstParagraph.id;
 
-        letter.once('data', function (paragraph) {
-          var secondId = paragraph.id;
+        letter.once('data', function (secondParagraph) {
+          var secondId = secondParagraph.id;
 
           assert.that(firstId, is.lessThan(secondId));
           assert.that(firstId + 1, is.equalTo(secondId));

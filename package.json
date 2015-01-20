@@ -23,22 +23,22 @@
     "find-root": "0.1.1",
     "lodash": "2.4.1",
     "markup-js": "1.5.21",
-    "moment": "2.8.4",
-    "oboe": "2.0.2",
+    "moment": "2.9.0",
+    "oboe": "2.1.0",
     "stringify-object": "1.0.0",
     "traceback-safe": "0.3.1-1",
-    "update-notifier": "0.2.2",
+    "update-notifier": "0.3.0",
     "varname": "1.0.2"
   },
   "devDependencies": {
-    "express": "4.10.6",
+    "assertthat": "0.3.0",
+    "express": "4.11.0",
     "grunt": "0.4.5",
-    "morgan": "1.5.0",
-    "node-assertthat": "0.2.3",
+    "morgan": "1.5.1",
     "nodeenv": "0.1.3",
     "sinon": "1.12.2",
     "supertest": "0.15.0",
-    "tourism": "0.10.1"
+    "tourism": "0.10.2"
   },
   "repository": {
     "type": "git",

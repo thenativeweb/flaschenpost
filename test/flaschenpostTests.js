@@ -2,7 +2,7 @@
 
 var stream = require('stream');
 
-var assert = require('node-assertthat'),
+var assert = require('assertthat'),
     chalk = require('chalk');
 
 var flaschenpost = require('../lib/flaschenpost'),
