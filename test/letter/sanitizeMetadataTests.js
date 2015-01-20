@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('node-assertthat');
+var assert = require('assertthat');
 
 var sanitize = require('../../lib/letter/sanitizeMetadata');
 
@@ -21,7 +21,6 @@ suite('sanitizeMetadata', function () {
 
     assert.that(actual, is.ofType('object'));
     assert.that(actual.name, is.equalTo('Error'));
-    assert.that(actual.code, is.undefined());
     assert.that(actual.message, is.equalTo('foo'));
     assert.that(actual.stack, is.ofType('string'));
     done();
@@ -36,7 +35,6 @@ suite('sanitizeMetadata', function () {
     assert.that(actual, is.ofType('object'));
     assert.that(actual.error, is.ofType('object'));
     assert.that(actual.error.name, is.equalTo('Error'));
-    assert.that(actual.error.code, is.undefined());
     assert.that(actual.error.message, is.equalTo('foo'));
     assert.that(actual.error.stack, is.ofType('string'));
     assert.that(actual.data, is.equalTo('bar'));

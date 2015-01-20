@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('node-assertthat');
+var assert = require('assertthat');
 
 var colorize = require('../../lib/formatters/colorize');
 
