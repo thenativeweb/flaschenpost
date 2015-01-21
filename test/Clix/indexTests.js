@@ -5,10 +5,20 @@ var assert = require('assertthat'),
     isAnsi = require('isansi'),
     record = require('record-stdstreams');
 
-var cli = require('../../lib/cli'),
-    unicode = require('../../lib/cli/unicode');
+var Cli = require('../../lib/Cli'),
+    unicode = require('../../lib/Cli/unicode');
 
 suite.only('cli', function () {
+  var cli;
+
+  setup(function () {
+    cli = new Cli();
+  });
+
+  teardown(function () {
+    cli = undefined;
+  });
+
   test('is an object.', function (done) {
     assert.that(cli, is.ofType('object'));
     done();
