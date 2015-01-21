@@ -5,20 +5,10 @@ var assert = require('assertthat'),
     isAnsi = require('isansi'),
     record = require('record-stdstreams');
 
-var Cli = require('../../lib/Cli'),
-    unicode = require('../../lib/Cli/unicode');
+var cli = require('../../lib/cli'),
+    unicode = require('../../lib/cli/unicode');
 
 suite.only('cli', function () {
-  var cli;
-
-  setup(function () {
-    cli = new Cli();
-  });
-
-  teardown(function () {
-    cli = undefined;
-  });
-
   test('is an object.', function (done) {
     assert.that(cli, is.ofType('object'));
     done();
@@ -36,6 +26,18 @@ suite.only('cli', function () {
         stop();
       }, function (stdoutText) {
         assert.that(stdoutText, is.equalTo('\n'));
+        done();
+      });
+    });
+
+    test('does nothing when --quiet is set.', function (done) {
+      process.argv.push('--quiet');
+      record(function (stop) {
+        cli.blankLine();
+        stop();
+      }, function (stdoutText) {
+        assert.that(stdoutText, is.equalTo(''));
+        process.argv.pop();
         done();
       });
     });
@@ -87,6 +89,18 @@ suite.only('cli', function () {
         done();
       });
     });
+
+    test('does nothing when --quiet is set.', function (done) {
+      process.argv.push('--quiet');
+      record(function (stop) {
+        cli.success('foo');
+        stop();
+      }, function (stdoutText) {
+        assert.that(stdoutText, is.equalTo(''));
+        process.argv.pop();
+        done();
+      });
+    });
   });
 
   suite('error', function () {
@@ -132,6 +146,18 @@ suite.only('cli', function () {
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' foo baz\n'));
+        done();
+      });
+    });
+
+    test('still works when --quiet is set.', function (done) {
+      process.argv.push('--quiet');
+      record(function (stop) {
+        cli.error('foo');
+        stop();
+      }, function (stdoutText, stderrText) {
+        assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' foo\n'));
+        process.argv.pop();
         done();
       });
     });
@@ -183,6 +209,18 @@ suite.only('cli', function () {
         done();
       });
     });
+
+    test('still works when --quiet is set.', function (done) {
+      process.argv.push('--quiet');
+      record(function (stop) {
+        cli.warn('foo');
+        stop();
+      }, function (stdoutText, stderrText) {
+        assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.rightPointingPointer + ' foo\n'));
+        process.argv.pop();
+        done();
+      });
+    });
   });
 
   suite('info', function () {
@@ -230,6 +268,18 @@ suite.only('cli', function () {
         done();
       });
     });
+
+    test('does nothing when --quiet is set.', function (done) {
+      process.argv.push('--quiet');
+      record(function (stop) {
+        cli.info('foo');
+        stop();
+      }, function (stdoutText) {
+        assert.that(stdoutText, is.equalTo(''));
+        process.argv.pop();
+        done();
+      });
+    });
   });
 
   suite('verbose', function () {
@@ -238,43 +288,77 @@ suite.only('cli', function () {
       done();
     });
 
-    test('writes a message in gray to stdout.', function (done) {
-      record(function (stop) {
-        cli.verbose('foo');
-        stop();
-      }, function (stdoutText) {
-        assert.that(isAnsi.gray(stdoutText), is.true());
-        done();
+    suite('with --verbose set.', function () {
+      setup(function () {
+        process.argv.push('--verbose');
+      });
+
+      teardown(function () {
+        process.argv.pop();
+      });
+
+      test('writes a message in gray to stdout.', function (done) {
+        record(function (stop) {
+          cli.verbose('foo');
+          stop();
+        }, function (stdoutText) {
+          assert.that(isAnsi.gray(stdoutText), is.true());
+          done();
+        });
+      });
+
+      test('writes a message with indentation.', function (done) {
+        record(function (stop) {
+          cli.verbose('foo');
+          stop();
+        }, function (stdoutText) {
+          assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo\n'));
+          done();
+        });
+      });
+
+      test('writes a stringified message if necessary.', function (done) {
+        record(function (stop) {
+          cli.verbose(23);
+          stop();
+        }, function (stdoutText) {
+          assert.that(chalk.stripColor(stdoutText), is.equalTo('  23\n'));
+          done();
+        });
+      });
+
+      test('supports template strings.', function (done) {
+        record(function (stop) {
+          cli.verbose('foo {{bar}}', { bar: 'baz' });
+          stop();
+        }, function (stdoutText) {
+          assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo baz\n'));
+          done();
+        });
+      });
+
+      test('does nothing when --quiet is set.', function (done) {
+        process.argv.push('--quiet');
+        record(function (stop) {
+          cli.verbose('foo');
+          stop();
+        }, function (stdoutText) {
+          assert.that(stdoutText, is.equalTo(''));
+          process.argv.pop();
+          done();
+        });
       });
     });
 
-    test('writes a message with indentation.', function (done) {
-      record(function (stop) {
-        cli.verbose('foo');
-        stop();
-      }, function (stdoutText) {
-        assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo\n'));
-        done();
-      });
-    });
-
-    test('writes a stringified message if necessary.', function (done) {
-      record(function (stop) {
-        cli.verbose(23);
-        stop();
-      }, function (stdoutText) {
-        assert.that(chalk.stripColor(stdoutText), is.equalTo('  23\n'));
-        done();
-      });
-    });
-
-    test('supports template strings.', function (done) {
-      record(function (stop) {
-        cli.verbose('foo {{bar}}', { bar: 'baz' });
-        stop();
-      }, function (stdoutText) {
-        assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo baz\n'));
-        done();
+    suite('without --verbose set.', function () {
+      test('does not write a message to stdout.', function (done) {
+        record(function (stop) {
+          cli.verbose('foo');
+          stop();
+        }, function (stdoutText) {
+          assert.that(stdoutText, is.equalTo(''));
+          done();
+        });
       });
     });
   });
