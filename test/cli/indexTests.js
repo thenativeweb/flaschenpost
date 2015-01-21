@@ -8,7 +8,7 @@ var assert = require('assertthat'),
 var cli = require('../../lib/cli'),
     unicode = require('../../lib/cli/unicode');
 
-suite.only('cli', function () {
+suite('cli', function () {
   test('is an object.', function (done) {
     assert.that(cli, is.ofType('object'));
     done();
