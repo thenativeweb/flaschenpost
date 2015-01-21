@@ -362,4 +362,50 @@ suite('cli', function () {
       });
     });
   });
+
+  suite('waitFor', function () {
+    test('is a function.', function (done) {
+      assert.that(cli.waitFor, is.ofType('function'));
+      done();
+    });
+
+    test('throws an error if worker is missing.', function (done) {
+      assert.that(function () {
+        cli.waitFor();
+      }, is.throwing('Worker is missing.'));
+      done();
+    });
+
+    test('shows a waiting indicator on stderr.', function (done) {
+      record(function (stopRecording) {
+        cli.waitFor(function (stopWaiting) {
+          setTimeout(function () {
+            stopWaiting();
+            stopRecording();
+          }, 0.2 * 1000);
+        });
+      }, function (stdoutText, stderrText) {
+        assert.that(stdoutText, is.equalTo(''));
+        assert.that(stderrText, is.not.equalTo(''));
+        done();
+      });
+    });
+
+    test('shows nothing when --quiet is set.', function (done) {
+      process.argv.push('--quiet');
+      record(function (stopRecording) {
+        cli.waitFor(function (stopWaiting) {
+          setTimeout(function () {
+            stopWaiting();
+            stopRecording();
+          }, 0.2 * 1000);
+        });
+      }, function (stdoutText, stderrText) {
+        assert.that(stdoutText, is.equalTo(''));
+        assert.that(stderrText, is.equalTo(''));
+        process.argv.pop();
+        done();
+      });
+    });
+  });
 });
