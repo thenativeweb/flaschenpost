@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "assertthat": "0.3.0",
-    "express": "4.11.0",
+    "express": "4.11.1",
     "grunt": "0.4.5",
     "morgan": "1.5.1",
     "nodeenv": "0.1.3",
