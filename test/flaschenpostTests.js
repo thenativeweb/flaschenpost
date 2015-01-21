@@ -42,6 +42,18 @@ suite('flaschenpost', function () {
     });
   });
 
+  suite('getCli', function () {
+    test('is a function.', function (done) {
+      assert.that(flaschenpost.getCli, is.ofType('function'));
+      done();
+    });
+
+    test('returns an object.', function (done) {
+      assert.that(flaschenpost.getCli(), is.ofType('object'));
+      done();
+    });
+  });
+
   suite('getLogger', function () {
     test('is a function.', function (done) {
       assert.that(flaschenpost.getLogger, is.ofType('function'));
