@@ -1,6 +1,6 @@
 {
   "name": "flaschenpost",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "flaschenpost is a logger for cloud and cli applications.",
   "contributors": [
     {
