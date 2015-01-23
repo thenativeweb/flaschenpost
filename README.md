@@ -169,6 +169,20 @@ cli.info('App {{name}} started.', {
 
 Please note that you can use as many placeholders as you like.
 
+#### Using lists
+
+To write a list to the console use the `list` function. Optionally, you may specify an indentation level. Setting the indentation level to `0` is equal to omitting it.
+
+```javascript
+cli.list('foo');
+cli.list('bar');
+cli.list('baz', { indent: 1 });
+
+// ∙ foo
+// ∙ bar
+//   ∙ baz
+```
+
 #### Enabling verbose and quiet mode
 
 By default, only messages written by `success`, `error`, `info` and `warn` are shown on the console. To enable `verbose` as well, provide the `--verbose` command line switch when running the application.

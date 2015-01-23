@@ -90,6 +90,16 @@ suite('cli', function () {
       });
     });
 
+    test('replaces the check mark if a prefix is explicitly given.', function (done) {
+      record(function (stop) {
+        cli.success('foo', { prefix: '-' });
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('- foo\n'));
+        done();
+      });
+    });
+
     test('does nothing when --quiet is set.', function (done) {
       process.argv.push('--quiet');
       record(function (stop) {
@@ -146,6 +156,16 @@ suite('cli', function () {
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' foo baz\n'));
+        done();
+      });
+    });
+
+    test('replaces the check mark if a prefix is explicitly given.', function (done) {
+      record(function (stop) {
+        cli.error('foo', { prefix: '-' });
+        stop();
+      }, function (stdoutText, stderrText) {
+        assert.that(chalk.stripColor(stderrText), is.equalTo('- foo\n'));
         done();
       });
     });
@@ -210,6 +230,16 @@ suite('cli', function () {
       });
     });
 
+    test('replaces the check mark if a prefix is explicitly given.', function (done) {
+      record(function (stop) {
+        cli.warn('foo', { prefix: '-' });
+        stop();
+      }, function (stdoutText, stderrText) {
+        assert.that(chalk.stripColor(stderrText), is.equalTo('- foo\n'));
+        done();
+      });
+    });
+
     test('still works when --quiet is set.', function (done) {
       process.argv.push('--quiet');
       record(function (stop) {
@@ -265,6 +295,16 @@ suite('cli', function () {
         stop();
       }, function (stdoutText) {
         assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo baz\n'));
+        done();
+      });
+    });
+
+    test('replaces the check mark if a prefix is explicitly given.', function (done) {
+      record(function (stop) {
+        cli.info('foo', { prefix: '-' });
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('- foo\n'));
         done();
       });
     });
@@ -337,6 +377,16 @@ suite('cli', function () {
         });
       });
 
+      test('replaces the check mark if a prefix is explicitly given.', function (done) {
+        record(function (stop) {
+          cli.verbose('foo', { prefix: '-' });
+          stop();
+        }, function (stdoutText) {
+          assert.that(chalk.stripColor(stdoutText), is.equalTo('- foo\n'));
+          done();
+        });
+      });
+
       test('does nothing when --quiet is set.', function (done) {
         process.argv.push('--quiet');
         record(function (stop) {
@@ -359,6 +409,53 @@ suite('cli', function () {
           assert.that(stdoutText, is.equalTo(''));
           done();
         });
+      });
+    });
+  });
+
+  suite('list', function () {
+    test('is a function.', function (done) {
+      assert.that(cli.list, is.ofType('function'));
+      done();
+    });
+
+    test('writes a message with a leading dash.', function (done) {
+      record(function (stop) {
+        cli.list('foo');
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo(unicode.multiplicationDot + ' foo\n'));
+        done();
+      });
+    });
+
+    test('writes an indented message.', function (done) {
+      record(function (stop) {
+        cli.list('foo', { indent: 1 });
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('  ' + unicode.multiplicationDot + ' foo\n'));
+        done();
+      });
+    });
+
+    test('writes an indented message.', function (done) {
+      record(function (stop) {
+        cli.list('foo', { indent: 2 });
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('    ' + unicode.multiplicationDot + ' foo\n'));
+        done();
+      });
+    });
+
+    test('correctly indents even for multiple prefix characters.', function (done) {
+      record(function (stop) {
+        cli.list('foo', { prefix: '--', indent: 1 });
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('   -- foo\n'));
+        done();
       });
     });
   });
