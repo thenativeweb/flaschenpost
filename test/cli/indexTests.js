@@ -460,6 +460,78 @@ suite('cli', function () {
     });
   });
 
+  suite('table', function () {
+    test('is a function.', function (done) {
+      assert.that(cli.table, is.ofType('function'));
+      done();
+    });
+
+    test('throws an error if now rows are given.', function (done) {
+      assert.that(function () {
+        cli.table();
+      }, is.throwing('Rows are missing.'));
+      done();
+    });
+
+    test('writes a single row.', function (done) {
+      record(function (stop) {
+        cli.table([
+          [ 'foo', 'bar', 'baz' ]
+        ]);
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo  bar  baz\n'));
+        done();
+      });
+    });
+
+    test('writes multiple rows.', function (done) {
+      record(function (stop) {
+        cli.table([
+          [ 'foo', 'bar', 'baz' ],
+          [ 'bar', 'baz', 'foo' ]
+        ]);
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('  foo  bar  baz\n  bar  baz  foo\n'));
+        done();
+      });
+    });
+
+    test('pads cells.', function (done) {
+      record(function (stop) {
+        cli.table([
+          [ 'fooA', 'bar', 'baz' ],
+          [ 'bar', 'baz', 'fooB' ]
+        ]);
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo('  fooA  bar  baz \n  bar   baz  fooB\n'));
+        done();
+      });
+    });
+
+    test('inserts a separator line.', function (done) {
+      record(function (stop) {
+        cli.table([
+          [ 'A', 'B', 'C' ],
+          [],
+          [ 'fooA', 'bar', 'baz' ],
+          [ 'bar', 'baz', 'fooB' ]
+        ]);
+        stop();
+      }, function (stdoutText) {
+        assert.that(chalk.stripColor(stdoutText), is.equalTo([
+          '  A     B    C   \n',
+          '  \u2500\u2500\u2500\u2500  \u2500\u2500\u2500  \u2500\u2500\u2500\u2500\n',
+          '  fooA  bar  baz \n',
+          '  bar   baz  fooB\n'
+        ].join('')));
+        done();
+      });
+    });
+  });
+
   suite('waitFor', function () {
     test('is a function.', function (done) {
       assert.that(cli.waitFor, is.ofType('function'));
