@@ -113,15 +113,15 @@ suite('cli', function () {
     });
   });
 
-  suite('error', function () {
+  suite('fail', function () {
     test('is a function.', function (done) {
-      assert.that(cli.error, is.ofType('function'));
+      assert.that(cli.fail, is.ofType('function'));
       done();
     });
 
     test('writes a message in red and bold to stderr.', function (done) {
       record(function (stop) {
-        cli.error('foo');
+        cli.fail('foo');
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(isAnsi.red(stderrText), is.true());
@@ -132,7 +132,7 @@ suite('cli', function () {
 
     test('writes a message with a cross.', function (done) {
       record(function (stop) {
-        cli.error('foo');
+        cli.fail('foo');
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' foo\n'));
@@ -142,7 +142,7 @@ suite('cli', function () {
 
     test('writes a stringified message if necessary.', function (done) {
       record(function (stop) {
-        cli.error(23);
+        cli.fail(23);
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' 23\n'));
@@ -152,7 +152,7 @@ suite('cli', function () {
 
     test('supports template strings.', function (done) {
       record(function (stop) {
-        cli.error('foo {{bar}}', { bar: 'baz' });
+        cli.fail('foo {{bar}}', { bar: 'baz' });
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' foo baz\n'));
@@ -162,7 +162,7 @@ suite('cli', function () {
 
     test('replaces the check mark if a prefix is explicitly given.', function (done) {
       record(function (stop) {
-        cli.error('foo', { prefix: '-' });
+        cli.fail('foo', { prefix: '-' });
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo('- foo\n'));
@@ -173,7 +173,7 @@ suite('cli', function () {
     test('still works when --quiet is set.', function (done) {
       process.argv.push('--quiet');
       record(function (stop) {
-        cli.error('foo');
+        cli.fail('foo');
         stop();
       }, function (stdoutText, stderrText) {
         assert.that(chalk.stripColor(stderrText), is.equalTo(unicode.crossMark + ' foo\n'));
