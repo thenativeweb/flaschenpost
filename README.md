@@ -146,7 +146,7 @@ From time to time you may want to inspect log files that contain messages create
 
 To write messages to the console, you need to call the `getCli` function to get a `cli` object. That object provides a number of functions to actually write messages.
 
-Use the `success` and `error` functions to show that your application has succeeded or failed. If you want to provide additional information, use the `info` and `verbose` functions. In case of any warnings, use the `warn` function.
+Use the `success` and `fail` functions to show that your application has succeeded or failed. If you want to provide additional information, use the `info` and `verbose` functions. In case of any warnings, use the `warn` function.
 
 ```javascript
 var cli = flaschenpost.getCli();
@@ -155,7 +155,7 @@ cli.info('Updating...')
 cli.success('Done.');
 ```
 
-*Please note that `error` and `warn` write messages to the standard error stream, all other functions write them to the standard output stream.*
+*Please note that `fail` and `warn` write messages to the standard error stream, all other functions write them to the standard output stream.*
 
 ##### Formatting messages
 
@@ -192,11 +192,31 @@ cli.list('baz', { indent: 1 });
 
 You may change the bullet character using the `prefix` property in the way described above.
 
+#### Using tables
+
+To write data formatted as a table use the `table` function. Provide the data as an array of arrays. If you want to insert a separator line, provide an empty array.
+
+```javascript
+cli.table([
+  [ 'Key', 'Value' ],
+  [],
+  [ 'foo', 23 ],
+  [ 'bar', 7 ]
+]);
+
+// => Key  Value
+//    ───  ─────
+//    foo     23
+//    bar      7
+```
+
+The individual cells become padded automatically: Numbers are aligned to the right, anything else is aligned to the left.
+
 #### Enabling verbose and quiet mode
 
-By default, only messages written by `success`, `error`, `info` and `warn` are shown on the console. To enable `verbose` as well, provide the `--verbose` command line switch when running the application.
+By default, only messages written by `success`, `fail`, `info` and `warn` are shown on the console. To enable `verbose` as well, provide the `--verbose` command line switch when running the application.
 
-If you want to disable any output except `error` and `warn`, provide the `--quiet` command line switch.
+If you want to disable any output except `fail` and `warn`, provide the `--quiet` command line switch.
 
 #### Enabling and disabling colors
 
