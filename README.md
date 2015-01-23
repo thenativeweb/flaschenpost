@@ -159,7 +159,7 @@ cli.success('Done.');
 
 ##### Formatting messages
 
-If you want to use placeholders in the message, embrace them in double curly braces. This way you can access any property of an additional data object.
+If you want to use placeholders in the message, embrace them in double curly braces. This way you can access any property of an additional `options` object.
 
 ```javascript
 cli.info('App {{name}} started.', {
@@ -168,6 +168,13 @@ cli.info('App {{name}} started.', {
 ```
 
 Please note that you can use as many placeholders as you like.
+
+Besides, you can use the `options` object to change the prefix of the various message writing functions. For that, simply provide a `prefix` property and set it to the desired character.
+
+```javascript
+cli.error('App stopped.', { prefix: 'X' });
+// => X App stopped.
+```
 
 #### Using lists
 
@@ -178,10 +185,12 @@ cli.list('foo');
 cli.list('bar');
 cli.list('baz', { indent: 1 });
 
-// ∙ foo
-// ∙ bar
-//   ∙ baz
+// => ∙ foo
+//    ∙ bar
+//      ∙ baz
 ```
+
+You may change the bullet character using the `prefix` property in the way described above.
 
 #### Enabling verbose and quiet mode
 
