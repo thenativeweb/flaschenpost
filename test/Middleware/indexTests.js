@@ -19,7 +19,7 @@ suite('Middleware', function () {
   });
 
   test('is a function.', function (done) {
-    assert.that(Middleware, is.ofType('function'));
+    assert.that(Middleware).is.ofType('function');
     done();
   });
 
@@ -28,7 +28,7 @@ suite('Middleware', function () {
       /*eslint-disable no-new*/
       new Middleware();
       /*eslint-enable no-new*/
-    }, is.throwing('Level is missing.'));
+    }).is.throwing('Level is missing.');
     done();
   });
 
@@ -37,12 +37,12 @@ suite('Middleware', function () {
       /*eslint-disable no-new*/
       new Middleware('foo', __filename);
       /*eslint-enable no-new*/
-    }, is.throwing('Level is invalid.'));
+    }).is.throwing('Level is invalid.');
     done();
   });
 
   test('returns a writable stream.', function (done) {
-    assert.that(new Middleware('info', __filename), is.instanceOf(Writable));
+    assert.that(new Middleware('info', __filename)).is.instanceOf(Writable);
     done();
   });
 
@@ -50,12 +50,12 @@ suite('Middleware', function () {
     var middleware = new Middleware('info', __filename);
 
     letter.once('data', function (data) {
-      assert.that(data.level, is.equalTo('info'));
-      assert.that(data.message, is.equalTo('foobar'));
-      assert.that(data.module, is.equalTo({
+      assert.that(data.level).is.equalTo('info');
+      assert.that(data.message).is.equalTo('foobar');
+      assert.that(data.module).is.equalTo({
         name: 'foo',
         version: '0.0.1'
-      }));
+      });
       done();
     });
 
@@ -75,16 +75,16 @@ suite('Middleware', function () {
     });
 
     letter.once('data', function (data) {
-      assert.that(data.module, is.equalTo({
+      assert.that(data.module).is.equalTo({
         name: 'foo',
         version: '0.0.1'
-      }));
+      });
       counter++;
     });
 
     request(app).get('/').end(function (err) {
-      assert.that(err, is.equalTo(null));
-      assert.that(counter, is.equalTo(1));
+      assert.that(err).is.equalTo(null);
+      assert.that(counter).is.equalTo(1);
       done();
     });
   });

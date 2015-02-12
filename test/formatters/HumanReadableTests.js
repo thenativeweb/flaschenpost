@@ -18,7 +18,7 @@ suite('HumanReadable', function () {
   });
 
   test('is a transform stream.', function (done) {
-    assert.that(humanReadable, is.instanceOf(Transform));
+    assert.that(humanReadable).is.instanceOf(Transform);
     done();
   });
 
@@ -40,7 +40,7 @@ suite('HumanReadable', function () {
     };
 
     humanReadable.once('data', function (data) {
-      assert.that(chalk.stripColor(data), is.equalTo([
+      assert.that(chalk.stripColor(data)).is.equalTo([
         /*eslint-disable nodeca/indent*/
         'App started. (info)',
         'foo@0.0.1 (app.js)',
@@ -50,7 +50,7 @@ suite('HumanReadable', function () {
         '}',
         new Array((process.stdout.columns || 80) + 1).join('\u2500') + '\n'
         /*eslint-enable nodeca/indent*/
-      ].join('\n')));
+      ].join('\n'));
       done();
     });
 

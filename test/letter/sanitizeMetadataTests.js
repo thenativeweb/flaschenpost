@@ -10,19 +10,19 @@ suite('sanitizeMetadata', function () {
       foo: 'bar'
     });
 
-    assert.that(actual, is.equalTo({
+    assert.that(actual).is.equalTo({
       foo: 'bar'
-    }));
+    });
     done();
   });
 
   test('converts error objects to normal ones.', function (done) {
     var actual = sanitize(new Error('foo'));
 
-    assert.that(actual, is.ofType('object'));
-    assert.that(actual.name, is.equalTo('Error'));
-    assert.that(actual.message, is.equalTo('foo'));
-    assert.that(actual.stack, is.ofType('string'));
+    assert.that(actual).is.ofType('object');
+    assert.that(actual.name).is.equalTo('Error');
+    assert.that(actual.message).is.equalTo('foo');
+    assert.that(actual.stack).is.ofType('string');
     done();
   });
 
@@ -32,12 +32,12 @@ suite('sanitizeMetadata', function () {
       data: 'bar'
     });
 
-    assert.that(actual, is.ofType('object'));
-    assert.that(actual.error, is.ofType('object'));
-    assert.that(actual.error.name, is.equalTo('Error'));
-    assert.that(actual.error.message, is.equalTo('foo'));
-    assert.that(actual.error.stack, is.ofType('string'));
-    assert.that(actual.data, is.equalTo('bar'));
+    assert.that(actual).is.ofType('object');
+    assert.that(actual.error).is.ofType('object');
+    assert.that(actual.error.name).is.equalTo('Error');
+    assert.that(actual.error.message).is.equalTo('foo');
+    assert.that(actual.error.stack).is.ofType('string');
+    assert.that(actual.data).is.equalTo('bar');
     done();
   });
 });

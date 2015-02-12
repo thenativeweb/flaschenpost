@@ -10,7 +10,7 @@ var Transform = stream.Transform;
 
 suite('letter', function () {
   test('is a transform stream.', function (done) {
-    assert.that(letter, is.instanceOf(Transform));
+    assert.that(letter).is.instanceOf(Transform);
     done();
   });
 
@@ -26,15 +26,15 @@ suite('letter', function () {
       };
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph, is.ofType('object'));
-        assert.that(paragraph.pid, is.equalTo(process.pid));
-        assert.that(paragraph.id, is.ofType('number'));
-        assert.that(paragraph.timestamp, is.not.undefined());
-        assert.that(paragraph.level, is.equalTo(expected.level));
-        assert.that(paragraph.message, is.equalTo(expected.message));
-        assert.that(paragraph.module, is.equalTo(expected.module));
-        assert.that(paragraph.source, is.undefined());
-        assert.that(paragraph.metadata, is.undefined());
+        assert.that(paragraph).is.ofType('object');
+        assert.that(paragraph.pid).is.equalTo(process.pid);
+        assert.that(paragraph.id).is.ofType('number');
+        assert.that(paragraph.timestamp).is.not.undefined();
+        assert.that(paragraph.level).is.equalTo(expected.level);
+        assert.that(paragraph.message).is.equalTo(expected.message);
+        assert.that(paragraph.module).is.equalTo(expected.module);
+        assert.that(paragraph.source).is.undefined();
+        assert.that(paragraph.metadata).is.undefined();
         done();
       });
 
@@ -57,7 +57,7 @@ suite('letter', function () {
       var expected = 'App bar started.';
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph.message, is.equalTo(expected));
+        assert.that(paragraph.message).is.equalTo(expected);
         done();
       });
 
@@ -76,7 +76,7 @@ suite('letter', function () {
       };
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph.source, is.equalTo(expected.source));
+        assert.that(paragraph.source).is.equalTo(expected.source);
         done();
       });
 
@@ -97,7 +97,7 @@ suite('letter', function () {
       };
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph.metadata, is.equalTo(expected.metadata));
+        assert.that(paragraph.metadata).is.equalTo(expected.metadata);
         done();
       });
 
@@ -119,11 +119,11 @@ suite('letter', function () {
       };
 
       letter.once('data', function (paragraph) {
-        assert.that(paragraph.metadata.err, is.ofType('object'));
-        assert.that(paragraph.metadata.err, is.not.instanceOf(Error));
-        assert.that(paragraph.metadata.err.name, is.equalTo('Error'));
-        assert.that(paragraph.metadata.err.message, is.equalTo('foobar'));
-        assert.that(paragraph.metadata.err.stack, is.ofType('string'));
+        assert.that(paragraph.metadata.err).is.ofType('object');
+        assert.that(paragraph.metadata.err).is.not.instanceOf(Error);
+        assert.that(paragraph.metadata.err.name).is.equalTo('Error');
+        assert.that(paragraph.metadata.err.message).is.equalTo('foobar');
+        assert.that(paragraph.metadata.err.stack).is.ofType('string');
         done();
       });
 
@@ -146,8 +146,8 @@ suite('letter', function () {
         letter.once('data', function (secondParagraph) {
           var secondId = secondParagraph.id;
 
-          assert.that(firstId, is.lessThan(secondId));
-          assert.that(firstId + 1, is.equalTo(secondId));
+          assert.that(firstId).is.lessThan(secondId);
+          assert.that(firstId + 1).is.equalTo(secondId);
           done();
         });
       });

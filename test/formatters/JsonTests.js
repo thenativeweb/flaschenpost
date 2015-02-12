@@ -16,7 +16,7 @@ suite('Json', function () {
   });
 
   test('is a transform stream.', function (done) {
-    assert.that(json, is.instanceOf(Transform));
+    assert.that(json).is.instanceOf(Transform);
     done();
   });
 
@@ -38,7 +38,7 @@ suite('Json', function () {
     };
 
     json.once('data', function (data) {
-      assert.that(data, is.equalTo([
+      assert.that(data).is.equalTo([
         /*eslint-disable nodeca/indent*/
         '{',
           '"pid":82517,',
@@ -56,7 +56,7 @@ suite('Json', function () {
           '}',
         '}\n'
         /*eslint-enable nodeca/indent*/
-      ].join('')));
+      ].join(''));
       done();
     });
 
