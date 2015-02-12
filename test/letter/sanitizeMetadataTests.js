@@ -40,4 +40,12 @@ suite('sanitizeMetadata', function () {
     assert.that(actual.data).is.equalTo('bar');
     done();
   });
+
+  test('returns a copy of the object.', function (done) {
+    var data = {
+      foo: 'bar'
+    };
+    assert.that(sanitize(data)).is.not.sameAs(data);
+    done();
+  });
 });
