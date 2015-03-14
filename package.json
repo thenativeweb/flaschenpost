@@ -1,7 +1,7 @@
 {
   "name": "flaschenpost",
   "version": "0.8.2",
-  "description": "flaschenpost is a logger for cloud and cli applications.",
+  "description": "flaschenpost is a logger for cloud-based applications.",
   "contributors": [
     {
       "name": "Golo Roden",
@@ -43,5 +43,8 @@
     "type": "git",
     "url": "git://github.com/thenativeweb/flaschenpost.git"
   },
+  "keywords": [
+    "log"
+  ],
   "license": "MIT"
 }
