@@ -27,18 +27,18 @@
     "oboe": "2.1.1",
     "stack-trace": "0.0.9",
     "stringify-object": "1.0.1",
-    "update-notifier": "0.3.0",
+    "update-notifier": "0.3.1",
     "varname": "1.0.2"
   },
   "devDependencies": {
-    "assertthat": "0.5.1",
+    "assertthat": "0.5.3",
     "express": "4.12.2",
     "grunt": "0.4.5",
     "morgan": "1.5.1",
     "nodeenv": "0.2.1",
-    "sinon": "1.13.0",
+    "sinon": "1.14.0",
     "supertest": "0.15.0",
-    "tourism": "0.14.0"
+    "tourism": "0.15.0"
   },
   "repository": {
     "type": "git",
