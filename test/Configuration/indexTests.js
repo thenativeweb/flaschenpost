@@ -21,6 +21,7 @@ suite('Configuration', function () {
   suite('module', function () {
     test('does not exist by default.', function (done) {
       var configuration = new Configuration();
+
       assert.that(configuration.module).is.undefined();
       done();
     });
@@ -29,12 +30,14 @@ suite('Configuration', function () {
   suite('levels', function () {
     test('is an object.', function (done) {
       var configuration = new Configuration();
+
       assert.that(configuration.levels).is.ofType('object');
       done();
     });
 
     test('contains the default levels.', function (done) {
       var configuration = new Configuration();
+
       assert.that(configuration.levels).is.equalTo(defaultLevels);
       done();
     });
@@ -43,12 +46,14 @@ suite('Configuration', function () {
   suite('set', function () {
     test('is a function.', function (done) {
       var configuration = new Configuration();
+
       assert.that(configuration.set).is.ofType('function');
       done();
     });
 
     test('throws an error when an unknown key is specified.', function (done) {
       var configuration = new Configuration();
+
       assert.that(function () {
         configuration.set('foo');
       }).is.throwing('Unknown key \'foo\' specified.');
@@ -79,12 +84,14 @@ suite('Configuration', function () {
   suite('setLevels', function () {
     test('is a function.', function (done) {
       var configuration = new Configuration();
+
       assert.that(configuration.setLevels).is.ofType('function');
       done();
     });
 
     test('throws an error if levels are missing.', function (done) {
       var configuration = new Configuration();
+
       assert.that(function () {
         configuration.setLevels();
       }).is.throwing('Levels are missing.');
@@ -100,6 +107,7 @@ suite('Configuration', function () {
       };
 
       var configuration = new Configuration();
+
       configuration.setLevels(expected);
 
       assert.that(configuration.levels).is.equalTo(expected);
@@ -123,6 +131,7 @@ suite('Configuration', function () {
         };
 
         var configuration = new Configuration();
+
         configuration.setLevels(input);
 
         assert.that(configuration.levels).is.equalTo(expected);
@@ -169,6 +178,7 @@ suite('Configuration', function () {
         };
 
         var configuration = new Configuration();
+
         configuration.setLevels(input);
 
         assert.that(configuration.levels).is.equalTo(expected);

@@ -69,6 +69,7 @@ suite('flaschenpost', function () {
 
     test('has the levels as log functions.', function (done) {
       var logger = flaschenpost.getLogger(__filename);
+
       assert.that(logger.fatal).is.ofType('function');
       assert.that(logger.error).is.ofType('function');
       assert.that(logger.warn).is.ofType('function');
@@ -80,6 +81,7 @@ suite('flaschenpost', function () {
     suite('log function', function () {
       test('throws an error when no message is given.', function (done) {
         var logger = flaschenpost.getLogger(__filename);
+
         assert.that(function () {
           logger.info();
         }).is.throwing('Message is missing.');
@@ -88,6 +90,7 @@ suite('flaschenpost', function () {
 
       test('throws an error when message is not a string.', function (done) {
         var logger = flaschenpost.getLogger(__filename);
+
         assert.that(function () {
           logger.info(42);
         }).is.throwing('Message must be a string.');
@@ -160,8 +163,8 @@ suite('flaschenpost', function () {
 
       test('does not write a message if the log level is disabled.', function (done) {
         var logger = flaschenpost.getLogger(__filename);
-
         var counter = 0;
+
         letter.once('data', function () {
           counter++;
         });

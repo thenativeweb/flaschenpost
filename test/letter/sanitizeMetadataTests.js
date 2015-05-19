@@ -16,6 +16,17 @@ suite('sanitizeMetadata', function () {
     done();
   });
 
+  test('preserves arrays.', function (done) {
+    var actual = sanitize({
+      foo: [ 'bar' ]
+    });
+
+    assert.that(actual).is.equalTo({
+      foo: [ 'bar' ]
+    });
+    done();
+  });
+
   test('converts error objects to normal ones.', function (done) {
     var actual = sanitize(new Error('foo'));
 
@@ -45,6 +56,7 @@ suite('sanitizeMetadata', function () {
     var data = {
       foo: 'bar'
     };
+
     assert.that(sanitize(data)).is.not.sameAs(data);
     done();
   });

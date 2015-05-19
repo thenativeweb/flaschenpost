@@ -21,24 +21,24 @@
   "dependencies": {
     "chalk": "1.0.0",
     "find-root": "0.1.1",
-    "lodash": "3.5.0",
+    "lodash": "3.8.0",
     "markup-js": "1.5.21",
-    "moment": "2.9.0",
-    "oboe": "2.1.1",
+    "moment": "2.10.3",
+    "oboe": "2.1.2",
     "stack-trace": "0.0.9",
-    "stringify-object": "1.0.1",
-    "update-notifier": "0.3.1",
+    "stringify-object": "2.0.0",
+    "update-notifier": "0.5.0",
     "varname": "1.0.2"
   },
   "devDependencies": {
-    "assertthat": "0.5.3",
-    "express": "4.12.2",
+    "assertthat": "0.6.0",
+    "express": "4.12.4",
     "grunt": "0.4.5",
-    "morgan": "1.5.1",
+    "morgan": "1.5.3",
     "nodeenv": "0.2.1",
-    "sinon": "1.14.0",
-    "supertest": "0.15.0",
-    "tourism": "0.15.0"
+    "sinon": "1.14.1",
+    "supertest": "1.0.1",
+    "tourism": "0.18.0"
   },
   "repository": {
     "type": "git",
