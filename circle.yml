@@ -6,8 +6,8 @@ machine:
 
 dependencies:
   pre:
-    - npm install -g grunt-cli
+    - npm install -g roboter
 
 test:
   override:
-    - grunt
+    - bot build-server
