@@ -22,7 +22,6 @@
     "chalk": "1.1.1",
     "find-root": "0.1.1",
     "lodash": "3.10.1",
-    "markup-js": "1.5.21",
     "moment": "2.10.6",
     "oboe": "2.1.2",
     "stack-trace": "0.0.9",

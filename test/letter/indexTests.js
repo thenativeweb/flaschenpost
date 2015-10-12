@@ -41,29 +41,6 @@ suite('letter', () => {
       letter.write(expected);
     });
 
-    test('returns a paragraph with a formatted message when data is given.', done => {
-      const input = {
-        level: 'info',
-        message: 'App {{foo}} started.',
-        metadata: {
-          foo: 'bar'
-        },
-        module: {
-          name: 'foo',
-          version: '0.0.1'
-        }
-      };
-
-      const expected = 'App bar started.';
-
-      letter.once('data', paragraph => {
-        assert.that(paragraph.message).is.equalTo(expected);
-        done();
-      });
-
-      letter.write(input);
-    });
-
     test('returns a paragraph with source information if they are given.', done => {
       const expected = {
         level: 'info',

@@ -106,7 +106,7 @@ suite('flaschenpost', () => {
           assert.that(paragraph.id).is.ofType('number');
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
-          assert.that(paragraph.message).is.equalTo('App bar started.');
+          assert.that(paragraph.message).is.equalTo('App started.');
           assert.that(paragraph.module).is.equalTo({
             name: 'foo',
             version: '0.0.1'
@@ -121,7 +121,7 @@ suite('flaschenpost', () => {
           done();
         });
 
-        logger.info('App {{foo}} started.', {
+        logger.info(`App started.`, {
           foo: 'bar',
           metadata: {
             bar: 'baz'
@@ -138,7 +138,7 @@ suite('flaschenpost', () => {
           assert.that(paragraph.id).is.ofType('number');
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
-          assert.that(paragraph.message).is.equalTo('App bar started.');
+          assert.that(paragraph.message).is.equalTo('App started.');
           assert.that(paragraph.module).is.equalTo({
             name: 'foo',
             version: '0.0.1'
@@ -153,7 +153,7 @@ suite('flaschenpost', () => {
           done();
         });
 
-        logger.info('App {{foo}} started.', {
+        logger.info('App started.', {
           foo: 'bar',
           metadata: {
             bar: 'baz'

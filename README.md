@@ -21,7 +21,7 @@ flaschenpost is a logger for cloud-based applications.
 First you need to integrate flaschenpost into your application.
 
 ```javascript
-var flaschenpost = require('flaschenpost');
+const flaschenpost = require('flaschenpost');
 ```
 
 ### Using a logger
@@ -29,13 +29,13 @@ var flaschenpost = require('flaschenpost');
 Next, call the `getLogger` function to acquire a logger. If you don't provide a parameter flaschenpost identifies the caller automatically.
 
 ```javascript
-var logger = flaschenpost.getLogger();
+const logger = flaschenpost.getLogger();
 ```
 
 In rare cases you need to specify the caller manually, e.g. if you wrap flaschenpost in your own logging module. In these cases, provide `__filename` as parameter.
 
 ```javascript
-var logger = flaschenpost.getLogger(__filename);
+const logger = flaschenpost.getLogger(__filename);
 ```
 
 Then you can use the functions `fatal`, `error`, `warn`, `info` and `debug` to write log messages. Simply provide the message you want to log as a parameter.
@@ -56,18 +56,6 @@ logger.info('App started.', {
   }
 });
 ```
-
-#### Formatting log messages
-
-If you want to use placeholders in the log message, embrace them in double curly braces. This way you can access any property of the meta data object.
-
-```javascript
-logger.info('App {{name}} started.', {
-  name: 'foo'
-});
-```
-
-Please note that you can use as many placeholders as you like.
 
 #### Defining the log target
 
