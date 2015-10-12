@@ -1,74 +1,74 @@
 'use strict';
 
-var stream = require('stream');
+const stream = require('stream');
 
-var assert = require('assertthat'),
+const assert = require('assertthat'),
     chalk = require('chalk');
 
-var flaschenpost = require('../lib/flaschenpost'),
+const flaschenpost = require('../lib/flaschenpost'),
     JsonFormatter = require('../lib/formatters/Json'),
     letter = require('../lib/letter');
 
-var PassThrough = stream.PassThrough;
+const PassThrough = stream.PassThrough;
 
-suite('flaschenpost', function () {
-  setup(function () {
+suite('flaschenpost', () => {
+  setup(() => {
     flaschenpost.initialize();
   });
 
-  test('is an object.', function (done) {
+  test('is an object.', done => {
     assert.that(flaschenpost).is.ofType('object');
     done();
   });
 
-  suite('initialize', function () {
-    test('is a function.', function (done) {
+  suite('initialize', () => {
+    test('is a function.', done => {
       assert.that(flaschenpost.initialize).is.ofType('function');
       done();
     });
   });
 
-  suite('use', function () {
-    test('is a function.', function (done) {
+  suite('use', () => {
+    test('is a function.', done => {
       assert.that(flaschenpost.use).is.ofType('function');
       done();
     });
 
-    test('throws an error when an unknown key is specified.', function (done) {
-      assert.that(function () {
+    test('throws an error when an unknown key is specified.', done => {
+      assert.that(() => {
         flaschenpost.use('foo');
       }).is.throwing('Unknown key \'foo\' specified.');
       done();
     });
   });
 
-  suite('getLogger', function () {
-    test('is a function.', function (done) {
+  suite('getLogger', () => {
+    test('is a function.', done => {
       assert.that(flaschenpost.getLogger).is.ofType('function');
       done();
     });
 
-    test('throws an error if source is not a valid path.', function (done) {
-      assert.that(function () {
+    test('throws an error if source is not a valid path.', done => {
+      assert.that(() => {
         flaschenpost.getLogger('foobar');
       }).is.throwing('Could not find package.json.');
       done();
     });
 
-    test('throws an error if given path does not have a package.json file.', function (done) {
-      assert.that(function () {
+    test('throws an error if given path does not have a package.json file.', done => {
+      assert.that(() => {
         flaschenpost.getLogger('/');
       }).is.throwing('Could not find package.json.');
       done();
     });
 
-    test('returns an object.', function (done) {
+    test('returns an object.', done => {
       assert.that(flaschenpost.getLogger(__filename)).is.ofType('object');
       done();
     });
 
-    test('has the levels as log functions.', function (done) {
-      var logger = flaschenpost.getLogger(__filename);
+    test('has the levels as log functions.', done => {
+      const logger = flaschenpost.getLogger(__filename);
 
       assert.that(logger.fatal).is.ofType('function');
       assert.that(logger.error).is.ofType('function');
@@ -78,27 +78,27 @@ suite('flaschenpost', function () {
       done();
     });
 
-    suite('log function', function () {
-      test('throws an error when no message is given.', function (done) {
-        var logger = flaschenpost.getLogger(__filename);
+    suite('log function', () => {
+      test('throws an error when no message is given.', done => {
+        const logger = flaschenpost.getLogger(__filename);
 
-        assert.that(function () {
+        assert.that(() => {
           logger.info();
         }).is.throwing('Message is missing.');
         done();
       });
 
-      test('throws an error when message is not a string.', function (done) {
-        var logger = flaschenpost.getLogger(__filename);
+      test('throws an error when message is not a string.', done => {
+        const logger = flaschenpost.getLogger(__filename);
 
-        assert.that(function () {
+        assert.that(() => {
           logger.info(42);
         }).is.throwing('Message must be a string.');
         done();
       });
 
-      test('writes the message to a letter.', function (done) {
-        var logger = flaschenpost.getLogger(__filename);
+      test('writes the message to a letter.', done => {
+        const logger = flaschenpost.getLogger(__filename);
 
         letter.once('data', function (paragraph) {
           assert.that(paragraph).is.ofType('object');
@@ -129,8 +129,8 @@ suite('flaschenpost', function () {
         });
       });
 
-      test('writes the message to a letter even when no filename was specified.', function (done) {
-        var logger = flaschenpost.getLogger();
+      test('writes the message to a letter even when no filename was specified.', done => {
+        const logger = flaschenpost.getLogger();
 
         letter.once('data', function (paragraph) {
           assert.that(paragraph).is.ofType('object');
@@ -161,17 +161,17 @@ suite('flaschenpost', function () {
         });
       });
 
-      test('does not write a message if the log level is disabled.', function (done) {
-        var logger = flaschenpost.getLogger(__filename);
-        var counter = 0;
+      test('does not write a message if the log level is disabled.', done => {
+        const logger = flaschenpost.getLogger(__filename);
+        let counter = 0;
 
-        letter.once('data', function () {
+        letter.once('data', () => {
           counter++;
         });
 
         logger.debug('App started.');
 
-        setTimeout(function () {
+        setTimeout(() => {
           assert.that(counter).is.equalTo(0);
           done();
         }, 0.1 * 1000);
@@ -179,12 +179,12 @@ suite('flaschenpost', function () {
     });
   });
 
-  suite('uncork', function () {
-    test('transforms JSON into a human readable format.', function (done) {
-      var inputStream = new JsonFormatter(),
+  suite('uncork', () => {
+    test('transforms JSON into a human readable format.', done => {
+      const inputStream = new JsonFormatter(),
           outputStream = new PassThrough({ objectMode: true });
 
-      var paragraph = {
+      const paragraph = {
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -197,28 +197,24 @@ suite('flaschenpost', function () {
         }
       };
 
-      var counter = 0;
+      let counter = 0;
 
       letter.pipe(inputStream);
       flaschenpost.uncork(inputStream, outputStream);
 
-      outputStream.on('data', function (data) {
+      outputStream.on('data', data => {
         counter++;
 
         assert.that(chalk.stripColor(data).indexOf([
-          /*eslint-disable nodeca/indent*/
           'App started. (info)',
           'foo@0.0.1 ('
-          /*eslint-enable nodeca/indent*/
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
-          /*eslint-disable nodeca/indent*/
           '{',
           '  foo: \'bar\'',
           '}',
-          new Array((process.stdout.columns || 80) + 1).join('\u2500') + '\n'
-          /*eslint-enable nodeca/indent*/
+          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
         ].join('\n'))).is.greaterThan(0);
 
         if (counter === 2) {

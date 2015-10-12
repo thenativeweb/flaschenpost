@@ -1,70 +1,70 @@
 'use strict';
 
-var assert = require('assertthat'),
+const assert = require('assertthat'),
     nodeenv = require('nodeenv'),
     sinon = require('sinon');
 
-var Configuration = require('../../lib/Configuration'),
+const Configuration = require('../../lib/Configuration'),
     defaultLevels = require('../../lib/defaultLevels.json');
 
-suite('Configuration', function () {
-  test('is a function.', function (done) {
+suite('Configuration', () => {
+  test('is a function.', done => {
     assert.that(Configuration).is.ofType('function');
     done();
   });
 
-  test('returns an object.', function (done) {
+  test('returns an object.', done => {
     assert.that(new Configuration()).is.ofType('object');
     done();
   });
 
-  suite('module', function () {
-    test('does not exist by default.', function (done) {
-      var configuration = new Configuration();
+  suite('module', () => {
+    test('does not exist by default.', done => {
+      const configuration = new Configuration();
 
       assert.that(configuration.module).is.undefined();
       done();
     });
   });
 
-  suite('levels', function () {
-    test('is an object.', function (done) {
-      var configuration = new Configuration();
+  suite('levels', () => {
+    test('is an object.', done => {
+      const configuration = new Configuration();
 
       assert.that(configuration.levels).is.ofType('object');
       done();
     });
 
-    test('contains the default levels.', function (done) {
-      var configuration = new Configuration();
+    test('contains the default levels.', done => {
+      const configuration = new Configuration();
 
       assert.that(configuration.levels).is.equalTo(defaultLevels);
       done();
     });
   });
 
-  suite('set', function () {
-    test('is a function.', function (done) {
-      var configuration = new Configuration();
+  suite('set', () => {
+    test('is a function.', done => {
+      const configuration = new Configuration();
 
       assert.that(configuration.set).is.ofType('function');
       done();
     });
 
-    test('throws an error when an unknown key is specified.', function (done) {
-      var configuration = new Configuration();
+    test('throws an error when an unknown key is specified.', done => {
+      const configuration = new Configuration();
 
-      assert.that(function () {
+      assert.that(() => {
         configuration.set('foo');
       }).is.throwing('Unknown key \'foo\' specified.');
       done();
     });
 
-    test('calls the appropriate setX function.', function (done) {
-      var configuration = new Configuration(),
+    test('calls the appropriate setX function.', done => {
+      const configuration = new Configuration(),
           spy = sinon.spy(configuration, 'setLevels');
 
-      var expected = {
+      const expected = {
         info: {
           color: 'green',
           enabled: true
@@ -81,32 +81,32 @@ suite('Configuration', function () {
     });
   });
 
-  suite('setLevels', function () {
-    test('is a function.', function (done) {
-      var configuration = new Configuration();
+  suite('setLevels', () => {
+    test('is a function.', done => {
+      const configuration = new Configuration();
 
       assert.that(configuration.setLevels).is.ofType('function');
       done();
     });
 
-    test('throws an error if levels are missing.', function (done) {
-      var configuration = new Configuration();
+    test('throws an error if levels are missing.', done => {
+      const configuration = new Configuration();
 
-      assert.that(function () {
+      assert.that(() => {
         configuration.setLevels();
       }).is.throwing('Levels are missing.');
       done();
     });
 
-    test('sets the given levels.', function (done) {
-      var expected = {
+    test('sets the given levels.', done => {
+      const expected = {
         info: {
           color: 'green',
           enabled: true
         }
       };
 
-      var configuration = new Configuration();
+      const configuration = new Configuration();
 
       configuration.setLevels(expected);
 
@@ -114,23 +114,23 @@ suite('Configuration', function () {
       done();
     });
 
-    test('sets the given levels with respect to the LOG_LEVELS environment variable.', function (done) {
-      nodeenv('LOG_LEVELS', 'debug', function (restore) {
-        var input = {
+    test('sets the given levels with respect to the LOG_LEVELS environment variable.', done => {
+      nodeenv('LOG_LEVELS', 'debug', restore => {
+        const input = {
           debug: {
             color: 'green',
             enabled: false
           }
         };
 
-        var expected = {
+        const expected = {
           debug: {
             color: 'green',
             enabled: true
           }
         };
 
-        var configuration = new Configuration();
+        const configuration = new Configuration();
 
         configuration.setLevels(input);
 
@@ -140,12 +140,12 @@ suite('Configuration', function () {
       });
     });
 
-    test('throws an error if an unknown level is provided by the LOG_LEVELS environment variable.', function (done) {
-      nodeenv('LOG_LEVELS', 'foobar', function (restore) {
-        assert.that(function () {
-          /*eslint-disable no-new*/
+    test('throws an error if an unknown level is provided by the LOG_LEVELS environment variable.', done => {
+      nodeenv('LOG_LEVELS', 'foobar', restore => {
+        assert.that(() => {
+          /* eslint-disable no-new */
           new Configuration();
-          /*eslint-enable no-new*/
+          /* eslint-enable no-new */
         }).is.throwing('Unknown log level foobar.');
 
         restore();
@@ -153,9 +153,9 @@ suite('Configuration', function () {
       });
     });
 
-    test('sets all levels if the LOG_LEVELS environment variable contains a \'*\'.', function (done) {
-      nodeenv('LOG_LEVELS', '*', function (restore) {
-        var input = {
+    test('sets all levels if the LOG_LEVELS environment variable contains a \'*\'.', done => {
+      nodeenv('LOG_LEVELS', '*', restore => {
+        const input = {
           debug: {
             color: 'green',
             enabled: false
@@ -166,7 +166,7 @@ suite('Configuration', function () {
           }
         };
 
-        var expected = {
+        const expected = {
           debug: {
             color: 'green',
             enabled: true
@@ -177,7 +177,7 @@ suite('Configuration', function () {
           }
         };
 
-        var configuration = new Configuration();
+        const configuration = new Configuration();
 
         configuration.setLevels(input);
 

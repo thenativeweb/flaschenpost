@@ -2,9 +2,9 @@
 
 'use strict';
 
-var updateNotifier = require('update-notifier');
+const updateNotifier = require('update-notifier');
 
-var flaschenpost = require('../lib/flaschenpost'),
+const flaschenpost = require('../lib/flaschenpost'),
     packageJson = require('../package.json');
 
 updateNotifier({

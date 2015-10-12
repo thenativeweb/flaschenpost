@@ -1,22 +1,22 @@
 'use strict';
 
-var stream = require('stream');
+const stream = require('stream');
 
-var assert = require('assertthat');
+const assert = require('assertthat');
 
-var letter = require('../../lib/letter');
+const letter = require('../../lib/letter');
 
-var Transform = stream.Transform;
+const Transform = stream.Transform;
 
-suite('letter', function () {
-  test('is a transform stream.', function (done) {
+suite('letter', () => {
+  test('is a transform stream.', done => {
     assert.that(letter).is.instanceOf(Transform);
     done();
   });
 
-  suite('write', function () {
-    test('returns a paragraph.', function (done) {
-      var expected = {
+  suite('write', () => {
+    test('returns a paragraph.', done => {
+      const expected = {
         level: 'info',
         message: 'App started.',
         module: {
@@ -25,7 +25,7 @@ suite('letter', function () {
         }
       };
 
-      letter.once('data', function (paragraph) {
+      letter.once('data', paragraph => {
         assert.that(paragraph).is.ofType('object');
         assert.that(paragraph.pid).is.equalTo(process.pid);
         assert.that(paragraph.id).is.ofType('number');
@@ -41,8 +41,8 @@ suite('letter', function () {
       letter.write(expected);
     });
 
-    test('returns a paragraph with a formatted message when data is given.', function (done) {
-      var input = {
+    test('returns a paragraph with a formatted message when data is given.', done => {
+      const input = {
         level: 'info',
         message: 'App {{foo}} started.',
         metadata: {
@@ -54,9 +54,9 @@ suite('letter', function () {
         }
       };
 
-      var expected = 'App bar started.';
+      const expected = 'App bar started.';
 
-      letter.once('data', function (paragraph) {
+      letter.once('data', paragraph => {
         assert.that(paragraph.message).is.equalTo(expected);
         done();
       });
@@ -64,8 +64,8 @@ suite('letter', function () {
       letter.write(input);
     });
 
-    test('returns a paragraph with source information if they are given.', function (done) {
-      var expected = {
+    test('returns a paragraph with source information if they are given.', done => {
+      const expected = {
         level: 'info',
         message: 'App started.',
         source: __filename,
@@ -75,7 +75,7 @@ suite('letter', function () {
         }
       };
 
-      letter.once('data', function (paragraph) {
+      letter.once('data', paragraph => {
         assert.that(paragraph.source).is.equalTo(expected.source);
         done();
       });
@@ -83,8 +83,8 @@ suite('letter', function () {
       letter.write(expected);
     });
 
-    test('returns a paragraph with metadata if they are given.', function (done) {
-      var expected = {
+    test('returns a paragraph with metadata if they are given.', done => {
+      const expected = {
         level: 'info',
         message: 'App started.',
         metadata: {
@@ -96,7 +96,7 @@ suite('letter', function () {
         }
       };
 
-      letter.once('data', function (paragraph) {
+      letter.once('data', paragraph => {
         assert.that(paragraph.metadata).is.equalTo(expected.metadata);
         done();
       });
@@ -104,8 +104,8 @@ suite('letter', function () {
       letter.write(expected);
     });
 
-    test('returns a paragraph with metadata with correctly transformed error objects.', function (done) {
-      var expected = {
+    test('returns a paragraph with metadata with correctly transformed error objects.', done => {
+      const expected = {
         level: 'info',
         message: 'App started.',
         metadata: {
@@ -118,7 +118,7 @@ suite('letter', function () {
         }
       };
 
-      letter.once('data', function (paragraph) {
+      letter.once('data', paragraph => {
         assert.that(paragraph.metadata.err).is.ofType('object');
         assert.that(paragraph.metadata.err).is.not.instanceOf(Error);
         assert.that(paragraph.metadata.err.name).is.equalTo('Error');
@@ -130,8 +130,8 @@ suite('letter', function () {
       letter.write(expected);
     });
 
-    test('increments the paragraph id by 1.', function (done) {
-      var input = {
+    test('increments the paragraph id by 1.', done => {
+      const input = {
         level: 'info',
         message: 'App started.',
         module: {
@@ -140,11 +140,11 @@ suite('letter', function () {
         }
       };
 
-      letter.once('data', function (firstParagraph) {
-        var firstId = firstParagraph.id;
+      letter.once('data', firstParagraph => {
+        const firstId = firstParagraph.id;
 
-        letter.once('data', function (secondParagraph) {
-          var secondId = secondParagraph.id;
+        letter.once('data', secondParagraph => {
+          const secondId = secondParagraph.id;
 
           assert.that(firstId).is.lessThan(secondId);
           assert.that(firstId + 1).is.equalTo(secondId);

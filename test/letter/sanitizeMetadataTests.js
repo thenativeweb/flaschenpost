@@ -1,12 +1,12 @@
 'use strict';
 
-var assert = require('assertthat');
+const assert = require('assertthat');
 
-var sanitize = require('../../lib/letter/sanitizeMetadata');
+const sanitize = require('../../lib/letter/sanitizeMetadata');
 
-suite('sanitizeMetadata', function () {
-  test('does nothing to normal objects.', function (done) {
-    var actual = sanitize({
+suite('sanitizeMetadata', () => {
+  test('does nothing to normal objects.', done => {
+    const actual = sanitize({
       foo: 'bar'
     });
 
@@ -16,8 +16,8 @@ suite('sanitizeMetadata', function () {
     done();
   });
 
-  test('preserves arrays.', function (done) {
-    var actual = sanitize({
+  test('preserves arrays.', done => {
+    const actual = sanitize({
       foo: [ 'bar' ]
     });
 
@@ -27,8 +27,8 @@ suite('sanitizeMetadata', function () {
     done();
   });
 
-  test('converts error objects to normal ones.', function (done) {
-    var actual = sanitize(new Error('foo'));
+  test('converts error objects to normal ones.', done => {
+    const actual = sanitize(new Error('foo'));
 
     assert.that(actual).is.ofType('object');
     assert.that(actual.name).is.equalTo('Error');
@@ -37,8 +37,8 @@ suite('sanitizeMetadata', function () {
     done();
   });
 
-  test('converts recursive objects.', function (done) {
-    var actual = sanitize({
+  test('converts recursive objects.', done => {
+    const actual = sanitize({
       error: new Error('foo'),
       data: 'bar'
     });
@@ -52,8 +52,8 @@ suite('sanitizeMetadata', function () {
     done();
   });
 
-  test('returns a copy of the object.', function (done) {
-    var data = {
+  test('returns a copy of the object.', done => {
+    const data = {
       foo: 'bar'
     };
 

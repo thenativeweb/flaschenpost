@@ -1,53 +1,53 @@
 'use strict';
 
-var stream = require('stream');
+const stream = require('stream');
 
-var assert = require('assertthat'),
+const assert = require('assertthat'),
     express = require('express'),
     morgan = require('morgan'),
     request = require('supertest');
 
-var flaschenpost = require('../../lib/flaschenpost'),
+const flaschenpost = require('../../lib/flaschenpost'),
     letter = require('../../lib/letter'),
     Middleware = require('../../lib/Middleware');
 
-var Writable = stream.Writable;
+const Writable = stream.Writable;
 
-suite('Middleware', function () {
-  setup(function () {
+suite('Middleware', () => {
+  setup(() => {
     flaschenpost.initialize();
   });
 
-  test('is a function.', function (done) {
+  test('is a function.', done => {
     assert.that(Middleware).is.ofType('function');
     done();
   });
 
-  test('throws an error if level is missing.', function (done) {
-    assert.that(function () {
-      /*eslint-disable no-new*/
+  test('throws an error if level is missing.', done => {
+    assert.that(() => {
+      /* eslint-disable no-new */
       new Middleware();
-      /*eslint-enable no-new*/
+      /* eslint-enable no-new */
     }).is.throwing('Level is missing.');
     done();
   });
 
-  test('throws an error if the specified level does not exist.', function (done) {
-    assert.that(function () {
-      /*eslint-disable no-new*/
+  test('throws an error if the specified level does not exist.', done => {
+    assert.that(() => {
+      /* eslint-disable no-new */
       new Middleware('foo', __filename);
-      /*eslint-enable no-new*/
+      /* eslint-enable no-new */
     }).is.throwing('Level is invalid.');
     done();
   });
 
-  test('returns a writable stream.', function (done) {
+  test('returns a writable stream.', done => {
     assert.that(new Middleware('info', __filename)).is.instanceOf(Writable);
     done();
   });
 
-  test('writes messages using the specified log level.', function (done) {
-    var middleware = new Middleware('info', __filename);
+  test('writes messages using the specified log level.', done => {
+    const middleware = new Middleware('info', __filename);
 
     letter.once('data', function (data) {
       assert.that(data.level).is.equalTo('info');
@@ -62,9 +62,9 @@ suite('Middleware', function () {
     middleware.write('foobar');
   });
 
-  test('writes messages using the specified log level even if no filename was specified.', function (done) {
-    var app = express(),
-        counter = 0;
+  test('writes messages using the specified log level even if no filename was specified.', done => {
+    const app = express();
+    let counter = 0;
 
     app.use(morgan('combined', {
       stream: new Middleware('info')

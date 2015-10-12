@@ -1,27 +1,27 @@
 'use strict';
 
-var stream = require('stream');
+const stream = require('stream');
 
-var assert = require('assertthat');
+const assert = require('assertthat');
 
-var Json = require('../../lib/formatters/Json');
+const Json = require('../../lib/formatters/Json');
 
-var Transform = stream.Transform;
+const Transform = stream.Transform;
 
-suite('Json', function () {
-  var json;
+suite('Json', () => {
+  let json;
 
-  suiteSetup(function () {
+  suiteSetup(() => {
     json = new Json();
   });
 
-  test('is a transform stream.', function (done) {
+  test('is a transform stream.', done => {
     assert.that(json).is.instanceOf(Transform);
     done();
   });
 
-  test('transforms a paragraph to a serialized JSON string.', function (done) {
-    var paragraph = {
+  test('transforms a paragraph to a serialized JSON string.', done => {
+    const paragraph = {
       pid: 82517,
       id: 0,
       timestamp: 1415024939974,
@@ -37,25 +37,25 @@ suite('Json', function () {
       }
     };
 
-    json.once('data', function (data) {
+    json.once('data', data => {
       assert.that(data).is.equalTo([
-        /*eslint-disable nodeca/indent*/
+        /* eslint-disable nodeca/indent */
         '{',
-          '"pid":82517,',
-          '"id":0,',
-          '"timestamp":1415024939974,',
-          '"level":"info",',
-          '"message":"App started.",',
-          '"module":{',
-            '"name":"foo",',
-            '"version":"0.0.1"',
-          '},',
-          '"file":"app.js",',
-          '"metadata":{',
-            '"foo":"bar"',
-          '}',
+        '"pid":82517,',
+        '"id":0,',
+        '"timestamp":1415024939974,',
+        '"level":"info",',
+        '"message":"App started.",',
+        '"module":{',
+        '"name":"foo",',
+        '"version":"0.0.1"',
+        '},',
+        '"file":"app.js",',
+        '"metadata":{',
+        '"foo":"bar"',
+        '}',
         '}\n'
-        /*eslint-enable nodeca/indent*/
+        /* eslint-enable nodeca/indent */
       ].join(''));
       done();
     });

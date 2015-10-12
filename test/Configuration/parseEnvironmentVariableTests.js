@@ -1,18 +1,18 @@
 'use strict';
 
-var assert = require('assertthat'),
+const assert = require('assertthat'),
     nodeenv = require('nodeenv');
 
-var parseEnvironmentVariable = require('../../lib/Configuration/parseEnvironmentVariable');
+const parseEnvironmentVariable = require('../../lib/Configuration/parseEnvironmentVariable');
 
-suite('parseEnvironmentVariable', function () {
-  test('is a function.', function (done) {
+suite('parseEnvironmentVariable', () => {
+  test('is a function.', done => {
     assert.that(parseEnvironmentVariable).is.ofType('function');
     done();
   });
 
-  test('returns an empty array if the environment variable is not set.', function (done) {
-    nodeenv('LOG_LEVELS', undefined, function (restore) {
+  test('returns an empty array if the environment variable is not set.', done => {
+    nodeenv('LOG_LEVELS', undefined, restore => {
       assert.that(parseEnvironmentVariable()).is.equalTo([]);
 
       restore();
@@ -20,8 +20,8 @@ suite('parseEnvironmentVariable', function () {
     });
   });
 
-  test('returns an array with a single value if the environment variable is set to a single value.', function (done) {
-    nodeenv('LOG_LEVELS', 'info', function (restore) {
+  test('returns an array with a single value if the environment variable is set to a single value.', done => {
+    nodeenv('LOG_LEVELS', 'info', restore => {
       assert.that(parseEnvironmentVariable()).is.equalTo([ 'info' ]);
 
       restore();
@@ -29,8 +29,8 @@ suite('parseEnvironmentVariable', function () {
     });
   });
 
-  test('returns an array with a single lowercased and trimmed value.', function (done) {
-    nodeenv('LOG_LEVELS', '  Info ', function (restore) {
+  test('returns an array with a single lowercased and trimmed value.', done => {
+    nodeenv('LOG_LEVELS', '  Info ', restore => {
       assert.that(parseEnvironmentVariable()).is.equalTo([ 'info' ]);
 
       restore();
@@ -38,8 +38,8 @@ suite('parseEnvironmentVariable', function () {
     });
   });
 
-  test('returns an array with multiple values.', function (done) {
-    nodeenv('LOG_LEVELS', '  Info , DEBUG  ,warN  ', function (restore) {
+  test('returns an array with multiple values.', done => {
+    nodeenv('LOG_LEVELS', '  Info , DEBUG  ,warN  ', restore => {
       assert.that(parseEnvironmentVariable()).is.equalTo([ 'info', 'debug', 'warn' ]);
 
       restore();
