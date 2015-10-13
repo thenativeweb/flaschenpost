@@ -23,7 +23,7 @@
     "find-root": "0.1.1",
     "lodash": "3.10.1",
     "moment": "2.10.6",
-    "oboe": "2.1.2",
+    "split2": "1.0.0",
     "stack-trace": "0.0.9",
     "stringify-object": "2.3.0",
     "update-notifier": "0.5.0",

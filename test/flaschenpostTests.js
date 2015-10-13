@@ -7,7 +7,8 @@ const assert = require('assertthat'),
 
 const flaschenpost = require('../lib/flaschenpost'),
     JsonFormatter = require('../lib/formatters/Json'),
-    letter = require('../lib/letter');
+    letter = require('../lib/letter'),
+    Paragraph = require('../lib/letter/Paragraph');
 
 const PassThrough = stream.PassThrough;
 
@@ -181,10 +182,10 @@ suite('flaschenpost', () => {
 
   suite('uncork', () => {
     test('transforms JSON into a human readable format.', done => {
-      const inputStream = new JsonFormatter(),
+      const inputStream = new PassThrough({ objectMode: true }),
           outputStream = new PassThrough({ objectMode: true });
 
-      const paragraph = {
+      const paragraph = JSON.stringify(new Paragraph(0, {
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -195,16 +196,11 @@ suite('flaschenpost', () => {
         metadata: {
           foo: 'bar'
         }
-      };
+      })) + '\n';
 
-      let counter = 0;
-
-      letter.pipe(inputStream);
       flaschenpost.uncork(inputStream, outputStream);
 
-      outputStream.on('data', data => {
-        counter++;
-
+      outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
           'App started. (info)',
           'foo@0.0.1 ('
@@ -217,15 +213,110 @@ suite('flaschenpost', () => {
           '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
         ].join('\n'))).is.greaterThan(0);
 
-        if (counter === 2) {
-          outputStream.removeAllListeners('data');
-          letter.unpipe(inputStream);
-          done();
-        }
+        letter.unpipe(inputStream);
+        done();
       });
 
-      letter.write(paragraph);
-      letter.write(paragraph);
+      inputStream.write(paragraph);
+    });
+
+    test('removes prefixes from JSON.', done => {
+      const inputStream = new PassThrough({ objectMode: true }),
+          outputStream = new PassThrough({ objectMode: true });
+
+      const paragraph = 'prefix: ' + JSON.stringify(new Paragraph(0, {
+        module: {
+          name: 'foo',
+          version: '0.0.1'
+        },
+        source: __filename,
+        level: 'info',
+        message: 'App started.',
+        metadata: {
+          foo: 'bar'
+        }
+      })) + '\n';
+
+      flaschenpost.uncork(inputStream, outputStream);
+
+      outputStream.once('data', data => {
+        assert.that(chalk.stripColor(data).indexOf([
+          'App started. (info)',
+          'foo@0.0.1 ('
+        ].join('\n'))).is.equalTo(0);
+
+        assert.that(chalk.stripColor(data).indexOf([
+          '{',
+          '  foo: \'bar\'',
+          '}',
+          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+        ].join('\n'))).is.greaterThan(0);
+
+        done();
+      });
+
+      inputStream.write(paragraph);
+    });
+
+    test('handles invalid JSON.', done => {
+      const inputStream = new PassThrough({ objectMode: true }),
+          outputStream = new PassThrough({ objectMode: true });
+
+      const paragraph = 'prefix: ' + JSON.stringify({
+        module: {
+          name: 'foo',
+          version: '0.0.1'
+        },
+        source: __filename,
+        level: 'info',
+        message: 'App started.',
+        metadata: {
+          foo: 'bar'
+        }
+      }).substr(0, 16) + '\n';
+
+      flaschenpost.uncork(inputStream, outputStream);
+
+      outputStream.once('data', data => {
+        assert.that(chalk.stripColor(data).indexOf([
+          'prefix: {"module":{"name (info)',
+          'n/a@n/a'
+        ].join('\n'))).is.equalTo(0);
+
+        assert.that(chalk.stripColor(data).indexOf([
+          '#-1',
+          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+        ].join('\n'))).is.greaterThan(0);
+
+        done();
+      });
+
+      inputStream.write(paragraph);
+    });
+
+    test('handles arbitrary strings.', done => {
+      const inputStream = new PassThrough({ objectMode: true }),
+          outputStream = new PassThrough({ objectMode: true });
+
+      const paragraph = 'prefix: foobar\n';
+
+      flaschenpost.uncork(inputStream, outputStream);
+
+      outputStream.once('data', data => {
+        assert.that(chalk.stripColor(data).indexOf([
+          'prefix: foobar (info)',
+          'n/a@n/a'
+        ].join('\n'))).is.equalTo(0);
+
+        assert.that(chalk.stripColor(data).indexOf([
+          '#-1',
+          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+        ].join('\n'))).is.greaterThan(0);
+
+        done();
+      });
+
+      inputStream.write(paragraph);
     });
   });
 });
