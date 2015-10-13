@@ -48,7 +48,7 @@ suite('HumanReadable', () => {
         '{',
         '  foo: \'bar\'',
         '}',
-        '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+        '\u2500'.repeat(process.stdout.columns || 80) + '\n'
         /* eslint-enable nodeca/indent */
       ].join('\n'));
       done();

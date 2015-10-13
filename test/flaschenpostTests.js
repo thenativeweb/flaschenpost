@@ -209,7 +209,7 @@ suite('flaschenpost', () => {
           '{',
           '  foo: \'bar\'',
           '}',
-          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
         ].join('\n'))).is.greaterThan(0);
 
         letter.unpipe(inputStream);
@@ -248,7 +248,7 @@ suite('flaschenpost', () => {
           '{',
           '  foo: \'bar\'',
           '}',
-          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
         ].join('\n'))).is.greaterThan(0);
 
         done();
@@ -284,7 +284,7 @@ suite('flaschenpost', () => {
 
         assert.that(chalk.stripColor(data).indexOf([
           '#-1',
-          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
         ].join('\n'))).is.greaterThan(0);
 
         done();
@@ -309,7 +309,7 @@ suite('flaschenpost', () => {
 
         assert.that(chalk.stripColor(data).indexOf([
           '#-1',
-          '\u2500'.repeat((process.stdout.columns || 80) + 1) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
         ].join('\n'))).is.greaterThan(0);
 
         done();
