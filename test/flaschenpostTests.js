@@ -6,7 +6,6 @@ const assert = require('assertthat'),
     chalk = require('chalk');
 
 const flaschenpost = require('../lib/flaschenpost'),
-    JsonFormatter = require('../lib/formatters/Json'),
     letter = require('../lib/letter'),
     Paragraph = require('../lib/letter/Paragraph');
 
