@@ -37,7 +37,7 @@ suite('sanitizeMetadata', () => {
     done();
   });
 
-  test('converts recursive objects.', done => {
+  test('converts objects that contain error objects.', done => {
     const actual = sanitize({
       error: new Error('foo'),
       data: 'bar'
@@ -49,6 +49,21 @@ suite('sanitizeMetadata', () => {
     assert.that(actual.error.message).is.equalTo('foo');
     assert.that(actual.error.stack).is.ofType('string');
     assert.that(actual.data).is.equalTo('bar');
+    done();
+  });
+
+  test('converts recursive objects and replaces the recursive part with null.', done => {
+    const recursive = {
+      foo: 'bar'
+    };
+
+    recursive.bar = recursive;
+
+    const actual = sanitize(recursive);
+
+    assert.that(actual).is.ofType('object');
+    assert.that(actual.foo).is.equalTo('bar');
+    assert.that(actual.bar).is.null();
     done();
   });
 
