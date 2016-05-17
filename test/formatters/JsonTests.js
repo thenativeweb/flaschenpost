@@ -22,6 +22,7 @@ suite('Json', () => {
 
   test('transforms a paragraph to a serialized JSON string.', done => {
     const paragraph = {
+      host: 'example.com',
       pid: 82517,
       id: 0,
       timestamp: 1415024939974,
@@ -41,6 +42,7 @@ suite('Json', () => {
       assert.that(data).is.equalTo([
         /* eslint-disable nodeca/indent */
         '{',
+        '"host":"example.com",',
         '"pid":82517,',
         '"id":0,',
         '"timestamp":1415024939974,',

@@ -17,6 +17,7 @@ suite('letter', () => {
   suite('write', () => {
     test('returns a paragraph.', done => {
       const expected = {
+        host: 'example.com',
         level: 'info',
         message: 'App started.',
         module: {
@@ -27,6 +28,7 @@ suite('letter', () => {
 
       letter.once('data', paragraph => {
         assert.that(paragraph).is.ofType('object');
+        assert.that(paragraph.host).is.equalTo(expected.host);
         assert.that(paragraph.pid).is.equalTo(process.pid);
         assert.that(paragraph.id).is.ofType('number');
         assert.that(paragraph.timestamp).is.not.undefined();
@@ -43,6 +45,7 @@ suite('letter', () => {
 
     test('returns a paragraph with source information if they are given.', done => {
       const expected = {
+        host: 'example.com',
         level: 'info',
         message: 'App started.',
         source: __filename,
@@ -62,6 +65,7 @@ suite('letter', () => {
 
     test('returns a paragraph with metadata if they are given.', done => {
       const expected = {
+        host: 'example.com',
         level: 'info',
         message: 'App started.',
         metadata: {
@@ -83,6 +87,7 @@ suite('letter', () => {
 
     test('returns a paragraph with metadata with correctly transformed error objects.', done => {
       const expected = {
+        host: 'example.com',
         level: 'info',
         message: 'App started.',
         metadata: {
@@ -109,6 +114,7 @@ suite('letter', () => {
 
     test('increments the paragraph id by 1.', done => {
       const input = {
+        host: 'example.com',
         level: 'info',
         message: 'App started.',
         module: {

@@ -1,5 +1,7 @@
 'use strict';
 
+const os = require('os');
+
 const assert = require('assertthat'),
     nodeenv = require('nodeenv'),
     sinon = require('sinon');
@@ -39,6 +41,22 @@ suite('Configuration', () => {
       const configuration = new Configuration();
 
       assert.that(configuration.levels).is.equalTo(defaultLevels);
+      done();
+    });
+  });
+
+  suite('host', () => {
+    test('is a string.', done => {
+      const configuration = new Configuration();
+
+      assert.that(configuration.host).is.ofType('string');
+      done();
+    });
+
+    test('contains the host.', done => {
+      const configuration = new Configuration();
+
+      assert.that(configuration.host).is.equalTo(os.hostname());
       done();
     });
   });
@@ -185,6 +203,33 @@ suite('Configuration', () => {
         restore();
         done();
       });
+    });
+  });
+
+  suite('setHost', () => {
+    test('is a function.', done => {
+      const configuration = new Configuration();
+
+      assert.that(configuration.setHost).is.ofType('function');
+      done();
+    });
+
+    test('throws an error if host is missing.', done => {
+      const configuration = new Configuration();
+
+      assert.that(() => {
+        configuration.setHost();
+      }).is.throwing('Host is missing.');
+      done();
+    });
+
+    test('sets the given host.', done => {
+      const configuration = new Configuration();
+
+      configuration.setHost('example.com');
+
+      assert.that(configuration.host).is.equalTo('example.com');
+      done();
     });
   });
 });
