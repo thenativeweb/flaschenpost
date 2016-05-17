@@ -24,6 +24,7 @@ suite('HumanReadable', () => {
 
   test('transforms a paragraph to a human-readable string.', done => {
     const paragraph = {
+      host: 'example.com',
       pid: 82517,
       id: 0,
       timestamp: 1415024939974,
@@ -43,7 +44,7 @@ suite('HumanReadable', () => {
       assert.that(chalk.stripColor(data)).is.equalTo([
         /* eslint-disable nodeca/indent */
         'App started. (info)',
-        'foo@0.0.1 (app.js)',
+        'example.com::foo@0.0.1 (app.js)',
         '14:28:59.974@2014-11-03 82517#0',
         '{',
         '  foo: \'bar\'',

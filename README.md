@@ -10,11 +10,15 @@ flaschenpost is a logger for cloud-based applications.
 
 ### As Node.js module
 
-    $ npm install flaschenpost
+```bash
+$ npm install flaschenpost
+```
 
 ### As CLI
 
-    $ npm install -g flaschenpost
+```bash
+$ npm install -g flaschenpost
+```
 
 ## Quick start
 
@@ -63,15 +67,27 @@ Unlike other loggers, flaschenpost only supports logging to the console. This is
 
 When you are running an application using a TTY, the log messages will be written in a human-readable format. As soon as you redirect the output to a file or over the network, log messages are automatically written as JSON objects that can easily be processed by other tools.
 
+#### Setting a custom host
+
+By default, flaschenpost uses the current host's host name in log messages. If you want to change the host name being used, call the `use` function.
+
+```javascript
+flaschenpost.use('host', 'example.com');
+```
+
 ### Enabling and disabling log levels
 
 By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
 
-    $ export LOG_LEVELS=debug,info
+```bash
+$ export LOG_LEVELS=debug,info
+```
 
 If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.
 
-    $ export LOG_LEVELS=*
+```bash
+$ export LOG_LEVELS=*
+```
 
 ### Setting custom log levels
 
@@ -126,13 +142,17 @@ app.use(morgan('combined', {
 
 From time to time you may want to inspect log files that contain messages created by flaschenpost. For that, run the CLI tool and provide the log file via stdin.
 
-    $ flaschenpost < foo.log
+```bash
+$ flaschenpost < foo.log
+```
 
 ## Running the build
 
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
-    $ bot build-server
+```bash
+$ bot build-server
+```
 
 ## License
 

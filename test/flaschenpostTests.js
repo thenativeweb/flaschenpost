@@ -98,10 +98,13 @@ suite('flaschenpost', () => {
       });
 
       test('writes the message to a letter.', done => {
+        flaschenpost.use('host', 'example.com');
+
         const logger = flaschenpost.getLogger(__filename);
 
-        letter.once('data', function (paragraph) {
+        letter.once('data', paragraph => {
           assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
           assert.that(paragraph.pid).is.equalTo(process.pid);
           assert.that(paragraph.id).is.ofType('number');
           assert.that(paragraph.timestamp).is.not.undefined();
@@ -132,7 +135,7 @@ suite('flaschenpost', () => {
       test('writes the message to a letter even when no filename was specified.', done => {
         const logger = flaschenpost.getLogger();
 
-        letter.once('data', function (paragraph) {
+        letter.once('data', paragraph => {
           assert.that(paragraph).is.ofType('object');
           assert.that(paragraph.pid).is.equalTo(process.pid);
           assert.that(paragraph.id).is.ofType('number');
@@ -185,6 +188,7 @@ suite('flaschenpost', () => {
           outputStream = new PassThrough({ objectMode: true });
 
       const paragraph = JSON.stringify(new Paragraph(0, {
+        host: 'example.com',
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -202,7 +206,7 @@ suite('flaschenpost', () => {
       outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
           'App started. (info)',
-          'foo@0.0.1 ('
+          'example.com::foo@0.0.1 ('
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
@@ -224,6 +228,7 @@ suite('flaschenpost', () => {
           outputStream = new PassThrough({ objectMode: true });
 
       const paragraph = 'prefix: ' + JSON.stringify(new Paragraph(0, {
+        host: 'example.com',
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -241,7 +246,7 @@ suite('flaschenpost', () => {
       outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
           'App started. (info)',
-          'foo@0.0.1 ('
+          'example.com::foo@0.0.1 ('
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
@@ -262,6 +267,7 @@ suite('flaschenpost', () => {
           outputStream = new PassThrough({ objectMode: true });
 
       const paragraph = 'prefix: ' + JSON.stringify({
+        host: 'example.com',
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -272,14 +278,14 @@ suite('flaschenpost', () => {
         metadata: {
           foo: 'bar'
         }
-      }).substr(0, 16) + '\n';
+      }).substr(0, 21) + '\n';
 
       flaschenpost.uncork(inputStream, outputStream);
 
       outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
-          'prefix: {"module":{"name (info)',
-          'n/a@n/a'
+          'prefix: {"host":"example.com" (info)',
+          'n/a::n/a@n/a'
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
@@ -304,7 +310,7 @@ suite('flaschenpost', () => {
       outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
           'prefix: foobar (info)',
-          'n/a@n/a'
+          'n/a::n/a@n/a'
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
