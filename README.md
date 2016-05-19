@@ -67,6 +67,8 @@ Unlike other loggers, flaschenpost only supports logging to the console. This is
 
 When you are running an application using a TTY, the log messages will be written in a human-readable format. As soon as you redirect the output to a file or over the network, log messages are automatically written as JSON objects that can easily be processed by other tools.
 
+If you want to enforce a specific output formatter, set the environment variable `FLASCHENPOST_FORMATTER` to `human` or to `json`.
+
 #### Setting a custom host
 
 By default, flaschenpost uses the current host's host name in log messages. If you want to change the host name being used, call the `use` function.
