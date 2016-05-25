@@ -14,6 +14,10 @@
     {
       "name": "Michael Scherer",
       "email": "mail@michael-scherer.net"
+    },
+    {
+      "name": "Jonathan Weiß",
+      "email": "info@jonathanweiss.net"
     }
   ],
   "bin": "bin/flaschenpost.js",
