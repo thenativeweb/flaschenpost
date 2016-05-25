@@ -35,7 +35,6 @@ suite('Gelf', () => {
   });
 
   test('transforms a paragraph to a GELF string', done => {
-
     gelf.once('data', data => {
       assert.that(data).is.ofType('string');
       done();
@@ -44,9 +43,9 @@ suite('Gelf', () => {
     gelf.write(paragraph);
   });
 
-  test('handles the keys correctyl', done => {
-
+  test('handles the keys correctly', done => {
     gelf.once('data', data => {
+      /* eslint-disable no-unused-expressions, no-underscore-dangle */
       const gelfObject = JSON.parse(data);
 
       // standard keys
@@ -63,10 +62,9 @@ suite('Gelf', () => {
       assert.that(gelfObject._metadata).is.not.undefined;
 
       done();
+      /* eslint-enable no-unused-expressions */
     });
 
     gelf.write(paragraph);
   });
-
-
 });
