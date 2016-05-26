@@ -3,11 +3,11 @@
 const stream = require('stream');
 
 const assert = require('assertthat'),
-    chalk = require('chalk');
+      chalk = require('chalk');
 
 const flaschenpost = require('../lib/flaschenpost'),
-    letter = require('../lib/letter'),
-    Paragraph = require('../lib/letter/Paragraph');
+      letter = require('../lib/letter'),
+      Paragraph = require('../lib/letter/Paragraph');
 
 const PassThrough = stream.PassThrough;
 
@@ -169,7 +169,7 @@ suite('flaschenpost', () => {
         let counter = 0;
 
         letter.once('data', () => {
-          counter++;
+          counter += 1;
         });
 
         logger.debug('App started.');
@@ -185,9 +185,9 @@ suite('flaschenpost', () => {
   suite('uncork', () => {
     test('transforms JSON into a human readable format.', done => {
       const inputStream = new PassThrough({ objectMode: true }),
-          outputStream = new PassThrough({ objectMode: true });
+            outputStream = new PassThrough({ objectMode: true });
 
-      const paragraph = JSON.stringify(new Paragraph(0, {
+      const paragraph = `${JSON.stringify(new Paragraph(0, {
         host: 'example.com',
         module: {
           name: 'foo',
@@ -199,7 +199,7 @@ suite('flaschenpost', () => {
         metadata: {
           foo: 'bar'
         }
-      })) + '\n';
+      }))}\n`;
 
       flaschenpost.uncork(inputStream, outputStream);
 
@@ -213,7 +213,8 @@ suite('flaschenpost', () => {
           '{',
           '  foo: \'bar\'',
           '}',
-          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80),
+          ''
         ].join('\n'))).is.greaterThan(0);
 
         letter.unpipe(inputStream);
@@ -225,9 +226,9 @@ suite('flaschenpost', () => {
 
     test('removes prefixes from JSON.', done => {
       const inputStream = new PassThrough({ objectMode: true }),
-          outputStream = new PassThrough({ objectMode: true });
+            outputStream = new PassThrough({ objectMode: true });
 
-      const paragraph = 'prefix: ' + JSON.stringify(new Paragraph(0, {
+      const paragraph = `prefix: ${JSON.stringify(new Paragraph(0, {
         host: 'example.com',
         module: {
           name: 'foo',
@@ -239,7 +240,7 @@ suite('flaschenpost', () => {
         metadata: {
           foo: 'bar'
         }
-      })) + '\n';
+      }))}\n`;
 
       flaschenpost.uncork(inputStream, outputStream);
 
@@ -253,7 +254,8 @@ suite('flaschenpost', () => {
           '{',
           '  foo: \'bar\'',
           '}',
-          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80),
+          ''
         ].join('\n'))).is.greaterThan(0);
 
         done();
@@ -264,9 +266,9 @@ suite('flaschenpost', () => {
 
     test('handles invalid JSON.', done => {
       const inputStream = new PassThrough({ objectMode: true }),
-          outputStream = new PassThrough({ objectMode: true });
+            outputStream = new PassThrough({ objectMode: true });
 
-      const paragraph = 'prefix: ' + JSON.stringify({
+      const paragraph = `prefix: ${JSON.stringify({
         host: 'example.com',
         module: {
           name: 'foo',
@@ -278,7 +280,7 @@ suite('flaschenpost', () => {
         metadata: {
           foo: 'bar'
         }
-      }).substr(0, 21) + '\n';
+      }).substr(0, 21)}\n`;
 
       flaschenpost.uncork(inputStream, outputStream);
 
@@ -290,7 +292,8 @@ suite('flaschenpost', () => {
 
         assert.that(chalk.stripColor(data).indexOf([
           '#-1',
-          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80),
+          ''
         ].join('\n'))).is.greaterThan(0);
 
         done();
@@ -301,7 +304,7 @@ suite('flaschenpost', () => {
 
     test('handles arbitrary strings.', done => {
       const inputStream = new PassThrough({ objectMode: true }),
-          outputStream = new PassThrough({ objectMode: true });
+            outputStream = new PassThrough({ objectMode: true });
 
       const paragraph = 'prefix: foobar\n';
 
@@ -315,7 +318,8 @@ suite('flaschenpost', () => {
 
         assert.that(chalk.stripColor(data).indexOf([
           '#-1',
-          '\u2500'.repeat(process.stdout.columns || 80) + '\n'
+          '\u2500'.repeat(process.stdout.columns || 80),
+          ''
         ].join('\n'))).is.greaterThan(0);
 
         done();

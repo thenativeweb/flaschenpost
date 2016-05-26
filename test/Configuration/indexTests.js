@@ -3,11 +3,11 @@
 const os = require('os');
 
 const assert = require('assertthat'),
-    nodeenv = require('nodeenv'),
-    sinon = require('sinon');
+      nodeenv = require('nodeenv'),
+      sinon = require('sinon');
 
 const Configuration = require('../../lib/Configuration'),
-    defaultLevels = require('../../lib/defaultLevels.json');
+      defaultLevels = require('../../lib/defaultLevels.json');
 
 suite('Configuration', () => {
   test('is a function.', done => {
@@ -80,7 +80,7 @@ suite('Configuration', () => {
 
     test('calls the appropriate setX function.', done => {
       const configuration = new Configuration(),
-          spy = sinon.spy(configuration, 'setLevels');
+            spy = sinon.spy(configuration, 'setLevels');
 
       const expected = {
         info: {
@@ -158,7 +158,9 @@ suite('Configuration', () => {
       });
     });
 
+    /* eslint-disable max-len */
     test('throws an error if an unknown level is provided by the LOG_LEVELS environment variable.', done => {
+      /* eslint-enable max-len */
       nodeenv('LOG_LEVELS', 'foobar', restore => {
         assert.that(() => {
           /* eslint-disable no-new */

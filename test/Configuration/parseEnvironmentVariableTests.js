@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assertthat'),
-    nodeenv = require('nodeenv');
+      nodeenv = require('nodeenv');
 
 const parseEnvironmentVariable = require('../../lib/Configuration/parseEnvironmentVariable');
 
@@ -20,7 +20,9 @@ suite('parseEnvironmentVariable', () => {
     });
   });
 
+  /* eslint-disable max-len */
   test('returns an array with a single value if the environment variable is set to a single value.', done => {
+    /* eslint-enable max-len */
     nodeenv('LOG_LEVELS', 'info', restore => {
       assert.that(parseEnvironmentVariable()).is.equalTo([ 'info' ]);
 

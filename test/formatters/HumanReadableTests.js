@@ -3,7 +3,7 @@
 const stream = require('stream');
 
 const assert = require('assertthat'),
-    chalk = require('chalk');
+      chalk = require('chalk');
 
 const HumanReadable = require('../../lib/formatters/HumanReadable');
 
@@ -49,7 +49,8 @@ suite('HumanReadable', () => {
         '{',
         '  foo: \'bar\'',
         '}',
-        '\u2500'.repeat(process.stdout.columns || 80) + '\n'
+        '\u2500'.repeat(process.stdout.columns || 80),
+        ''
         /* eslint-enable nodeca/indent */
       ].join('\n'));
       done();

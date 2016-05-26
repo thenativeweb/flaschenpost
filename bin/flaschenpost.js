@@ -5,7 +5,7 @@
 const updateNotifier = require('update-notifier');
 
 const flaschenpost = require('../lib/flaschenpost'),
-    packageJson = require('../package.json');
+      packageJson = require('../package.json');
 
 updateNotifier({
   packageName: packageJson.name,
