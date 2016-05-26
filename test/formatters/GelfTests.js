@@ -15,14 +15,9 @@ suite('Gelf', () => {
     timestamp: 1415024939974,
     level: 'info',
     message: 'App started.',
-    module: {
-      name: 'foo',
-      version: '0.0.1'
-    },
+    module: { name: 'foo', version: '0.0.1' },
     source: 'app.js',
-    metadata: {
-      foo: 'bar'
-    }
+    metadata: { foo: 'bar' }
   };
 
   suiteSetup(() => {
@@ -48,12 +43,12 @@ suite('Gelf', () => {
       /* eslint-disable no-underscore-dangle */
       const gelfObject = JSON.parse(data);
 
-      // standard keys
+      // Standard keys
       assert.that(gelfObject.host).is.not.undefined();
       assert.that(gelfObject.level).is.not.undefined();
       assert.that(gelfObject.timestamp).is.not.undefined();
 
-      // non-standard keys
+      // Non-standard keys
       assert.that(gelfObject.id).is.undefined();
       assert.that(gelfObject._id).is.not.undefined();
       assert.that(gelfObject.source).is.undefined();
@@ -62,7 +57,7 @@ suite('Gelf', () => {
       assert.that(gelfObject._metadata).is.not.undefined();
 
       done();
-      /* eslint-enable no-unused-expressions */
+      /* eslint-enable no-underscore-dangle */
     });
 
     gelf.write(paragraph);
@@ -70,29 +65,21 @@ suite('Gelf', () => {
 
   test('inserts required key(s).', done => {
     gelf.once('data', data => {
-      /* eslint-disable no-underscore-dangle */
       const gelfObject = JSON.parse(data);
 
-      assert.that(gelfObject.version).is.not.undefined();
       assert.that(gelfObject.version).is.equalTo('1.1');
-
       done();
-      /* eslint-enable no-unused-expressions */
     });
 
     gelf.write(paragraph);
   });
 
-  test('renames the Flaschenpost keys.', done => {
+  test('maps the flaschenpost keys.', done => {
     gelf.once('data', data => {
-      /* eslint-disable no-underscore-dangle */
       const gelfObject = JSON.parse(data);
 
-      assert.that(gelfObject.short_message).is.not.undefined();
       assert.that(gelfObject.short_message).is.equalTo(paragraph.message);
-
       done();
-      /* eslint-enable no-unused-expressions */
     });
 
     gelf.write(paragraph);
