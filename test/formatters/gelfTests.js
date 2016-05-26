@@ -42,7 +42,7 @@ suite('Gelf', () => {
     gelf.write(paragraph);
   });
 
-  test('handles the keys correctly.', done => {
+  test('prefixes the non-standard keys.', done => {
     gelf.once('data', data => {
       /* eslint-disable no-underscore-dangle */
       const gelfObject = JSON.parse(data);
@@ -59,6 +59,36 @@ suite('Gelf', () => {
       assert.that(gelfObject._source).is.not.undefined();
       assert.that(gelfObject.metadata).is.undefined();
       assert.that(gelfObject._metadata).is.not.undefined();
+
+      done();
+      /* eslint-enable no-unused-expressions */
+    });
+
+    gelf.write(paragraph);
+  });
+
+  test('inserts required key(s).', done => {
+    gelf.once('data', data => {
+      /* eslint-disable no-underscore-dangle */
+      const gelfObject = JSON.parse(data);
+
+      assert.that(gelfObject.version).is.not.undefined();
+      assert.that(gelfObject.version).is.equalTo('1.1');
+
+      done();
+      /* eslint-enable no-unused-expressions */
+    });
+
+    gelf.write(paragraph);
+  });
+
+  test('renames the Flaschenpost keys.', done => {
+    gelf.once('data', data => {
+      /* eslint-disable no-underscore-dangle */
+      const gelfObject = JSON.parse(data);
+
+      assert.that(gelfObject.short_message).is.not.undefined();
+      assert.that(gelfObject.short_message).is.equalTo(paragraph.message);
 
       done();
       /* eslint-enable no-unused-expressions */
