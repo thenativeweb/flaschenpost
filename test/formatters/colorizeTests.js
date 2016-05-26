@@ -21,7 +21,8 @@ suite('colorize', () => {
   });
 
   test('colorizes text with styling.', done => {
-    assert.that(colorize('foo', 'info', 'bold')).is.equalTo('\u001b[1m\u001b[32mfoo\u001b[39m\u001b[22m');
+    assert.that(colorize('foo', 'info', 'bold')).is.equalTo(
+      '\u001b[1m\u001b[32mfoo\u001b[39m\u001b[22m');
     done();
   });
 });

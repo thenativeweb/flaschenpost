@@ -4,13 +4,13 @@ const assert = require('assertthat');
 
 const Paragraph = require('../../lib/letter/Paragraph');
 
-suite('Paragraph', function () {
-  test('is a function.', function (done) {
+suite('Paragraph', () => {
+  test('is a function.', done => {
     assert.that(Paragraph).is.ofType('function');
     done();
   });
 
-  test('throws an error if id is missing.', function (done) {
+  test('throws an error if id is missing.', done => {
     assert.that(() => {
       /* eslint-disable no-new */
       new Paragraph();
@@ -19,7 +19,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('throws an error if data is missing.', function (done) {
+  test('throws an error if data is missing.', done => {
     assert.that(() => {
       /* eslint-disable no-new */
       new Paragraph(0);
@@ -28,7 +28,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('throws an error if host is missing.', function (done) {
+  test('throws an error if host is missing.', done => {
     assert.that(() => {
       /* eslint-disable no-new */
       new Paragraph(0, {});
@@ -37,7 +37,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('throws an error if level is missing.', function (done) {
+  test('throws an error if level is missing.', done => {
     assert.that(() => {
       /* eslint-disable no-new */
       new Paragraph(0, { host: 'example.com' });
@@ -46,7 +46,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('throws an error if message is missing.', function (done) {
+  test('throws an error if message is missing.', done => {
     assert.that(() => {
       /* eslint-disable no-new */
       new Paragraph(0, { host: 'example.com', level: 'error' });
@@ -55,7 +55,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('throws an error if metadata is given and metadata is not an object.', function (done) {
+  test('throws an error if metadata is given and metadata is not an object.', done => {
     assert.that(() => {
       /* eslint-disable no-new */
       new Paragraph(0, { host: 'example.com', level: 'error', message: 'foo', metadata: 'bar' });
@@ -64,7 +64,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('returns a paragraph.', function (done) {
+  test('returns a paragraph.', done => {
     const id = 23;
     const data = {
       host: 'example.com',
@@ -83,7 +83,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('returns a paragraph with a module if a module is given.', function (done) {
+  test('returns a paragraph with a module if a module is given.', done => {
     const id = 23;
     const data = {
       host: 'example.com',
@@ -98,7 +98,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('returns a paragraph with a source if a source is given.', function (done) {
+  test('returns a paragraph with a source if a source is given.', done => {
     const id = 23;
     const data = {
       host: 'example.com',
@@ -113,7 +113,7 @@ suite('Paragraph', function () {
     done();
   });
 
-  test('returns a paragraph with metadata if metadata are given.', function (done) {
+  test('returns a paragraph with metadata if metadata are given.', done => {
     const id = 23;
     const data = {
       host: 'example.com',

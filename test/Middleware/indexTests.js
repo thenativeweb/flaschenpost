@@ -3,13 +3,13 @@
 const stream = require('stream');
 
 const assert = require('assertthat'),
-    express = require('express'),
-    morgan = require('morgan'),
-    request = require('supertest');
+      express = require('express'),
+      morgan = require('morgan'),
+      request = require('supertest');
 
 const flaschenpost = require('../../lib/flaschenpost'),
-    letter = require('../../lib/letter'),
-    Middleware = require('../../lib/Middleware');
+      letter = require('../../lib/letter'),
+      Middleware = require('../../lib/Middleware');
 
 const Writable = stream.Writable;
 
@@ -49,7 +49,7 @@ suite('Middleware', () => {
   test('writes messages using the specified log level.', done => {
     const middleware = new Middleware('info', __filename);
 
-    letter.once('data', function (data) {
+    letter.once('data', data => {
       assert.that(data.level).is.equalTo('info');
       assert.that(data.message).is.equalTo('foobar');
       assert.that(data.module).is.equalTo({
@@ -70,22 +70,24 @@ suite('Middleware', () => {
       stream: new Middleware('info')
     }));
 
-    app.get('/', function (req, res) {
+    app.get('/', (req, res) => {
       res.send('foobar');
     });
 
-    letter.once('data', function (data) {
+    letter.once('data', data => {
       assert.that(data.module).is.equalTo({
         name: 'foo',
         version: '0.0.1'
       });
-      counter++;
+      counter += 1;
     });
 
-    request(app).get('/').end(function (err) {
-      assert.that(err).is.equalTo(null);
-      assert.that(counter).is.equalTo(1);
-      done();
-    });
+    request(app).
+      get('/').
+      end(err => {
+        assert.that(err).is.equalTo(null);
+        assert.that(counter).is.equalTo(1);
+        done();
+      });
   });
 });
