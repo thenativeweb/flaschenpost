@@ -67,9 +67,15 @@ Unlike other loggers, flaschenpost only supports logging to the console. This is
 
 When you are running an application using a TTY, the log messages will be written in a human-readable format. As soon as you redirect the output to a file or over the network, log messages are automatically written as JSON objects that can easily be processed by other tools.
 
-If you're using [Graylog](https://www.graylog.org/) to process the logs, the messages can be written in the [GELF](http://docs.graylog.org/en/2.0/pages/gelf.html) format.
+Some log processing tools, e.g. Graylog, expect the JSON to be in a slightly different format. In these cases use the environment variable `FLASCHENPOST_FORMATTER` to set the output format you want to use. The following formats are currently supported.
 
-If you want to enforce a specific output formatter, set the environment variable `FLASCHENPOST_FORMATTER` to `human`, `json` or to `gelf`.
+Name  | Description
+------|-----------------------------------
+gelf  | The `GELF` format used by Graylog.
+human | The default human-readable format.
+json  | The default json format.
+
+*Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not.*
 
 #### Setting a custom host
 
