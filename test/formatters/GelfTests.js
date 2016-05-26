@@ -7,6 +7,7 @@ const Transform = require('stream').Transform;
 
 suite('Gelf', () => {
   let gelf;
+
   const paragraph = {
     host: 'example.com',
     pid: 82517,
