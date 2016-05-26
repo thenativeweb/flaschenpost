@@ -1,6 +1,6 @@
 'use strict';
 
-const Gelf = require('../../lib/formatters/gelf');
+const Gelf = require('../../lib/formatters/Gelf');
 
 const assert = require('assertthat');
 const Transform = require('stream').Transform;
