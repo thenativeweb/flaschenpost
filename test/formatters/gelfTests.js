@@ -25,7 +25,6 @@ suite('Gelf', () => {
   };
 
   suiteSetup(() => {
-    // chalk.enabled = true;
     gelf = new Gelf();
   });
 
@@ -34,7 +33,7 @@ suite('Gelf', () => {
     done();
   });
 
-  test('transforms a paragraph to a GELF string', done => {
+  test('transforms a paragraph to a GELF string.', done => {
     gelf.once('data', data => {
       assert.that(data).is.ofType('string');
       done();
@@ -43,23 +42,23 @@ suite('Gelf', () => {
     gelf.write(paragraph);
   });
 
-  test('handles the keys correctly', done => {
+  test('handles the keys correctly.', done => {
     gelf.once('data', data => {
-      /* eslint-disable no-unused-expressions, no-underscore-dangle */
+      /* eslint-disable no-underscore-dangle */
       const gelfObject = JSON.parse(data);
 
       // standard keys
-      assert.that(gelfObject.host).is.not.undefined;
-      assert.that(gelfObject.level).is.not.undefined;
-      assert.that(gelfObject.timestamp).is.not.undefined;
+      assert.that(gelfObject.host).is.not.undefined();
+      assert.that(gelfObject.level).is.not.undefined();
+      assert.that(gelfObject.timestamp).is.not.undefined();
 
       // non-standard keys
-      assert.that(gelfObject.id).is.undefined;
-      assert.that(gelfObject._id).is.not.undefined;
-      assert.that(gelfObject.source).is.undefined;
-      assert.that(gelfObject._source).is.not.undefined;
-      assert.that(gelfObject.metadata).is.undefined;
-      assert.that(gelfObject._metadata).is.not.undefined;
+      assert.that(gelfObject.id).is.undefined();
+      assert.that(gelfObject._id).is.not.undefined();
+      assert.that(gelfObject.source).is.undefined();
+      assert.that(gelfObject._source).is.not.undefined();
+      assert.that(gelfObject.metadata).is.undefined();
+      assert.that(gelfObject._metadata).is.not.undefined();
 
       done();
       /* eslint-enable no-unused-expressions */
