@@ -12,5 +12,10 @@ roboter.
     task('universal/test-units', {
       src: 'test/**/*Tests.js'
     });
+
+    task('universal/coverage', {
+      src: 'lib/**/*.js',
+      test: 'test/**/*Tests.js'
+    });
   }).
   start();
