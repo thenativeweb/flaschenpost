@@ -30,6 +30,10 @@ suite('HumanReadable', () => {
       timestamp: 1415024939974,
       level: 'info',
       message: 'App started.',
+      process: {
+        name: 'app',
+        version: '1.2.3'
+      },
       module: {
         name: 'foo',
         version: '0.0.1'
@@ -44,7 +48,7 @@ suite('HumanReadable', () => {
       assert.that(chalk.stripColor(data)).is.equalTo([
         /* eslint-disable nodeca/indent */
         'App started. (info)',
-        'example.com::foo@0.0.1 (app.js)',
+        'example.com::app@1.2.3::foo@0.0.1 (app.js)',
         '14:28:59.974@2014-11-03 82517#0',
         '{',
         '  foo: \'bar\'',
