@@ -30,7 +30,7 @@ suite('HumanReadable', () => {
       timestamp: 1415024939974,
       level: 'info',
       message: 'App started.',
-      process: {
+      application: {
         name: 'app',
         version: '1.2.3'
       },
@@ -63,7 +63,7 @@ suite('HumanReadable', () => {
     humanReadable.write(paragraph);
   });
 
-  test('does not throw an error if process information is missing.', done => {
+  test('does not throw an error if application information is missing.', done => {
     const paragraph = {
       host: 'example.com',
       pid: 82517,
@@ -100,7 +100,7 @@ suite('HumanReadable', () => {
     humanReadable.write(paragraph);
   });
 
-  test('does not print information twice if process and module are the same.', done => {
+  test('does not print information twice if application and module are the same.', done => {
     const paragraph = {
       host: 'example.com',
       pid: 82517,
@@ -108,7 +108,7 @@ suite('HumanReadable', () => {
       timestamp: 1415024939974,
       level: 'info',
       message: 'App started.',
-      process: {
+      application: {
         name: 'app',
         version: '1.2.3'
       },

@@ -110,8 +110,8 @@ suite('flaschenpost', () => {
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
           assert.that(paragraph.message).is.equalTo('App started.');
-          assert.that(paragraph.process.name).is.equalTo('flaschenpost');
-          assert.that(paragraph.process.version).is.not.undefined();
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
           assert.that(paragraph.module).is.equalTo({
             name: 'foo',
             version: '0.0.1'
@@ -191,7 +191,7 @@ suite('flaschenpost', () => {
 
       const paragraph = `${JSON.stringify(new Paragraph(0, {
         host: 'example.com',
-        process: {
+        application: {
           name: 'app',
           version: '1.2.3'
         },
@@ -236,7 +236,7 @@ suite('flaschenpost', () => {
 
       const paragraph = `prefix: ${JSON.stringify(new Paragraph(0, {
         host: 'example.com',
-        process: {
+        application: {
           name: 'app',
           version: '1.2.3'
         },
@@ -280,7 +280,7 @@ suite('flaschenpost', () => {
 
       const paragraph = `prefix: ${JSON.stringify({
         host: 'example.com',
-        process: {
+        application: {
           name: 'app',
           version: '1.2.3'
         },

@@ -94,7 +94,7 @@ suite('Paragraph', () => {
 
     const paragraph = new Paragraph(id, data);
 
-    assert.that(paragraph.process).is.equalTo(data.process);
+    assert.that(paragraph.application).is.equalTo(data.application);
     done();
   });
 
