@@ -83,6 +83,21 @@ suite('Paragraph', () => {
     done();
   });
 
+  test('returns a paragraph with a process if a process is given.', done => {
+    const id = 23;
+    const data = {
+      host: 'example.com',
+      level: 'error',
+      message: 'foo',
+      process: 'bar'
+    };
+
+    const paragraph = new Paragraph(id, data);
+
+    assert.that(paragraph.process).is.equalTo(data.process);
+    done();
+  });
+
   test('returns a paragraph with a module if a module is given.', done => {
     const id = 23;
     const data = {

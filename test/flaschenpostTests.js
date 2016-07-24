@@ -110,6 +110,8 @@ suite('flaschenpost', () => {
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
           assert.that(paragraph.message).is.equalTo('App started.');
+          assert.that(paragraph.process.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.process.version).is.not.undefined();
           assert.that(paragraph.module).is.equalTo({
             name: 'foo',
             version: '0.0.1'

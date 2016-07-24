@@ -28,6 +28,10 @@ suite('Json', () => {
       timestamp: 1415024939974,
       level: 'info',
       message: 'App started.',
+      process: {
+        name: 'app',
+        version: '1.2.3'
+      },
       module: {
         name: 'foo',
         version: '0.0.1'
@@ -48,6 +52,10 @@ suite('Json', () => {
         '"timestamp":1415024939974,',
         '"level":"info",',
         '"message":"App started.",',
+        '"process":{',
+        '"name":"app",',
+        '"version":"1.2.3"',
+        '},',
         '"module":{',
         '"name":"foo",',
         '"version":"0.0.1"',
