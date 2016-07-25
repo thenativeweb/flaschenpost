@@ -52,6 +52,8 @@ suite('Middleware', () => {
     letter.once('data', data => {
       assert.that(data.level).is.equalTo('info');
       assert.that(data.message).is.equalTo('foobar');
+      assert.that(data.application.name).is.equalTo('flaschenpost');
+      assert.that(data.application.version).is.not.undefined();
       assert.that(data.module).is.equalTo({
         name: 'foo',
         version: '0.0.1'

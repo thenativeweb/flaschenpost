@@ -20,15 +20,6 @@ suite('Configuration', () => {
     done();
   });
 
-  suite('module', () => {
-    test('does not exist by default.', done => {
-      const configuration = new Configuration();
-
-      assert.that(configuration.module).is.undefined();
-      done();
-    });
-  });
-
   suite('levels', () => {
     test('is an object.', done => {
       const configuration = new Configuration();

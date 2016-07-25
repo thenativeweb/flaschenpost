@@ -20,6 +20,10 @@ suite('letter', () => {
         host: 'example.com',
         level: 'info',
         message: 'App started.',
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -34,6 +38,7 @@ suite('letter', () => {
         assert.that(paragraph.timestamp).is.not.undefined();
         assert.that(paragraph.level).is.equalTo(expected.level);
         assert.that(paragraph.message).is.equalTo(expected.message);
+        assert.that(paragraph.application).is.equalTo(expected.application);
         assert.that(paragraph.module).is.equalTo(expected.module);
         assert.that(paragraph.source).is.undefined();
         assert.that(paragraph.metadata).is.undefined();
@@ -49,6 +54,10 @@ suite('letter', () => {
         level: 'info',
         message: 'App started.',
         source: __filename,
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -70,6 +79,10 @@ suite('letter', () => {
         message: 'App started.',
         metadata: {
           foo: 'bar'
+        },
+        application: {
+          name: 'app',
+          version: '1.2.3'
         },
         module: {
           name: 'foo',
@@ -94,6 +107,10 @@ suite('letter', () => {
           foo: 'bar',
           err: new Error('foobar')
         },
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -117,6 +134,10 @@ suite('letter', () => {
         host: 'example.com',
         level: 'info',
         message: 'App started.',
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'

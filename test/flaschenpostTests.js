@@ -110,6 +110,8 @@ suite('flaschenpost', () => {
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
           assert.that(paragraph.message).is.equalTo('App started.');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
           assert.that(paragraph.module).is.equalTo({
             name: 'foo',
             version: '0.0.1'
@@ -189,6 +191,10 @@ suite('flaschenpost', () => {
 
       const paragraph = `${JSON.stringify(new Paragraph(0, {
         host: 'example.com',
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -206,7 +212,7 @@ suite('flaschenpost', () => {
       outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
           'App started. (info)',
-          'example.com::foo@0.0.1 ('
+          'example.com::app@1.2.3::foo@0.0.1 ('
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
@@ -230,6 +236,10 @@ suite('flaschenpost', () => {
 
       const paragraph = `prefix: ${JSON.stringify(new Paragraph(0, {
         host: 'example.com',
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'
@@ -247,7 +257,7 @@ suite('flaschenpost', () => {
       outputStream.once('data', data => {
         assert.that(chalk.stripColor(data).indexOf([
           'App started. (info)',
-          'example.com::foo@0.0.1 ('
+          'example.com::app@1.2.3::foo@0.0.1 ('
         ].join('\n'))).is.equalTo(0);
 
         assert.that(chalk.stripColor(data).indexOf([
@@ -270,6 +280,10 @@ suite('flaschenpost', () => {
 
       const paragraph = `prefix: ${JSON.stringify({
         host: 'example.com',
+        application: {
+          name: 'app',
+          version: '1.2.3'
+        },
         module: {
           name: 'foo',
           version: '0.0.1'
