@@ -44,8 +44,8 @@
     "express": "4.14.0",
     "morgan": "1.7.0",
     "nodeenv": "0.2.1",
-    "roboter": "0.12.1",
-    "roboter-server": "0.12.1",
+    "roboter": "0.12.3",
+    "roboter-server": "0.12.3",
     "sinon": "1.17.5",
     "supertest": "2.0.0"
   },
