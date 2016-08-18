@@ -18,6 +18,10 @@
     {
       "name": "Jonathan Weiß",
       "email": "info@jonathanweiss.net"
+    },
+    {
+      "name": "Joachim Häcker-Becker",
+      "email": "joachim.haecker-becker@arcor.de"
     }
   ],
   "bin": "bin/flaschenpost.js",
