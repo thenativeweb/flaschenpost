@@ -67,6 +67,25 @@ suite('sanitizeMetadata', () => {
     done();
   });
 
+  test('ignores non-objects on recursion check.', done => {
+    const recursive = {
+      foo: 'bar',
+      bar: {
+        foo: 'bar'
+      }
+    };
+
+    const actual = sanitize(recursive);
+
+    assert.that(actual).is.equalTo({
+      foo: 'bar',
+      bar: {
+        foo: 'bar'
+      }
+    });
+    done();
+  });
+
   test('returns a copy of the object.', done => {
     const data = {
       foo: 'bar'
