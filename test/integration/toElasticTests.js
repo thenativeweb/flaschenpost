@@ -17,6 +17,8 @@ suite('toElastic', function () {
   let testIndex = 0;
 
   setup(done => {
+    testIndex += 1;
+
     async.series({
       runElastic (callback) {
         shell.exec(`docker run -d -p 9200:9200 -p 9300:9300 --name elastic${testIndex} elasticsearch:2.4.0`, callback);
@@ -35,11 +37,7 @@ suite('toElastic', function () {
 
     shell.exec([
       `docker kill elastic${testIndex}; docker rm -v elastic${testIndex}`
-    ].join(';'), err => {
-      assert.that(err).is.null();
-      testIndex += 1;
-      done();
-    });
+    ].join(';'), done);
   });
 
   test('sends messages to Elasticsearch.', done => {
