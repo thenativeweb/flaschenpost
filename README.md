@@ -153,7 +153,7 @@ $ npm install -g flaschenpost
 From time to time you may want to inspect log output that was written using the JSON formatter. To turn that into human readable output again, run `flaschenpost-uncork` and provide the messages using the standard input stream.
 
 ```bash
-$ node sample.js | flaschenpost-uncork
+$ cat sample.log | flaschenpost-uncork
 ```
 
 ### Normalizing messages
