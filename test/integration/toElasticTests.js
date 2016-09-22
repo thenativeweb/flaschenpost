@@ -14,10 +14,12 @@ const env = require('../helpers/env'),
 suite('toElastic', function () {
   this.timeout(60 * 1000);
 
+  let testIndex = 0;
+
   setup(done => {
     async.series({
       runElastic (callback) {
-        shell.exec('docker run -d -p 9200:9200 -p 9300:9300 --name elastic elasticsearch:2.4.0', callback);
+        shell.exec(`docker run -d -p 9200:9200 -p 9300:9300 --name elastic${testIndex} elasticsearch:2.4.0`, callback);
       },
       waitForElastic (callback) {
         waitFor(env.ELASTIC_URL, callback);
@@ -32,8 +34,12 @@ suite('toElastic', function () {
     }
 
     shell.exec([
-      'docker kill elastic; docker rm -v elastic'
-    ].join(';'), done);
+      `docker kill elastic${testIndex}; docker rm -v elastic${testIndex}`
+    ].join(';'), err => {
+      assert.that(err).is.null();
+      testIndex += 1;
+      done();
+    });
   });
 
   test('sends messages to Elasticsearch.', done => {
