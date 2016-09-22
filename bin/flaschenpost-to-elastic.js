@@ -50,11 +50,13 @@ client.indices.create({ index: 'logs' }, errCreateIndex => {
     }
 
     buffer.on('data', message => {
+      message['@timestamp'] = new Date(message.timestamp).toISOString();
+
       client.create({
         index: 'logs',
         type: 'message',
         id: uuid(),
-        '@timestamp': message.timestamp,
+        timestamp: message.timestamp,
         body: message
       }, errCreate => {
         if (errCreate) {
