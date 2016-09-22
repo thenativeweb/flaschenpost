@@ -24,19 +24,24 @@
       "email": "joachim.haecker-becker@arcor.de"
     }
   ],
-  "bin": "bin/flaschenpost.js",
+  "bin": {
+    "flaschenpost-normalize": "bin/flaschenpost-normalize.js",
+    "flaschenpost-to-elastic": "bin/flaschenpost-to-elastic.js",
+    "flaschenpost-uncork": "bin/flaschenpost-uncork.js"
+  },
   "main": "lib/flaschenpost.js",
   "dependencies": {
-    "app-root-path": "1.3.0",
+    "app-root-path": "2.0.1",
     "chalk": "1.1.3",
+    "elasticsearch": "11.0.1",
     "find-root": "1.0.0",
-    "lodash": "4.14.2",
-    "moment": "2.14.1",
+    "lodash": "4.15.0",
+    "moment": "2.15.0",
     "processenv": "0.1.0",
     "split2": "2.1.0",
     "stack-trace": "0.0.9",
     "stringify-object": "2.4.0",
-    "update-notifier": "1.0.2",
+    "uuidv4": "0.3.1",
     "varname": "2.0.2"
   },
   "devDependencies": {
@@ -44,9 +49,9 @@
     "express": "4.14.0",
     "morgan": "1.7.0",
     "nodeenv": "0.2.1",
-    "roboter": "0.12.3",
-    "roboter-server": "0.12.3",
-    "sinon": "1.17.5",
+    "roboter": "0.13.0",
+    "roboter-server": "0.13.0",
+    "sinon": "1.17.6",
     "supertest": "2.0.0"
   },
   "repository": {

@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const sanitize = require('../../lib/letter/sanitizeMetadata');
+const sanitize = require('../../../lib/letter/sanitizeMetadata');
 
 suite('sanitizeMetadata', () => {
   test('does nothing to normal objects.', done => {

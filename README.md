@@ -8,16 +8,8 @@ flaschenpost is a logger for cloud-based applications.
 
 ## Installation
 
-### As Node.js module
-
 ```bash
 $ npm install flaschenpost
-```
-
-### As CLI
-
-```bash
-$ npm install -g flaschenpost
 ```
 
 ## Quick start
@@ -148,12 +140,42 @@ app.use(morgan('combined', {
 }));
 ```
 
-### Uncorking a flaschenpost
+## Processing logs
 
-From time to time you may want to inspect log files that contain messages created by flaschenpost. For that, run the CLI tool and provide the log file via stdin.
+To process logs, first you need to install the flaschenpost CLI globally.
 
 ```bash
-$ flaschenpost < foo.log
+$ npm install -g flaschenpost
+```
+
+### Uncorking a flaschenpost
+
+From time to time you may want to inspect log output that was written using the JSON formatter. To turn that into human readable output again, run `flaschenpost-uncork` and provide the messages using the standard input stream.
+
+```bash
+$ node sample.js | flaschenpost-uncork
+```
+
+### Normalizing messages
+
+However, this won't work when your log output does not only contain messages written by flaschenpost, but also arbitrary text. In this case, run `flaschenpost-normalize` and provide the messages using the standard input stream.
+
+```bash
+$ node sample.js | flaschenpost-normalize
+```
+
+### Sending messages to Elasticsearch
+
+If you want to process your log output with Elasticsearch and Kibana, you do not need to use Logstash or Filebeat. Instead run `flaschenpost-to-elastic` and provide the address of the Elasticsearch server using the `ELASTIC_URL` environment variable.
+
+```bash
+$ node sample.js | ELASTIC_URL=localhost:9200 flaschenpost-to-elastic
+```
+
+Please note that it may be needed to normalize the messages before sending them to Elasticsearch. You probably also want to redirect the application's standard error stream to its standard output stream.
+
+```bash
+$ node sample.js 2>&1 | flaschenpost-normalize | ELASTIC_URL=localhost:9200 flaschenpost-to-elastic
 ```
 
 ## Running the build
@@ -161,7 +183,7 @@ $ flaschenpost < foo.log
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
 ```bash
-$ bot build-server
+$ bot
 ```
 
 ## License

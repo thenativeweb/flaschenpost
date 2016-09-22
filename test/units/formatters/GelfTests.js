@@ -1,9 +1,12 @@
 'use strict';
 
-const Gelf = require('../../lib/formatters/Gelf');
+const stream = require('stream');
 
 const assert = require('assertthat');
-const Transform = require('stream').Transform;
+
+const Gelf = require('../../../lib/formatters/Gelf');
+
+const Transform = stream.Transform;
 
 suite('Gelf', () => {
   let gelf;
