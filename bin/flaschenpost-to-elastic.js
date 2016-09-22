@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 /* eslint-disable no-process-env */
