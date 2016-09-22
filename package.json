@@ -46,11 +46,14 @@
   },
   "devDependencies": {
     "assertthat": "0.8.0",
+    "async": "2.0.1",
     "express": "4.14.0",
+    "knockat": "0.2.1",
     "morgan": "1.7.0",
     "nodeenv": "0.2.1",
     "roboter": "0.13.0",
     "roboter-server": "0.13.0",
+    "shelljs": "0.7.4",
     "sinon": "1.17.6",
     "supertest": "2.0.0"
   },
