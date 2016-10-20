@@ -194,6 +194,52 @@ suite('flaschenpost', () => {
         });
       });
 
+      test('handles string metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata).is.equalTo({ stringified: '"foo"' });
+          done();
+        });
+
+        logger.info('A string.', 'foo');
+      });
+
+      test('handles number metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata).is.equalTo({ stringified: '42' });
+          done();
+        });
+
+        logger.info('A string.', 42);
+      });
+
+      test('handles array metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata).is.equalTo([ 42, 23 ]);
+          done();
+        });
+
+        logger.info('A string.', [ 42, 23 ]);
+      });
+
+      test('handles error metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata.name).is.equalTo('Error');
+          assert.that(paragraph.metadata.message).is.equalTo('error');
+          assert.that(paragraph.metadata.stack).is.not.undefined();
+          done();
+        });
+
+        logger.info('A string.', new Error('error'));
+      });
+
       test('does not write a message if the log level is disabled.', done => {
         const logger = flaschenpost.getLogger(__filename);
         let counter = 0;
