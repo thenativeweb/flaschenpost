@@ -73,22 +73,56 @@ suite('flaschenpost', () => {
     });
 
     suite('log function', () => {
-      test('throws an error when no message is given.', done => {
+      test('writes a blank message to a letter.', done => {
+        flaschenpost.use('host', 'example.com');
+
         const logger = flaschenpost.getLogger(__filename);
 
-        assert.that(() => {
-          logger.info();
-        }).is.throwing('Message is missing.');
-        done();
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.undefined();
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          done();
+        });
+
+        logger.info();
       });
 
-      test('throws an error when message is not a string.', done => {
+      test('writes a number message to a letter.', done => {
+        flaschenpost.use('host', 'example.com');
+
         const logger = flaschenpost.getLogger(__filename);
 
-        assert.that(() => {
-          logger.info(42);
-        }).is.throwing('Message must be a string.');
-        done();
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.equalTo('42');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          done();
+        });
+
+        logger.info(42);
       });
 
       test('writes the message to a letter.', done => {
@@ -158,6 +192,52 @@ suite('flaschenpost', () => {
             bar: 'baz'
           }
         });
+      });
+
+      test('handles string metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata).is.equalTo({ stringified: '"foo"' });
+          done();
+        });
+
+        logger.info('A string.', 'foo');
+      });
+
+      test('handles number metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata).is.equalTo({ stringified: '42' });
+          done();
+        });
+
+        logger.info('A string.', 42);
+      });
+
+      test('handles array metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata).is.equalTo([ 42, 23 ]);
+          done();
+        });
+
+        logger.info('A string.', [ 42, 23 ]);
+      });
+
+      test('handles error metadata.', done => {
+        const logger = flaschenpost.getLogger();
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph.metadata.name).is.equalTo('Error');
+          assert.that(paragraph.metadata.message).is.equalTo('error');
+          assert.that(paragraph.metadata.stack).is.not.undefined();
+          done();
+        });
+
+        logger.info('A string.', new Error('error'));
       });
 
       test('does not write a message if the log level is disabled.', done => {

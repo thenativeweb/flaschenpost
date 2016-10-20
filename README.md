@@ -42,15 +42,11 @@ logger.info('App started.');
 
 #### Handling meta data
 
-If you want to provide additional meta data, use an object as second parameter.
+If you want to provide additional meta data, add a second parameter.
 
 ```javascript
-logger.info('App started.', {
-  name: 'foo',
-  bar: {
-    baz: 23
-  }
-});
+logger.info('App started.', { port: 3000 });
+logger.info('App started.', 3000);
 ```
 
 #### Defining the log target

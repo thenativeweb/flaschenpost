@@ -46,21 +46,24 @@ suite('Paragraph', () => {
     done();
   });
 
-  test('throws an error if message is missing.', done => {
-    assert.that(() => {
-      /* eslint-disable no-new */
-      new Paragraph(0, { host: 'example.com', level: 'error' });
-      /* eslint-enable no-new */
-    }).is.throwing('Message is missing.');
+  test('handles message is missing.', done => {
+    const paragraph = new Paragraph(0, { host: 'example.com', level: 'error' });
+
+    assert.that(paragraph.message).is.undefined();
     done();
   });
 
-  test('throws an error if metadata is given and metadata is not an object.', done => {
-    assert.that(() => {
-      /* eslint-disable no-new */
-      new Paragraph(0, { host: 'example.com', level: 'error', message: 'foo', metadata: 'bar' });
-      /* eslint-enable no-new */
-    }).is.throwing('Invalid metadata.');
+  test('handles string metadata.', done => {
+    const paragraph = new Paragraph(0, { host: 'example.com', level: 'error', message: 'foo', metadata: 'bar' });
+
+    assert.that(paragraph.metadata).is.equalTo({ stringified: '"bar"' });
+    done();
+  });
+
+  test('handles number metadata.', done => {
+    const paragraph = new Paragraph(0, { host: 'example.com', level: 'error', message: 'foo', metadata: 42 });
+
+    assert.that(paragraph.metadata).is.equalTo({ stringified: '42' });
     done();
   });
 
