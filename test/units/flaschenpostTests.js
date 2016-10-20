@@ -85,7 +85,7 @@ suite('flaschenpost', () => {
           assert.that(paragraph.id).is.ofType('number');
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
-          assert.that(paragraph.message).is.equalTo('');
+          assert.that(paragraph.message).is.undefined();
           assert.that(paragraph.application.name).is.equalTo('flaschenpost');
           assert.that(paragraph.application.version).is.not.undefined();
           assert.that(paragraph.module).is.equalTo({

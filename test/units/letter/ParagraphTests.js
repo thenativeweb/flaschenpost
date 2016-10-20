@@ -49,7 +49,7 @@ suite('Paragraph', () => {
   test('handles message is missing.', done => {
     const paragraph = new Paragraph(0, { host: 'example.com', level: 'error' });
 
-    assert.that(paragraph.message).is.equalTo('');
+    assert.that(paragraph.message).is.undefined();
     done();
   });
 
