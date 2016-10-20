@@ -73,22 +73,56 @@ suite('flaschenpost', () => {
     });
 
     suite('log function', () => {
-      test('throws an error when no message is given.', done => {
+      test('writes a blank message to a letter.', done => {
+        flaschenpost.use('host', 'example.com');
+
         const logger = flaschenpost.getLogger(__filename);
 
-        assert.that(() => {
-          logger.info();
-        }).is.throwing('Message is missing.');
-        done();
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.equalTo('');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          done();
+        });
+
+        logger.info();
       });
 
-      test('throws an error when message is not a string.', done => {
+      test('writes a number message to a letter.', done => {
+        flaschenpost.use('host', 'example.com');
+
         const logger = flaschenpost.getLogger(__filename);
 
-        assert.that(() => {
-          logger.info(42);
-        }).is.throwing('Message must be a string.');
-        done();
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.equalTo('42');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          done();
+        });
+
+        logger.info(42);
       });
 
       test('writes the message to a letter.', done => {

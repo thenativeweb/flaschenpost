@@ -42,7 +42,8 @@ logger.info('App started.');
 
 #### Handling meta data
 
-If you want to provide additional meta data, use an object as second parameter.
+If you want to provide additional meta data, add a second parameter. This can
+be any type that can be stringified.
 
 ```javascript
 logger.info('App started.', {
@@ -51,6 +52,14 @@ logger.info('App started.', {
     baz: 23
   }
 });
+
+logger.info('A string.', 'foo');
+
+logger.info('A number.', 23);
+
+logger.info('An array.', [42, 23]);
+
+logger.info('An error.', new Error('error'));
 ```
 
 #### Defining the log target
