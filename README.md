@@ -65,6 +65,34 @@ json  | The default json format.
 
 *Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not.*
 
+#### Customizing the human-readable format.
+
+Use the environment variable `FLASCHENPOST_HUMAN_FORMAT` to customize the human-readable format and to adjust to your needs.
+
+Option              | Description
+--------------------|--------------------------------------------
+%application        | Name of the main application
+%applicationVersion | Version of the main application
+%date               | Date in YYYY-MM-DD UTC
+%host               | Hostname
+%id                 | Log message ID
+%level              | Log level (debug, info, warn, error, fatal)
+%coloredLevel       | Log level colored
+%message            | Log message
+%coloredMessage     | Log message colored by log level
+%metadata           | Metadata, stringified
+%module             | Name of the module
+%moduleVersion      | Version of the module
+%ms                 | Milliseconds
+%pid                | Process ID
+%source             | Log source file
+%time               | Time in HH:mm:ss UTC
+
+Example:
+```bash
+export FLASCHENPOST_HUMAN_FORMAT='%date %time %coloredLevel %message %metadata'
+```
+
 #### Setting a custom host
 
 By default, flaschenpost uses the current host's host name in log messages. If you want to change the host name being used, call the `use` function.
@@ -94,7 +122,7 @@ If you want to change the default log levels, i.e. define other log levels, chan
 ```javascript
 flaschenpost.use('levels', {
   fatal: {
-    color: 'blue',
+    color: 'magenta',
     enabled: true
   },
   error: {
