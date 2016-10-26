@@ -198,7 +198,7 @@ suite('flaschenpost', () => {
         const logger = flaschenpost.getLogger();
 
         letter.once('data', paragraph => {
-          assert.that(paragraph.metadata).is.equalTo({ stringified: '"foo"' });
+          assert.that(paragraph.metadata).is.equalTo('foo');
           done();
         });
 
@@ -209,7 +209,7 @@ suite('flaschenpost', () => {
         const logger = flaschenpost.getLogger();
 
         letter.once('data', paragraph => {
-          assert.that(paragraph.metadata).is.equalTo({ stringified: '42' });
+          assert.that(paragraph.metadata).is.equalTo(42);
           done();
         });
 

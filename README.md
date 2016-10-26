@@ -77,20 +77,22 @@ Option              | Description
 %host               | Hostname
 %id                 | Log message ID
 %level              | Log level (debug, info, warn, error, fatal)
-%coloredLevel       | Log level colored
+%levelColored       | Log level colored
 %message            | Log message
-%coloredMessage     | Log message colored by log level
+%messageColored     | Log message colored by log level
 %metadata           | Metadata, stringified
+%metadataShort      | Metadata, stringified, no line-breaks
 %module             | Name of the module
 %moduleVersion      | Version of the module
 %ms                 | Milliseconds
+%origin             | Hostname, application & version, module & version (if different from application), source
 %pid                | Process ID
 %source             | Log source file
 %time               | Time in HH:mm:ss UTC
 
 Example:
 ```bash
-export FLASCHENPOST_HUMAN_FORMAT='%date %time %coloredLevel %message %metadata'
+export FLASCHENPOST_HUMAN_FORMAT='%date %time %levelColored %message %metadata'
 ```
 
 #### Setting a custom host
@@ -106,7 +108,7 @@ flaschenpost.use('host', 'example.com');
 By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
 
 ```bash
-$ export LOG_LEVELS=debug,info
+$ export LOG_LEVELS=fatal,error
 ```
 
 If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.

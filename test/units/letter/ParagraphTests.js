@@ -56,14 +56,14 @@ suite('Paragraph', () => {
   test('handles string metadata.', done => {
     const paragraph = new Paragraph(0, { host: 'example.com', level: 'error', message: 'foo', metadata: 'bar' });
 
-    assert.that(paragraph.metadata).is.equalTo({ stringified: '"bar"' });
+    assert.that(paragraph.metadata).is.equalTo('bar');
     done();
   });
 
   test('handles number metadata.', done => {
     const paragraph = new Paragraph(0, { host: 'example.com', level: 'error', message: 'foo', metadata: 42 });
 
-    assert.that(paragraph.metadata).is.equalTo({ stringified: '42' });
+    assert.that(paragraph.metadata).is.equalTo(42);
     done();
   });
 
