@@ -117,6 +117,16 @@ If you want to enable all log levels at once, you can provide a `*` character as
 $ export LOG_LEVELS=*
 ```
 
+### Restricting `debug` logging per module
+
+If `debug` logging is enabled (`export LOG_LEVELS=*`), this can be restricted
+to specific modules, by setting the `LOG_DEBUG_MODULES` environment variable.
+This must hold a comma-separated list of the modules to enable.
+
+```bash
+$ export LOG_DEBUG_MODULES=module1,@scoped/module2
+```
+
 ### Setting custom log levels
 
 If you want to change the default log levels, i.e. define other log levels, change colors or define which log levels are enabled by default, call the `use` function of flaschenpost.

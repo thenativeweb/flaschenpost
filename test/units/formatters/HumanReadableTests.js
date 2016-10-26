@@ -10,7 +10,7 @@ const HumanReadable = require('../../../lib/formatters/HumanReadable');
 
 const Transform = stream.Transform;
 
-suite.only('HumanReadable', () => {
+suite('HumanReadable', () => {
   let humanReadable;
   const paragraph = {
     host: 'example.com',
