@@ -32,10 +32,23 @@ suite('HumanReadable', () => {
       foo: 'bar'
     }
   };
+  let suiteRestore;
 
-  suiteSetup(() => {
+  suiteSetup(done => {
     chalk.enabled = true;
     humanReadable = new HumanReadable();
+
+    nodeenv({
+      FLASCHENPOST_HUMAN_FORMAT: undefined
+    }, restore => {
+      suiteRestore = restore;
+      done();
+    });
+  });
+
+  suiteTeardown(done => {
+    suiteRestore();
+    done();
   });
 
   suite('default', () => {

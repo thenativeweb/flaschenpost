@@ -85,7 +85,7 @@ suite('flaschenpost', () => {
           assert.that(paragraph.id).is.ofType('number');
           assert.that(paragraph.timestamp).is.not.undefined();
           assert.that(paragraph.level).is.equalTo('info');
-          assert.that(paragraph.message).is.undefined();
+          assert.that(paragraph.message).is.equalTo('undefined');
           assert.that(paragraph.application.name).is.equalTo('flaschenpost');
           assert.that(paragraph.application.version).is.not.undefined();
           assert.that(paragraph.module).is.equalTo({
@@ -123,6 +123,34 @@ suite('flaschenpost', () => {
         });
 
         logger.info(42);
+      });
+
+      test('writes an error to a letter.', done => {
+        flaschenpost.use('host', 'example.com');
+
+        const logger = flaschenpost.getLogger(__filename);
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.startingWith('ERROR: {\n');
+          assert.that(paragraph.message).is.containing(`stack: 'Error: Something failed\n`);
+          assert.that(paragraph.message).is.endingWith(`message: 'Something failed'\n}`);
+          assert.that(paragraph.message).is.containing('');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          done();
+        });
+
+        logger.info(new Error('Something failed'));
       });
 
       test('writes the message to a letter.', done => {
