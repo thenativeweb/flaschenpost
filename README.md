@@ -42,15 +42,11 @@ logger.info('App started.');
 
 #### Handling meta data
 
-If you want to provide additional meta data, use an object as second parameter.
+If you want to provide additional meta data, add a second parameter.
 
 ```javascript
-logger.info('App started.', {
-  name: 'foo',
-  bar: {
-    baz: 23
-  }
-});
+logger.info('App started.', { port: 3000 });
+logger.info('App started.', 3000);
 ```
 
 #### Defining the log target
@@ -69,6 +65,36 @@ json  | The default json format.
 
 *Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not.*
 
+#### Customizing the human-readable format.
+
+Use the environment variable `FLASCHENPOST_HUMAN_FORMAT` to customize the human-readable format and to adjust to your needs.
+
+Option              | Description
+--------------------|--------------------------------------------
+%application        | Name of the main application
+%applicationVersion | Version of the main application
+%date               | Date in YYYY-MM-DD UTC
+%host               | Hostname
+%id                 | Log message ID
+%level              | Log level (debug, info, warn, error, fatal)
+%levelColored       | Log level colored
+%message            | Log message
+%messageColored     | Log message colored by log level
+%metadata           | Metadata, stringified
+%metadataShort      | Metadata, stringified, no line-breaks
+%module             | Name of the module
+%moduleVersion      | Version of the module
+%ms                 | Milliseconds
+%origin             | Hostname, application & version, module & version (if different from application), source
+%pid                | Process ID
+%source             | Log source file
+%time               | Time in HH:mm:ss UTC
+
+Example:
+```bash
+export FLASCHENPOST_HUMAN_FORMAT='%date %time %levelColored %message %metadata'
+```
+
 #### Setting a custom host
 
 By default, flaschenpost uses the current host's host name in log messages. If you want to change the host name being used, call the `use` function.
@@ -82,13 +108,23 @@ flaschenpost.use('host', 'example.com');
 By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
 
 ```bash
-$ export LOG_LEVELS=debug,info
+$ export LOG_LEVELS=fatal,error
 ```
 
 If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.
 
 ```bash
 $ export LOG_LEVELS=*
+```
+
+### Restricting `debug` logging per module
+
+If `debug` logging is enabled (`export LOG_LEVELS=*`), this can be restricted
+to specific modules, by setting the `LOG_DEBUG_MODULES` environment variable.
+This must hold a comma-separated list of the modules to enable.
+
+```bash
+$ export LOG_DEBUG_MODULES=module1,@scoped/module2
 ```
 
 ### Setting custom log levels
@@ -98,7 +134,7 @@ If you want to change the default log levels, i.e. define other log levels, chan
 ```javascript
 flaschenpost.use('levels', {
   fatal: {
-    color: 'blue',
+    color: 'magenta',
     enabled: true
   },
   error: {
