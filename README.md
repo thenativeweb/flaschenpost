@@ -66,8 +66,32 @@ Name  | Description
 gelf  | The `GELF` format used by Graylog.
 human | The default human-readable format.
 json  | The default json format.
+js:   | A custom format (see [Using a custom human-readable format](#using-a-custom-human-readable-format)).
 
 *Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not.*
+
+##### Using a custom human-readable format
+
+Maybe you want to adjust the styling of the human-readable format. For that, you can provide a custom formatter. Basically, a custom formatter is nothing but a function that gets the log message as an object and returns a formatted string.
+
+Hence, a simple implementation may look like the following code snippet.
+
+```javascript
+'use strict';
+
+const format = function (log) {
+  return `${log.level}  ${log.message}`;
+};
+
+module.exports = format;
+```
+
+To actually use a custom human-readable format, set the environment variable `FLASCHENPOST_FORMATTER` to `js:` and add the absolute path to the file that contains the `format` function. Instead of a file you may also provide the name of a module that provides the `format` function.
+
+```bash
+$ export FLASCHENPOST_FORMATTER=js:/foo/bar/myFormatter.js
+$ export FLASCHENPOST_FORMATTER=js:myFormatter
+```
 
 #### Setting a custom host
 
