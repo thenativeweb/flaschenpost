@@ -91,35 +91,6 @@ If you want to enable all log levels at once, you can provide a `*` character as
 $ export LOG_LEVELS=*
 ```
 
-### Setting custom log levels
-
-If you want to change the default log levels, i.e. define other log levels, change colors or define which log levels are enabled by default, call the `use` function of flaschenpost.
-
-```javascript
-flaschenpost.use('levels', {
-  fatal: {
-    color: 'blue',
-    enabled: true
-  },
-  error: {
-    color: 'red',
-    enabled: true
-  },
-  warn: {
-    color: 'yellow',
-    enabled: true
-  },
-  info: {
-    color: 'green',
-    enabled: true
-  },
-  debug: {
-    color: 'white',
-    enabled: false
-  }
-});
-```
-
 ### Using the Express middleware
 
 If you are writing an Express-based application and you use [morgan](https://github.com/expressjs/morgan) as logger, you can easily integrate flaschenpost into it.
