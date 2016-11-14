@@ -82,7 +82,7 @@ flaschenpost.use('host', 'example.com');
 By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
 
 ```bash
-$ export LOG_LEVELS=debug,info
+$ export LOG_LEVELS=fatal,error,warn,info,debug
 ```
 
 If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.
