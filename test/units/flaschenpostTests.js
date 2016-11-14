@@ -175,6 +175,103 @@ suite('flaschenpost', () => {
           done();
         }, 0.1 * 1000);
       });
+
+      suite('debug modules', () => {
+        test('writes log level debug if debugging is not restricted to specific modules.', done => {
+          flaschenpost.configuration.levels.debug.enabled = true;
+          flaschenpost.configuration.debugModules = [];
+
+          const logger = flaschenpost.getLogger(__filename);
+          let counter = 0;
+
+          letter.once('data', () => {
+            counter += 1;
+          });
+
+          logger.debug('App started.');
+
+          setTimeout(() => {
+            assert.that(counter).is.equalTo(1);
+            done();
+          }, 0.1 * 1000);
+        });
+
+        test('writes log level debug if debugging is restricted to a single module and the module matches.', done => {
+          flaschenpost.configuration.levels.debug.enabled = true;
+          flaschenpost.configuration.debugModules = [ 'foo' ];
+
+          const logger = flaschenpost.getLogger(__filename);
+          let counter = 0;
+
+          letter.once('data', () => {
+            counter += 1;
+          });
+
+          logger.debug('App started.');
+
+          setTimeout(() => {
+            assert.that(counter).is.equalTo(1);
+            done();
+          }, 0.1 * 1000);
+        });
+
+        test('does not write log level debug if debugging is restricted to a single module and the module does not match.', done => {
+          flaschenpost.configuration.levels.debug.enabled = true;
+          flaschenpost.configuration.debugModules = [ 'bar' ];
+
+          const logger = flaschenpost.getLogger(__filename);
+          let counter = 0;
+
+          letter.once('data', () => {
+            counter += 1;
+          });
+
+          logger.debug('App started.');
+
+          setTimeout(() => {
+            assert.that(counter).is.equalTo(0);
+            done();
+          }, 0.1 * 1000);
+        });
+
+        test('writes log level debug if debugging is restricted to multiple modules and the module matches.', done => {
+          flaschenpost.configuration.levels.debug.enabled = true;
+          flaschenpost.configuration.debugModules = [ 'foo', 'bar' ];
+
+          const logger = flaschenpost.getLogger(__filename);
+          let counter = 0;
+
+          letter.once('data', () => {
+            counter += 1;
+          });
+
+          logger.debug('App started.');
+
+          setTimeout(() => {
+            assert.that(counter).is.equalTo(1);
+            done();
+          }, 0.1 * 1000);
+        });
+
+        test('does not write log level debug if debugging is restricted to multiple modules and the module does not match.', done => {
+          flaschenpost.configuration.levels.debug.enabled = true;
+          flaschenpost.configuration.debugModules = [ 'bar', 'baz' ];
+
+          const logger = flaschenpost.getLogger(__filename);
+          let counter = 0;
+
+          letter.once('data', () => {
+            counter += 1;
+          });
+
+          logger.debug('App started.');
+
+          setTimeout(() => {
+            assert.that(counter).is.equalTo(0);
+            done();
+          }, 0.1 * 1000);
+        });
+      });
     });
   });
 });

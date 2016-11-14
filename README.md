@@ -91,6 +91,14 @@ If you want to enable all log levels at once, you can provide a `*` character as
 $ export LOG_LEVELS=*
 ```
 
+### Restricting `debug` logging
+
+If the log level `debug` is enabled, by default this affects all modules. From time to time it may be desired to restrict debug logging to specific modules. For that, set the `LOG_DEBUG_MODULES` environment variable to a comma-separated list of the modules' names that you want to track.
+
+```bash
+$ export LOG_DEBUG_MODULES=module1,@scoped/module2
+```
+
 ### Using the Express middleware
 
 If you are writing an Express-based application and you use [morgan](https://github.com/expressjs/morgan) as logger, you can easily integrate flaschenpost into it.
