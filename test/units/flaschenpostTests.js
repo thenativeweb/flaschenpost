@@ -111,6 +111,33 @@ suite('flaschenpost', () => {
             version: '0.0.1'
           });
           assert.that(paragraph.source).is.equalTo(__filename);
+          assert.that(paragraph.metadata).is.undefined();
+          done();
+        });
+
+        logger.info('App started.');
+      });
+
+      test('writes the message to a letter with metadata.', done => {
+        flaschenpost.use('host', 'example.com');
+
+        const logger = flaschenpost.getLogger(__filename);
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.equalTo('App started.');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
           assert.that(paragraph.metadata).is.equalTo({
             foo: 'bar',
             metadata: {
@@ -120,12 +147,68 @@ suite('flaschenpost', () => {
           done();
         });
 
-        logger.info(`App started.`, {
+        logger.info('App started.', {
           foo: 'bar',
           metadata: {
             bar: 'baz'
           }
         });
+      });
+
+      test('writes the message to a letter with metadata other than object.', done => {
+        flaschenpost.use('host', 'example.com');
+
+        const logger = flaschenpost.getLogger(__filename);
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.equalTo('App started.');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          assert.that(paragraph.metadata).is.equalTo({ value: 3000 });
+          done();
+        });
+
+        logger.info('App started.', 3000);
+      });
+
+      test('writes the message to a letter with an error as metadata.', done => {
+        flaschenpost.use('host', 'example.com');
+
+        const logger = flaschenpost.getLogger(__filename);
+
+        letter.once('data', paragraph => {
+          assert.that(paragraph).is.ofType('object');
+          assert.that(paragraph.host).is.equalTo('example.com');
+          assert.that(paragraph.pid).is.equalTo(process.pid);
+          assert.that(paragraph.id).is.ofType('number');
+          assert.that(paragraph.timestamp).is.not.undefined();
+          assert.that(paragraph.level).is.equalTo('info');
+          assert.that(paragraph.message).is.equalTo('App started.');
+          assert.that(paragraph.application.name).is.equalTo('flaschenpost');
+          assert.that(paragraph.application.version).is.not.undefined();
+          assert.that(paragraph.module).is.equalTo({
+            name: 'foo',
+            version: '0.0.1'
+          });
+          assert.that(paragraph.source).is.equalTo(__filename);
+          assert.that(paragraph.metadata).is.ofType('object');
+          assert.that(paragraph.metadata.name).is.equalTo('Error');
+          assert.that(paragraph.metadata.message).is.equalTo('Something went wrong.');
+          done();
+        });
+
+        logger.info('App started.', new Error('Something went wrong.'));
       });
 
       test('writes the message to a letter even when no filename was specified.', done => {
