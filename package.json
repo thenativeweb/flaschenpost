@@ -45,6 +45,7 @@
     "split2": "2.1.0",
     "stack-trace": "0.0.9",
     "stringify-object": "2.4.0",
+    "untildify": "3.0.2",
     "uuidv4": "0.4.0",
     "varname": "2.0.2"
   },
