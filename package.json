@@ -52,6 +52,7 @@
     "assertthat": "0.8.2",
     "async": "2.1.2",
     "express": "4.14.0",
+    "fs-extra": "1.0.0",
     "knockat": "0.2.1",
     "morgan": "1.7.0",
     "nodeenv": "0.2.1",
