@@ -21,7 +21,7 @@ suite('toElastic', function () {
 
     async.series({
       runElastic (callback) {
-        shell.exec(`docker run -d -p 9200:9200 -p 9300:9300 --name elastic${testIndex} elasticsearch:2.4.0`, callback);
+        shell.exec(`docker run -d -p 9200:9200 -p 9300:9300 -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" --name elastic${testIndex} docker.elastic.co/elasticsearch/elasticsearch:5.2.2`, callback);
       },
       waitForElastic (callback) {
         waitFor(env.ELASTIC_URL, callback);
@@ -47,8 +47,8 @@ suite('toElastic', function () {
       assert.that(code).is.equalTo(0);
 
       // Delay querying Elasticsearch since by default it only flushes to disk
-      // every few seconds (for details, see Elasticsearch's documentation at:
-      // https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-translog.html#_flush_settings)
+      // every few seconds. For details, see Elasticsearch's documentation at:
+      // https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-translog.html#_flush_settings
       setTimeout(() => {
         const client = new elasticsearch.Client({
           host: env.ELASTIC_URL
