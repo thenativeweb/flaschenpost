@@ -2,7 +2,7 @@ machine:
   timezone: Europe/Berlin
 
   environment:
-    ELASTIC_URL: http://localhost:9200
+    ELASTIC_URL: http://elastic:changeme@localhost:9200
 
   node:
     version: 6.2.0
