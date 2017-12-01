@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
-    appRootPath = require('app-root-path'),
+    appRoot = require('app-root-path'),
     findRoot = require('find-root'),
     processenv = require('processenv'),
     stackTrace = require('stack-trace');
@@ -18,9 +18,13 @@ var Configuration = require('./Configuration'),
 
 var flaschenpost = {};
 
-flaschenpost.initialize = function () {
+flaschenpost.initialize = function (options) {
+  options = options || {};
+
+  var appRootPath = options.appRootPath || appRoot.path;
+
   this.configuration = new Configuration();
-  this.configuration.application = readPackageJson(appRootPath.path);
+  this.configuration.application = readPackageJson(appRootPath);
 
   letter.unpipe();
 
