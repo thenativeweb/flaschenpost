@@ -18,13 +18,9 @@ var Configuration = require('./Configuration'),
 
 var flaschenpost = {};
 
-flaschenpost.initialize = function (options) {
-  options = options || {};
-
-  var appRootPath = options.appRootPath || appRoot.path;
-
+flaschenpost.initialize = function () {
   this.configuration = new Configuration();
-  this.configuration.application = readPackageJson(appRootPath);
+  this.configuration.application = readPackageJson(appRoot.path);
 
   letter.unpipe();
 
