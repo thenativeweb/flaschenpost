@@ -12,40 +12,40 @@ suite('parseLogLevelsEnvironmentVariable', () => {
   });
 
   test('returns an empty array if the environment variable is not set.', done => {
-    nodeenv('LOG_LEVELS', undefined, restore => {
-      assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([]);
+    const restore = nodeenv('LOG_LEVELS', undefined);
 
-      restore();
-      done();
-    });
+    assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([]);
+
+    restore();
+    done();
   });
 
   /* eslint-disable max-len */
   test('returns an array with a single value if the environment variable is set to a single value.', done => {
     /* eslint-enable max-len */
-    nodeenv('LOG_LEVELS', 'info', restore => {
-      assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([ 'info' ]);
+    const restore = nodeenv('LOG_LEVELS', 'info');
 
-      restore();
-      done();
-    });
+    assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([ 'info' ]);
+
+    restore();
+    done();
   });
 
   test('returns an array with a single lowercased and trimmed value.', done => {
-    nodeenv('LOG_LEVELS', '  Info ', restore => {
-      assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([ 'info' ]);
+    const restore = nodeenv('LOG_LEVELS', '  Info ');
 
-      restore();
-      done();
-    });
+    assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([ 'info' ]);
+
+    restore();
+    done();
   });
 
   test('returns an array with multiple values.', done => {
-    nodeenv('LOG_LEVELS', '  Info , DEBUG  ,warN  ', restore => {
-      assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([ 'info', 'debug', 'warn' ]);
+    const restore = nodeenv('LOG_LEVELS', '  Info , DEBUG  ,warN  ');
 
-      restore();
-      done();
-    });
+    assert.that(parseLogLevelsEnvironmentVariable()).is.equalTo([ 'info', 'debug', 'warn' ]);
+
+    restore();
+    done();
   });
 });

@@ -8,7 +8,7 @@ flaschenpost is a logger for cloud-based applications.
 
 ## Installation
 
-```bash
+```shell
 $ npm install flaschenpost
 ```
 
@@ -89,7 +89,7 @@ module.exports = format;
 
 To actually use a custom human-readable format, set the environment variable `FLASCHENPOST_FORMATTER` to `js:` and add the absolute path to the file that contains the `format` function. Instead of a file you may also provide the name of a module that provides the `format` function.
 
-```bash
+```shell
 $ export FLASCHENPOST_FORMATTER=js:/foo/bar/myFormatter.js
 $ export FLASCHENPOST_FORMATTER=js:myFormatter
 ```
@@ -106,13 +106,13 @@ flaschenpost.use('host', 'example.com');
 
 By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
 
-```bash
+```shell
 $ export LOG_LEVELS=fatal,error,warn,info,debug
 ```
 
 If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.
 
-```bash
+```shell
 $ export LOG_LEVELS=*
 ```
 
@@ -120,7 +120,7 @@ $ export LOG_LEVELS=*
 
 If the log level `debug` is enabled, by default this affects all modules. From time to time it may be desired to restrict debug logging to specific modules. For that, set the `LOG_DEBUG_MODULES` environment variable to a comma-separated list of the modules' names that you want to track.
 
-```bash
+```shell
 $ export LOG_DEBUG_MODULES=module1,@scoped/module2
 ```
 
@@ -148,7 +148,7 @@ app.use(morgan('combined', {
 
 To process logs, first you need to install the flaschenpost CLI globally.
 
-```bash
+```shell
 $ npm install -g flaschenpost
 ```
 
@@ -156,7 +156,7 @@ $ npm install -g flaschenpost
 
 From time to time you may want to inspect log output that was written using the JSON formatter. To turn that into human readable output again, run `flaschenpost-uncork` and provide the messages using the standard input stream.
 
-```bash
+```shell
 $ cat sample.log | flaschenpost-uncork
 ```
 
@@ -164,36 +164,22 @@ $ cat sample.log | flaschenpost-uncork
 
 However, this won't work when your log output does not only contain messages written by flaschenpost, but also arbitrary text. In this case, run `flaschenpost-normalize` and provide the messages using the standard input stream.
 
-```bash
+```shell
 $ node sample.js | flaschenpost-normalize
-```
-
-### Sending messages to Elasticsearch
-
-If you want to process your log output with Elasticsearch and Kibana, you do not need to use Logstash or Filebeat. Instead run `flaschenpost-to-elastic` and provide the address of the Elasticsearch server using the `ELASTIC_URL` environment variable.
-
-```bash
-$ node sample.js | ELASTIC_URL=localhost:9200 flaschenpost-to-elastic
-```
-
-Please note that it may be needed to normalize the messages before sending them to Elasticsearch. You probably also want to redirect the application's standard error stream to its standard output stream.
-
-```bash
-$ node sample.js 2>&1 | flaschenpost-normalize | ELASTIC_URL=localhost:9200 flaschenpost-to-elastic
 ```
 
 ## Running the build
 
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
-```bash
+```shell
 $ bot
 ```
 
 ## License
 
 The MIT License (MIT)
-Copyright (c) 2013-2016 the native web.
+Copyright (c) 2013-2018 the native web.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

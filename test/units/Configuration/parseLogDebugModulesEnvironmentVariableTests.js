@@ -12,34 +12,34 @@ suite('parseLogDebugModulesEnvironmentVariable', () => {
   });
 
   test('returns an empty array if the environment variable is not set.', done => {
-    nodeenv('LOG_DEBUG_MODULES', undefined, restore => {
-      assert.that(parseLogDebugModulesEnvironmentVariable()).is.equalTo([]);
+    const restore = nodeenv('LOG_DEBUG_MODULES', undefined);
 
-      restore();
-      done();
-    });
+    assert.that(parseLogDebugModulesEnvironmentVariable()).is.equalTo([]);
+
+    restore();
+    done();
   });
 
   test('returns an array with a single value if the environment variable is set to a single value.', done => {
-    nodeenv('LOG_DEBUG_MODULES', 'module1', restore => {
-      assert.that(parseLogDebugModulesEnvironmentVariable()).is.equalTo([
-        'module1'
-      ]);
+    const restore = nodeenv('LOG_DEBUG_MODULES', 'module1');
 
-      restore();
-      done();
-    });
+    assert.that(parseLogDebugModulesEnvironmentVariable()).is.equalTo([
+      'module1'
+    ]);
+
+    restore();
+    done();
   });
 
   test('returns an array with multiple values.', done => {
-    nodeenv('LOG_DEBUG_MODULES', 'module1,@scoped/module2', restore => {
-      assert.that(parseLogDebugModulesEnvironmentVariable()).is.equalTo([
-        'module1',
-        '@scoped/module2'
-      ]);
+    const restore = nodeenv('LOG_DEBUG_MODULES', 'module1,@scoped/module2');
 
-      restore();
-      done();
-    });
+    assert.that(parseLogDebugModulesEnvironmentVariable()).is.equalTo([
+      'module1',
+      '@scoped/module2'
+    ]);
+
+    restore();
+    done();
   });
 });

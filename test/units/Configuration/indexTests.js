@@ -124,78 +124,76 @@ suite('Configuration', () => {
     });
 
     test('sets the given levels with respect to the LOG_LEVELS environment variable.', done => {
-      nodeenv('LOG_LEVELS', 'debug', restore => {
-        const input = {
-          debug: {
-            color: 'green',
-            enabled: false
-          }
-        };
+      const restore = nodeenv('LOG_LEVELS', 'debug');
 
-        const expected = {
-          debug: {
-            color: 'green',
-            enabled: true
-          }
-        };
+      const input = {
+        debug: {
+          color: 'green',
+          enabled: false
+        }
+      };
 
-        const configuration = new Configuration();
+      const expected = {
+        debug: {
+          color: 'green',
+          enabled: true
+        }
+      };
 
-        configuration.setLevels(input);
+      const configuration = new Configuration();
 
-        assert.that(configuration.levels).is.equalTo(expected);
-        restore();
-        done();
-      });
+      configuration.setLevels(input);
+
+      assert.that(configuration.levels).is.equalTo(expected);
+      restore();
+      done();
     });
 
-    /* eslint-disable max-len */
     test('throws an error if an unknown level is provided by the LOG_LEVELS environment variable.', done => {
-      /* eslint-enable max-len */
-      nodeenv('LOG_LEVELS', 'foobar', restore => {
-        assert.that(() => {
-          /* eslint-disable no-new */
-          new Configuration();
-          /* eslint-enable no-new */
-        }).is.throwing('Unknown log level foobar.');
+      const restore = nodeenv('LOG_LEVELS', 'foobar');
 
-        restore();
-        done();
-      });
+      assert.that(() => {
+        /* eslint-disable no-new */
+        new Configuration();
+        /* eslint-enable no-new */
+      }).is.throwing('Unknown log level foobar.');
+
+      restore();
+      done();
     });
 
     test('sets all levels if the LOG_LEVELS environment variable contains a \'*\'.', done => {
-      nodeenv('LOG_LEVELS', '*', restore => {
-        const input = {
-          debug: {
-            color: 'green',
-            enabled: false
-          },
-          info: {
-            color: 'white',
-            enabled: false
-          }
-        };
+      const restore = nodeenv('LOG_LEVELS', '*');
 
-        const expected = {
-          debug: {
-            color: 'green',
-            enabled: true
-          },
-          info: {
-            color: 'white',
-            enabled: true
-          }
-        };
+      const input = {
+        debug: {
+          color: 'green',
+          enabled: false
+        },
+        info: {
+          color: 'white',
+          enabled: false
+        }
+      };
 
-        const configuration = new Configuration();
+      const expected = {
+        debug: {
+          color: 'green',
+          enabled: true
+        },
+        info: {
+          color: 'white',
+          enabled: true
+        }
+      };
 
-        configuration.setLevels(input);
+      const configuration = new Configuration();
 
-        assert.that(configuration.levels).is.equalTo(expected);
-        restore();
-        done();
-      });
+      configuration.setLevels(input);
+
+      assert.that(configuration.levels).is.equalTo(expected);
+      restore();
+      done();
     });
   });
 

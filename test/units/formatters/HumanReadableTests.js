@@ -3,7 +3,8 @@
 const stream = require('stream');
 
 const assert = require('assertthat'),
-      chalk = require('chalk');
+      chalk = require('chalk'),
+      stripAnsi = require('strip-ansi');
 
 const HumanReadable = require('../../../lib/formatters/HumanReadable');
 
@@ -45,8 +46,7 @@ suite('HumanReadable', () => {
     };
 
     humanReadable.once('data', data => {
-      assert.that(chalk.stripColor(data)).is.equalTo([
-        /* eslint-disable nodeca/indent */
+      assert.that(stripAnsi(data)).is.equalTo([
         'App started. (info)',
         'example.com::app@1.2.3::foo@0.0.1 (app.js)',
         '14:28:59.974@2014-11-03 82517#0',
@@ -55,7 +55,6 @@ suite('HumanReadable', () => {
         '}',
         '\u2500'.repeat(process.stdout.columns || 80),
         ''
-        /* eslint-enable nodeca/indent */
       ].join('\n'));
       done();
     });
@@ -82,7 +81,7 @@ suite('HumanReadable', () => {
     };
 
     humanReadable.once('data', data => {
-      assert.that(chalk.stripColor(data)).is.equalTo([
+      assert.that(stripAnsi(data)).is.equalTo([
         /* eslint-disable nodeca/indent */
         'App started. (info)',
         'example.com::foo@0.0.1 (app.js)',
@@ -123,7 +122,7 @@ suite('HumanReadable', () => {
     };
 
     humanReadable.once('data', data => {
-      assert.that(chalk.stripColor(data)).is.equalTo([
+      assert.that(stripAnsi(data)).is.equalTo([
         /* eslint-disable nodeca/indent */
         'App started. (info)',
         'example.com::app@1.2.3 (app.js)',

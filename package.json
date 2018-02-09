@@ -26,41 +26,41 @@
     {
       "name": "Stefan Heine",
       "email": "stefan.heine@hpe.com"
+    },
+    {
+      "name": "Jan-Hendrik Grundhöfer",
+      "email": "jan-hendrik.grundhoefer@thenativeweb.io"
     }
   ],
   "bin": {
     "flaschenpost-normalize": "bin/flaschenpost-normalize.js",
-    "flaschenpost-to-elastic": "bin/flaschenpost-to-elastic.js",
     "flaschenpost-uncork": "bin/flaschenpost-uncork.js"
   },
   "main": "dist/flaschenpost.js",
   "dependencies": {
     "app-root-path": "2.0.1",
-    "chalk": "1.1.3",
-    "elasticsearch": "12.1.3",
-    "find-root": "1.0.0",
-    "lodash": "4.17.4",
-    "moment": "2.17.1",
-    "processenv": "0.1.1",
-    "split2": "2.1.1",
-    "stack-trace": "0.0.9",
-    "stringify-object": "3.1.0",
+    "chalk": "2.3.0",
+    "find-root": "1.1.0",
+    "lodash": "4.17.5",
+    "moment": "2.20.1",
+    "processenv": "1.0.0",
+    "split2": "2.2.0",
+    "stack-trace": "0.0.10",
+    "stringify-object": "3.2.2",
     "untildify": "3.0.2",
-    "uuidv4": "0.4.1",
     "varname": "2.0.3"
   },
   "devDependencies": {
-    "assertthat": "0.8.5",
-    "async": "2.1.5",
-    "express": "4.14.1",
-    "fs-extra": "2.0.0",
-    "knockat": "0.2.1",
-    "morgan": "1.8.1",
-    "nodeenv": "0.2.1",
-    "roboter": "0.15.1",
-    "roboter-server": "0.15.1",
-    "shelljs": "0.7.6",
-    "sinon": "1.17.7",
+    "assertthat": "1.0.0",
+    "express": "4.16.2",
+    "fs-extra": "5.0.0",
+    "morgan": "1.9.0",
+    "nodeenv": "1.0.0",
+    "roboter": "0.15.6",
+    "roboter-server": "0.15.6",
+    "shelljs": "0.8.1",
+    "sinon": "4.2.2",
+    "strip-ansi": "4.0.0",
     "supertest": "3.0.0"
   },
   "repository": {
