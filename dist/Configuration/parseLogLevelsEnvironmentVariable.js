@@ -1,9 +1,9 @@
 'use strict';
 
 var parseEnvironmentVariable = function parseEnvironmentVariable() {
-  /* eslint-disable no-process-env, newline-after-var */
+  /* eslint-disable no-process-env */
   var logLevels = process.env.LOG_LEVELS;
-  /* eslint-enable no-process-env, newline-after-var */
+  /* eslint-enable no-process-env */
 
   if (!logLevels) {
     return [];

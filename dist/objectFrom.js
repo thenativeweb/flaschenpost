@@ -1,12 +1,13 @@
 'use strict';
 
-var _ = require('lodash');
+var isArray = require('lodash/isArray'),
+    isObject = require('lodash/isObject');
 
 var objectFrom = function objectFrom(data, isGiven) {
   if (!isGiven) {
     return;
   }
-  if (_.isObject(data) && !_.isArray(data) && data !== null) {
+  if (isObject(data) && !isArray(data) && data !== null) {
     return data;
   }
 

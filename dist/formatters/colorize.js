@@ -1,7 +1,7 @@
 'use strict';
 
-var _ = require('lodash'),
-    chalk = require('chalk');
+var chalk = require('chalk'),
+    forOwn = require('lodash/forOwn');
 
 var defaultLevels = require('../defaultLevels.json');
 
@@ -25,7 +25,7 @@ var colorize = function colorize(text, colorOrLevel, style) {
   return result;
 };
 
-_.forOwn(defaultLevels, function (levelOptions, levelName) {
+forOwn(defaultLevels, function (levelOptions, levelName) {
   map[levelName] = levelOptions.color;
 });
 

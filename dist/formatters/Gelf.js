@@ -1,50 +1,66 @@
 'use strict';
 
-var Transform = require('stream').Transform;
-var util = require('util');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var Gelf = function Gelf(options) {
-  options = options || {};
-  options.objectMode = true;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  Reflect.apply(Transform, this, [options]);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  this.predefinedKeys = ['version', 'host', 'short_message', 'full_message', 'timestamp', 'level', 'facility', 'line', 'file'];
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-  this.mappedKeys = {
-    message: 'short_message'
-  };
+var _require = require('stream'),
+    Transform = _require.Transform;
 
-  this.defaultValues = {
-    version: '1.1'
-  };
-};
+var Gelf = function (_Transform) {
+  _inherits(Gelf, _Transform);
 
-util.inherits(Gelf, Transform);
+  function Gelf(options) {
+    _classCallCheck(this, Gelf);
 
-/* eslint-disable no-underscore-dangle */
-Gelf.prototype._transform = function (chunk, encoding, callback) {
-  var _this = this;
+    options = options || {};
+    options.objectMode = true;
 
-  /* eslint-enable no-underscore-dangle */
-  var result = Object.assign({}, this.defaultValues);
+    var _this = _possibleConstructorReturn(this, (Gelf.__proto__ || Object.getPrototypeOf(Gelf)).call(this, options));
 
-  Object.keys(chunk).forEach(function (key) {
-    var mappedKey = void 0;
+    _this.predefinedKeys = ['version', 'host', 'short_message', 'full_message', 'timestamp', 'level', 'facility', 'line', 'file'];
 
-    if (_this.predefinedKeys.includes(key)) {
-      mappedKey = key;
-    } else if (_this.mappedKeys[key]) {
-      mappedKey = _this.mappedKeys[key];
-    } else {
-      mappedKey = '_' + key;
+    _this.mappedKeys = {
+      message: 'short_message'
+    };
+
+    _this.defaultValues = {
+      version: '1.1'
+    };
+    return _this;
+  }
+
+  _createClass(Gelf, [{
+    key: '_transform',
+    value: function _transform(chunk, encoding, callback) {
+      var _this2 = this;
+
+      var result = Object.assign({}, this.defaultValues);
+
+      Object.keys(chunk).forEach(function (key) {
+        var mappedKey = void 0;
+
+        if (_this2.predefinedKeys.includes(key)) {
+          mappedKey = key;
+        } else if (_this2.mappedKeys[key]) {
+          mappedKey = _this2.mappedKeys[key];
+        } else {
+          mappedKey = '_' + key;
+        }
+
+        result[mappedKey] = chunk[key];
+      });
+
+      this.push(JSON.stringify(result));
+      callback();
     }
+  }]);
 
-    result[mappedKey] = chunk[key];
-  });
-
-  this.push(JSON.stringify(result));
-  callback();
-};
+  return Gelf;
+}(Transform);
 
 module.exports = Gelf;
