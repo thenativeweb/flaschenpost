@@ -1,5 +1,11 @@
 'use strict';
 
+var _apply = require('babel-runtime/core-js/reflect/apply');
+
+var _apply2 = _interopRequireDefault(_apply);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var stream = require('stream'),
     util = require('util');
 
@@ -11,7 +17,7 @@ var Letter = function Letter(options) {
   options = options || {};
   options.objectMode = true;
 
-  Reflect.apply(Transform, this, [options]);
+  (0, _apply2.default)(Transform, this, [options]);
 
   this.id = 0;
 };

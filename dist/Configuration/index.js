@@ -1,8 +1,14 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var os = require('os');
 
@@ -19,7 +25,7 @@ var defaultLevels = require('../defaultLevels.json'),
 
 var Configuration = function () {
   function Configuration() {
-    _classCallCheck(this, Configuration);
+    (0, _classCallCheck3.default)(this, Configuration);
 
     this.setLevels(cloneDeep(defaultLevels));
     this.setHost(os.hostname());
@@ -27,7 +33,7 @@ var Configuration = function () {
     this.debugModules = parseLogDebugModulesEnvironmentVariable();
   }
 
-  _createClass(Configuration, [{
+  (0, _createClass3.default)(Configuration, [{
     key: 'set',
     value: function set(key, options) {
       var fn = varname.camelback('set-' + key);
@@ -79,7 +85,6 @@ var Configuration = function () {
       this.host = host;
     }
   }]);
-
   return Configuration;
 }();
 

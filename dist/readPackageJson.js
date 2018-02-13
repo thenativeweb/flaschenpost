@@ -13,7 +13,10 @@ var readPackageJson = function readPackageJson(packagePath) {
       version: packageJson.version
     };
   } catch (ex) {
-    throw new Error('Could not find package.json.');
+    return {
+      name: '(unknown)',
+      version: '(unknown)'
+    };
   }
 };
 

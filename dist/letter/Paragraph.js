@@ -1,6 +1,10 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var sanitizeMetadata = require('./sanitizeMetadata');
 
@@ -20,7 +24,7 @@ var Paragraph = function Paragraph(id, data) {
   if (!data.message) {
     throw new Error('Message is missing.');
   }
-  if (data.metadata && _typeof(data.metadata) !== 'object') {
+  if (data.metadata && (0, _typeof3.default)(data.metadata) !== 'object') {
     throw new Error('Invalid metadata.');
   }
 
