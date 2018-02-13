@@ -42,17 +42,23 @@ suite('flaschenpost', () => {
       done();
     });
 
-    test('throws an error if source is not a valid path.', done => {
-      assert.that(() => {
-        flaschenpost.getLogger('foobar');
-      }).is.throwing('Could not find package.json.');
+    test('uses an unknown module if source is not a valid path.', done => {
+      const logger = flaschenpost.getLogger('foobar');
+
+      assert.that(logger.module).is.equalTo({
+        name: '(unknown)',
+        version: '(unknown)'
+      });
       done();
     });
 
-    test('throws an error if given path does not have a package.json file.', done => {
-      assert.that(() => {
-        flaschenpost.getLogger('/');
-      }).is.throwing('Could not find package.json.');
+    test('uses an unknown module if given path does not have a package.json file.', done => {
+      const logger = flaschenpost.getLogger('/');
+
+      assert.that(logger.module).is.equalTo({
+        name: '(unknown)',
+        version: '(unknown)'
+      });
       done();
     });
 
