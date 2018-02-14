@@ -39,6 +39,7 @@
   "main": "dist/flaschenpost.js",
   "dependencies": {
     "app-root-path": "2.0.1",
+    "babel-runtime": "6.26.0",
     "chalk": "2.3.1",
     "find-root": "1.1.0",
     "lodash": "4.17.5",
