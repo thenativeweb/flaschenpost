@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const Paragraph = require('../../../lib/letter/Paragraph');
+const Paragraph = require('../../../src/letter/Paragraph');
 
 suite('Paragraph', () => {
   test('is a function.', done => {

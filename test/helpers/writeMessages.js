@@ -1,6 +1,6 @@
 'use strict';
 
-const flaschenpost = require('../../lib/flaschenpost');
+const flaschenpost = require('../../src/flaschenpost');
 
 const logger = flaschenpost.getLogger();
 

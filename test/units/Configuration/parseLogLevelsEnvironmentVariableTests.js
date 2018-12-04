@@ -3,7 +3,7 @@
 const assert = require('assertthat'),
       nodeenv = require('nodeenv');
 
-const parseLogLevelsEnvironmentVariable = require('../../../lib/Configuration/parseLogLevelsEnvironmentVariable');
+const parseLogLevelsEnvironmentVariable = require('../../../src/Configuration/parseLogLevelsEnvironmentVariable');
 
 suite('parseLogLevelsEnvironmentVariable', () => {
   test('is a function.', done => {

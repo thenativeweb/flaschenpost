@@ -4,7 +4,7 @@ const stream = require('stream');
 
 const assert = require('assertthat');
 
-const letter = require('../../../lib/letter');
+const letter = require('../../../src/letter');
 
 const Transform = stream.Transform;
 
