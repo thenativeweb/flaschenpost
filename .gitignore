@@ -2,9 +2,6 @@
 *coverage/
 *node_modules/
 
-# Temporary files
-*.swp
-
 # Build artefacts
 *build/
 

@@ -5,10 +5,10 @@
 const processenv = require('processenv'),
       split2 = require('split2');
 
-const FormatterCustom = require('../src/formatters/Custom'),
-      FormatterGelf = require('../src/formatters/Gelf'),
-      FormatterHumanReadable = require('../src/formatters/HumanReadable'),
-      FormatterJson = require('../src/formatters/Json');
+const FormatterCustom = require('../formatters/Custom'),
+      FormatterGelf = require('../formatters/Gelf'),
+      FormatterHumanReadable = require('../formatters/HumanReadable'),
+      FormatterJson = require('../formatters/Json');
 
 const requestedFormatter =
   processenv('FLASCHENPOST_FORMATTER') ||
