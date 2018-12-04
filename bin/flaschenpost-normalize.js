@@ -8,7 +8,7 @@ process.env.FLASCHENPOST_FORMATTER = 'json';
 
 const split2 = require('split2');
 
-const flaschenpost = require('../lib/flaschenpost');
+const flaschenpost = require('../src/flaschenpost');
 
 const logger = flaschenpost.getLogger();
 

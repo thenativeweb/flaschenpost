@@ -173,7 +173,7 @@ $ node sample.js | flaschenpost-normalize
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
 ```shell
-$ bot
+$ npx roboter
 ```
 
 ## License

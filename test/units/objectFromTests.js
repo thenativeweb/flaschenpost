@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const objectFrom = require('../../lib/objectFrom');
+const objectFrom = require('../../src/objectFrom');
 
 suite('objectFrom', () => {
   test('is a function.', done => {

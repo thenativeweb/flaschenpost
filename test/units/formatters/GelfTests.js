@@ -4,7 +4,7 @@ const stream = require('stream');
 
 const assert = require('assertthat');
 
-const Gelf = require('../../../lib/formatters/Gelf');
+const Gelf = require('../../../src/formatters/Gelf');
 
 const Transform = stream.Transform;
 

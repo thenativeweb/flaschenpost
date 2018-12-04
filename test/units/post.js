@@ -1,12 +1,15 @@
 'use strict';
 
-const fs = require('fs'),
-      path = require('path');
+const promisify = require('util.promisify');
+const fs = require('fs');
+const path = require('path');
 
-const post = function (done) {
+const unlink = promisify(fs.unlink);
+
+const post = async function () {
   const packageJson = path.join(__dirname, 'package.json');
 
-  fs.unlink(packageJson, done);
+  await unlink(packageJson);
 };
 
 module.exports = post;
