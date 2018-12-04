@@ -1,14 +1,10 @@
 'use strict';
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var os = require('os');
 
@@ -23,29 +19,29 @@ var defaultLevels = require('../defaultLevels.json'),
     parseLogDebugModulesEnvironmentVariable = require('./parseLogDebugModulesEnvironmentVariable'),
     parseLogLevelsEnvironmentVariable = require('./parseLogLevelsEnvironmentVariable');
 
-var Configuration = function () {
+var Configuration =
+/*#__PURE__*/
+function () {
   function Configuration() {
-    (0, _classCallCheck3.default)(this, Configuration);
-
+    (0, _classCallCheck2.default)(this, Configuration);
     this.setLevels(cloneDeep(defaultLevels));
     this.setHost(os.hostname());
-
     this.debugModules = parseLogDebugModulesEnvironmentVariable();
   }
 
-  (0, _createClass3.default)(Configuration, [{
-    key: 'set',
+  (0, _createClass2.default)(Configuration, [{
+    key: "set",
     value: function set(key, options) {
-      var fn = varname.camelback('set-' + key);
+      var fn = varname.camelback("set-".concat(key));
 
       if (!this[fn]) {
-        throw new Error('Unknown key \'' + key + '\' specified.');
+        throw new Error("Unknown key '".concat(key, "' specified."));
       }
 
       this[fn](options);
     }
   }, {
-    key: 'setLevels',
+    key: "setLevels",
     value: function setLevels(levels) {
       var _this = this;
 
@@ -54,7 +50,6 @@ var Configuration = function () {
       }
 
       this.levels = levels;
-
       var enabledLogLevels = parseLogLevelsEnvironmentVariable();
 
       if (enabledLogLevels.length === 0) {
@@ -67,16 +62,15 @@ var Configuration = function () {
 
       forEach(enabledLogLevels, function (enabledLogLevel) {
         if (!includes(keys(_this.levels), enabledLogLevel)) {
-          throw new Error('Unknown log level ' + enabledLogLevel + '.');
+          throw new Error("Unknown log level ".concat(enabledLogLevel, "."));
         }
       });
-
       forOwn(this.levels, function (levelOptions, levelName) {
         levelOptions.enabled = includes(enabledLogLevels, levelName);
       });
     }
   }, {
-    key: 'setHost',
+    key: "setHost",
     value: function setHost(host) {
       if (!host) {
         throw new Error('Host is missing.');

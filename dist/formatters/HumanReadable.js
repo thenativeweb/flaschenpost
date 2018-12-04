@@ -1,26 +1,16 @@
 'use strict';
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
 var _require = require('stream'),
     Transform = _require.Transform;
@@ -30,44 +20,47 @@ var moment = require('moment'),
 
 var colorize = require('./colorize');
 
-var HumanReadable = function (_Transform) {
-  (0, _inherits3.default)(HumanReadable, _Transform);
+var HumanReadable =
+/*#__PURE__*/
+function (_Transform) {
+  (0, _inherits2.default)(HumanReadable, _Transform);
 
   function HumanReadable(options) {
-    (0, _classCallCheck3.default)(this, HumanReadable);
-
+    (0, _classCallCheck2.default)(this, HumanReadable);
     options = options || {};
     options.objectMode = true;
-
-    return (0, _possibleConstructorReturn3.default)(this, (HumanReadable.__proto__ || (0, _getPrototypeOf2.default)(HumanReadable)).call(this, options));
+    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(HumanReadable).call(this, options));
   }
 
-  (0, _createClass3.default)(HumanReadable, [{
-    key: '_transform',
+  (0, _createClass2.default)(HumanReadable, [{
+    key: "_transform",
     value: function _transform(chunk, encoding, callback) {
       var timestamp = moment.utc(chunk.timestamp);
       var origin = '',
           result = '';
+      origin = "".concat(chunk.host);
 
-      origin = '' + chunk.host;
       if (chunk.application) {
         // Be backward compatible and allow to parse logs without application data
-        origin += '::' + chunk.application.name + '@' + chunk.application.version;
-      }
-      if (!chunk.application || chunk.application.name !== chunk.module.name) {
-        // Do not print the same module information twice
-        origin += '::' + chunk.module.name + '@' + chunk.module.version;
-      }
-      if (chunk.source) {
-        origin += ' (' + chunk.source + ')';
+        origin += "::".concat(chunk.application.name, "@").concat(chunk.application.version);
       }
 
-      result += colorize(chunk.message + ' (' + chunk.level + ')', chunk.level, 'bold');
+      if (!chunk.application || chunk.application.name !== chunk.module.name) {
+        // Do not print the same module information twice
+        origin += "::".concat(chunk.module.name, "@").concat(chunk.module.version);
+      }
+
+      if (chunk.source) {
+        origin += " (".concat(chunk.source, ")");
+      }
+
+      result += colorize("".concat(chunk.message, " (").concat(chunk.level, ")"), chunk.level, 'bold');
       result += '\n';
       result += colorize(origin, 'white');
       result += '\n';
-      result += colorize(timestamp.format('HH:mm:ss.SSS') + '@' + timestamp.format('YYYY-MM-DD') + ' ' + chunk.pid + '#' + chunk.id, 'gray');
+      result += colorize("".concat(timestamp.format('HH:mm:ss.SSS'), "@").concat(timestamp.format('YYYY-MM-DD'), " ").concat(chunk.pid, "#").concat(chunk.id), 'gray');
       result += '\n';
+
       if (chunk.metadata) {
         result += colorize(stringifyObject(chunk.metadata, {
           indent: '  ',
@@ -75,9 +68,9 @@ var HumanReadable = function (_Transform) {
         }).replace(/\\n/g, '\n'), 'gray');
         result += '\n';
       }
-      result += colorize('\u2500'.repeat(process.stdout.columns || 80), 'gray');
-      result += '\n';
 
+      result += colorize("\u2500".repeat(process.stdout.columns || 80), 'gray');
+      result += '\n';
       this.push(result);
       callback();
     }

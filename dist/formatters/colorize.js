@@ -28,5 +28,4 @@ var colorize = function colorize(text, colorOrLevel, style) {
 forOwn(defaultLevels, function (levelOptions, levelName) {
   map[levelName] = levelOptions.color;
 });
-
 module.exports = colorize;

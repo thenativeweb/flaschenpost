@@ -20,12 +20,9 @@ var flaschenpost = {
   initialize: function initialize() {
     this.configuration = new Configuration();
     this.configuration.application = readPackageJson(appRoot.path);
-
     letter.unpipe();
-
     var requestedFormatter = processenv('FLASCHENPOST_FORMATTER') || (process.stdout.isTTY ? 'human' : 'json');
-
-    var formatter = void 0;
+    var formatter;
 
     if (requestedFormatter === 'gelf') {
       formatter = new FormatterGelf();
@@ -34,7 +31,9 @@ var flaschenpost = {
     } else if (requestedFormatter === 'json') {
       formatter = new FormatterJson();
     } else if (requestedFormatter.startsWith('js:')) {
-      formatter = new FormatterCustom({ js: /^js:(.*)$/g.exec(requestedFormatter)[1] });
+      formatter = new FormatterCustom({
+        js: /^js:(.*)$/g.exec(requestedFormatter)[1]
+      });
     } else {
       throw new Error('Unsupported formatter.');
     }
@@ -52,13 +51,10 @@ var flaschenpost = {
     }
 
     var logger = {};
-
     logger.module = readPackageJson(findRoot(source));
-
     forOwn(this.configuration.levels, function (levelOptions, levelName) {
       if (!levelOptions.enabled) {
-        logger[levelName] = function () {
-          // Do nothing, as the log level is disabled.
+        logger[levelName] = function () {// Do nothing, as the log level is disabled.
         };
 
         return;
@@ -68,12 +64,12 @@ var flaschenpost = {
         if (!message) {
           throw new Error('Message is missing.');
         }
+
         if (typeof message !== 'string') {
           throw new Error('Message must be a string.');
         }
 
         metadata = objectFrom(metadata, arguments.length === 2);
-
         letter.write({
           host: this.configuration.host,
           application: this.configuration.application,
@@ -99,14 +95,9 @@ var flaschenpost = {
         }
       }.bind(_this);
     });
-
     return logger;
   },
-
-
   Middleware: Middleware
 };
-
 flaschenpost.initialize();
-
 module.exports = flaschenpost;

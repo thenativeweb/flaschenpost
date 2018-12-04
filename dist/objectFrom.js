@@ -7,11 +7,14 @@ var objectFrom = function objectFrom(data, isGiven) {
   if (!isGiven) {
     return;
   }
+
   if (isObject(data) && !isArray(data) && data !== null) {
     return data;
   }
 
-  return { value: data };
+  return {
+    value: data
+  };
 };
 
 module.exports = objectFrom;

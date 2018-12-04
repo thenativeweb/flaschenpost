@@ -1,10 +1,8 @@
 'use strict';
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var sanitizeMetadata = require('./sanitizeMetadata');
 
@@ -12,19 +10,24 @@ var Paragraph = function Paragraph(id, data) {
   if (id === undefined) {
     throw new Error('Id is missing.');
   }
+
   if (!data) {
     throw new Error('Data is missing.');
   }
+
   if (!data.host) {
     throw new Error('Host is missing.');
   }
+
   if (!data.level) {
     throw new Error('Level is missing.');
   }
+
   if (!data.message) {
     throw new Error('Message is missing.');
   }
-  if (data.metadata && (0, _typeof3.default)(data.metadata) !== 'object') {
+
+  if (data.metadata && (0, _typeof2.default)(data.metadata) !== 'object') {
     throw new Error('Invalid metadata.');
   }
 
@@ -38,12 +41,15 @@ var Paragraph = function Paragraph(id, data) {
   if (data.application) {
     this.application = data.application;
   }
+
   if (data.module) {
     this.module = data.module;
   }
+
   if (data.source) {
     this.source = data.source;
   }
+
   if (data.metadata) {
     this.metadata = sanitizeMetadata(data.metadata);
   }
