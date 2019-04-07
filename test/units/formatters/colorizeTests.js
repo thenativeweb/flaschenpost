@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const colorize = require('../../../src/formatters/colorize');
+const colorize = require('../../../lib/formatters/colorize');
 
 suite('colorize', () => {
   test('is a function.', done => {

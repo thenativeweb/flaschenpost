@@ -6,7 +6,7 @@ const assert = require('assertthat'),
       chalk = require('chalk'),
       stripAnsi = require('strip-ansi');
 
-const HumanReadable = require('../../../src/formatters/HumanReadable');
+const HumanReadable = require('../../../lib/formatters/HumanReadable');
 
 const Transform = stream.Transform;
 

@@ -7,9 +7,9 @@ const assert = require('assertthat'),
       morgan = require('morgan'),
       request = require('supertest');
 
-const flaschenpost = require('../../../src/flaschenpost'),
-      letter = require('../../../src/letter'),
-      Middleware = require('../../../src/Middleware');
+const flaschenpost = require('../../../lib/flaschenpost'),
+      letter = require('../../../lib/letter'),
+      Middleware = require('../../../lib/Middleware');
 
 const Writable = stream.Writable;
 

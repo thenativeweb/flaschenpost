@@ -6,8 +6,8 @@ const assert = require('assertthat'),
       nodeenv = require('nodeenv'),
       sinon = require('sinon');
 
-const Configuration = require('../../../src/Configuration'),
-      defaultLevels = require('../../../src/defaultLevels.json');
+const Configuration = require('../../../lib/Configuration'),
+      defaultLevels = require('../../../lib/defaultLevels.json');
 
 suite('Configuration', () => {
   test('is a function.', done => {

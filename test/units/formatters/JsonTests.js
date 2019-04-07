@@ -4,7 +4,7 @@ const stream = require('stream');
 
 const assert = require('assertthat');
 
-const Json = require('../../../src/formatters/Json');
+const Json = require('../../../lib/formatters/Json');
 
 const Transform = stream.Transform;
 

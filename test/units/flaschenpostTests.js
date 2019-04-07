@@ -2,8 +2,8 @@
 
 const assert = require('assertthat');
 
-const flaschenpost = require('../../src/flaschenpost'),
-      letter = require('../../src/letter');
+const flaschenpost = require('../../lib/flaschenpost'),
+      letter = require('../../lib/letter');
 
 suite('flaschenpost', () => {
   setup(() => {

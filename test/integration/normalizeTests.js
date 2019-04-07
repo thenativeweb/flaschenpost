@@ -7,7 +7,7 @@ const assert = require('assertthat'),
 
 suite('normalize', () => {
   test('wraps normal text.', done => {
-    shell.exec('node writeConsoleLog.js | ../../src/bin/flaschenpost-normalize.js', {
+    shell.exec('node writeConsoleLog.js | ../../bin/flaschenpost-normalize.js', {
       cwd: path.join(__dirname, '..', 'shared')
     }, (code, stdout, stderr) => {
       assert.that(code).is.equalTo(0);
@@ -23,7 +23,7 @@ suite('normalize', () => {
   });
 
   test('wraps invalid JSON.', done => {
-    shell.exec('node writeInvalidJson.js | ../../src/bin/flaschenpost-normalize.js', {
+    shell.exec('node writeInvalidJson.js | ../../bin/flaschenpost-normalize.js', {
       cwd: path.join(__dirname, '..', 'shared')
     }, (code, stdout, stderr) => {
       assert.that(code).is.equalTo(0);
@@ -39,7 +39,7 @@ suite('normalize', () => {
   });
 
   test('passes through flaschenpost messages.', done => {
-    shell.exec('node writeMessages.js | node ../../src/bin/flaschenpost-normalize.js', {
+    shell.exec('node writeMessages.js | node ../../bin/flaschenpost-normalize.js', {
       cwd: path.join(__dirname, '..', 'shared')
     }, (code, stdout, stderr) => {
       assert.that(code).is.equalTo(0);

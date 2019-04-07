@@ -33,20 +33,19 @@
     }
   ],
   "bin": {
-    "flaschenpost-normalize": "dist/bin/flaschenpost-normalize.js",
-    "flaschenpost-uncork": "dist/bin/flaschenpost-uncork.js"
+    "flaschenpost-normalize": "bin/flaschenpost-normalize.js",
+    "flaschenpost-uncork": "bin/flaschenpost-uncork.js"
   },
-  "main": "dist/flaschenpost.js",
+  "main": "lib/flaschenpost.js",
   "dependencies": {
-    "@babel/runtime": "7.2.0",
-    "app-root-path": "2.1.0",
-    "babel-runtime": "6.26.0",
-    "chalk": "2.4.1",
+    "app-root-path": "2.2.1",
+    "chalk": "2.4.2",
     "find-root": "1.1.0",
     "lodash": "4.17.11",
-    "moment": "2.22.2",
+    "moment": "2.24.0",
     "processenv": "1.1.0",
-    "split2": "3.0.0",
+    "serialize-error": "4.1.0",
+    "split2": "3.1.1",
     "stack-trace": "0.0.10",
     "stringify-object": "3.3.0",
     "untildify": "3.0.3",
@@ -54,16 +53,16 @@
     "varname": "2.0.3"
   },
   "devDependencies": {
-    "assertthat": "2.0.0",
+    "assertthat": "2.0.3",
     "express": "4.16.4",
     "fs-extra": "7.0.1",
     "morgan": "1.9.1",
     "nodeenv": "1.0.0",
-    "roboter": "3.0.3",
+    "roboter": "4.0.4",
     "shelljs": "0.8.3",
-    "sinon": "7.1.1",
-    "strip-ansi": "5.0.0",
-    "supertest": "3.3.0"
+    "sinon": "7.3.1",
+    "strip-ansi": "5.2.0",
+    "supertest": "4.0.2"
   },
   "repository": {
     "type": "git",

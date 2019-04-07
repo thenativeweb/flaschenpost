@@ -5,7 +5,7 @@ const path = require('path'),
 
 const assert = require('assertthat');
 
-const Custom = require('../../../src/formatters/Custom');
+const Custom = require('../../../lib/formatters/Custom');
 
 const Transform = stream.Transform;
 

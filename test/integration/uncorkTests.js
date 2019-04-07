@@ -10,7 +10,7 @@ const humanReadableMessage = /^.+ \(.+\)\n.+::.+@\d+\.\d+\.\d+.* \(.+\)\n\d{2}:\
 
 suite('uncork', () => {
   test('humanizes messages.', done => {
-    shell.exec('FLASCHENPOST_FORMATTER=json node writeMessages.js | node ../../src/bin/flaschenpost-uncork.js', {
+    shell.exec('FLASCHENPOST_FORMATTER=json node writeMessages.js | node ../../bin/flaschenpost-uncork.js', {
       cwd: path.join(__dirname, '..', 'shared'),
       /* eslint-disable no-process-env */
       env: defaults({

@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const sanitize = require('../../../src/letter/sanitizeMetadata');
+const sanitize = require('../../../lib/letter/sanitizeMetadata');
 
 suite('sanitizeMetadata', () => {
   test('does nothing to normal objects.', done => {
@@ -52,7 +52,7 @@ suite('sanitizeMetadata', () => {
     done();
   });
 
-  test('converts recursive objects and replaces the recursive part with null.', done => {
+  test('converts objects with recursion.', done => {
     const recursive = {
       foo: 'bar'
     };
@@ -61,9 +61,10 @@ suite('sanitizeMetadata', () => {
 
     const actual = sanitize(recursive);
 
-    assert.that(actual).is.ofType('object');
-    assert.that(actual.foo).is.equalTo('bar');
-    assert.that(actual.bar).is.null();
+    assert.that(actual).is.equalTo({
+      foo: 'bar',
+      bar: actual
+    });
     done();
   });
 
