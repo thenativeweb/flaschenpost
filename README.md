@@ -4,7 +4,7 @@ flaschenpost is a logger for cloud-based applications.
 
 ![flaschenpost](https://github.com/thenativeweb/flaschenpost/raw/master/images/logo.jpg "flaschenpost")
 
-> *A [/ˈflaʃənˌpɔst/](https://en.wiktionary.org/wiki/Flaschenpost) is a &bdquo;message written on a scrap of paper, rolled-up and put in an empty bottle and set adrift on the ocean; traditionally, a method used by castaways to advertise their distress to the outside world&rdquo;.* (from [Wiktionary](https://en.wiktionary.org/wiki/message_in_a_bottle))
+> _A [/ˈflaʃənˌpɔst/](https://en.wiktionary.org/wiki/Flaschenpost) is a „message written on a scrap of paper, rolled-up and put in an empty bottle and set adrift on the ocean; traditionally, a method used by castaways to advertise their distress to the outside world”._ (from [Wiktionary](https://en.wiktionary.org/wiki/message_in_a_bottle))
 
 ## Installation
 
@@ -62,14 +62,14 @@ When you are running an application using a TTY, the log messages will be writte
 
 Some log processing tools, e.g. Graylog, expect the JSON to be in a slightly different format. In these cases use the environment variable `FLASCHENPOST_FORMATTER` to set the output format you want to use. The following formats are currently supported.
 
-Name  | Description
-------|-----------------------------------
-gelf  | The `GELF` format used by Graylog.
-human | The default human-readable format.
-json  | The default json format.
-js:   | A custom format (see [Using a custom human-readable format](#using-a-custom-human-readable-format)).
+| Name  | Description                                                                                          |
+| ----- | ---------------------------------------------------------------------------------------------------- |
+| gelf  | The `GELF` format used by Graylog.                                                                   |
+| human | The default human-readable format.                                                                   |
+| json  | The default json format.                                                                             |
+| js:   | A custom format (see [Using a custom human-readable format](#using-a-custom-human-readable-format)). |
 
-*Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not.*
+_Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not._
 
 ##### Using a custom human-readable format
 
