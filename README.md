@@ -62,14 +62,14 @@ When you are running an application using a TTY, the log messages will be writte
 
 Some log processing tools, e.g. Graylog, expect the JSON to be in a slightly different format. In these cases use the environment variable `FLASCHENPOST_FORMATTER` to set the output format you want to use. The following formats are currently supported.
 
-| Name  | Description |
-|-|-|
-| gelf | The `GELF` format used by Graylog. |
-| human | The default human-readable format. |
-| json | The default json format. |
-| js: | A custom format (see [Using a custom human-readable format](#using-a-custom-human-readable-format)). |
+| Name  | Description                                                                                          |
+| ----- | ---------------------------------------------------------------------------------------------------- |
+| gelf  | The `GELF` format used by Graylog.                                                                   |
+| human | The default human-readable format.                                                                   |
+| json  | The default json format.                                                                             |
+| js:   | A custom format (see [Using a custom human-readable format](#using-a-custom-human-readable-format)). |
 
-*Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not.*
+_Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not._
 
 ##### Using a custom human-readable format
 
@@ -116,7 +116,7 @@ If you want to enable all log levels at once, you can provide a `*` character as
 $ export LOG_LEVELS=*
 ```
 
-*Please note that when using flaschenpost in Mocha, all log levels are always enabled, to make sure that you get all output within the tests.*
+_Please note that when using flaschenpost in Mocha, all log levels are always enabled, to make sure that you get all output within the tests._
 
 ### Restricting `debug` logging
 
