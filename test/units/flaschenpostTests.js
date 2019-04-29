@@ -6,8 +6,16 @@ const flaschenpost = require('../../lib/flaschenpost'),
       letter = require('../../lib/letter');
 
 suite('flaschenpost', () => {
-  setup(() => {
+  let originalProcessArgv;
+
+  setup(async () => {
     flaschenpost.initialize();
+
+    originalProcessArgv = process.argv[1];
+  });
+
+  teardown(async () => {
+    process.argv[1] = originalProcessArgv;
   });
 
   test('is an object.', done => {
@@ -250,6 +258,10 @@ suite('flaschenpost', () => {
       });
 
       test('does not write a message if the log level is disabled.', done => {
+        // Simulate that we are not in Mocha, as the debug log level depends on
+        // Mocha.
+        process.argv[1] = 'not-mocha';
+
         const logger = flaschenpost.getLogger(__filename);
         let counter = 0;
 
@@ -261,6 +273,25 @@ suite('flaschenpost', () => {
 
         setTimeout(() => {
           assert.that(counter).is.equalTo(0);
+          done();
+        }, 0.1 * 1000);
+      });
+
+      test('writes a message if the log level is disabled, but the execution environment is Mocha.', done => {
+        // Since these tests are run in Mocha anyway, we do not need to do
+        // anything specific here.
+
+        const logger = flaschenpost.getLogger(__filename);
+        let counter = 0;
+
+        letter.once('data', () => {
+          counter += 1;
+        });
+
+        logger.debug('App started.');
+
+        setTimeout(() => {
+          assert.that(counter).is.equalTo(1);
           done();
         }, 0.1 * 1000);
       });
