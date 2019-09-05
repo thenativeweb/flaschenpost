@@ -54,7 +54,7 @@ From time to time you may want to also provide additional metadata for the log m
 logger.info('Server started.', { port: 3000 });
 ```
 
-*Please note that the metadata parameter must be an object. If you want to use other data types as metadata, such as booleans, numbers or strings, you need to wrap them within an object.*
+_Please note that the metadata parameter must be an object. If you want to use other data types as metadata, such as booleans, numbers or strings, you need to wrap them within an object._
 
 ### Managing log levels
 
@@ -134,7 +134,7 @@ The configuration object now has a number of functions (see section below) to ad
 const updatedConfiguration = configuration.withHostname('localhost');
 ```
 
-*Please note that all of the functions on the configuration object do not mutate the configuration, but return a new instance instead!*
+_Please note that all of the functions on the configuration object do not mutate the configuration, but return a new instance instead!_
 
 Finally, set the new configuration using the `configure` function. Typically, because of the configuration object's immutability, you may want to do all of this in a single line:
 
