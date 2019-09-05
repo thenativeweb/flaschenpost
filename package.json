@@ -60,7 +60,7 @@
     "@types/serialize-error": "4.0.1",
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "3.2.0",
-    "assertthat": "4.0.1",
+    "assertthat": "4.0.2",
     "common-tags": "1.8.0",
     "nodeenv": "2.0.1",
     "record-stdstreams": "2.0.2",
