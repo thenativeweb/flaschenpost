@@ -30,39 +30,42 @@
     {
       "name": "Jan-Hendrik Grundhöfer",
       "email": "jan-hendrik.grundhoefer@thenativeweb.io"
+    },
+    {
+      "name": "Hannes Leutloff",
+      "email": "hannes.leutloff@thenativeweb.io"
     }
   ],
-  "bin": {
-    "flaschenpost-normalize": "bin/flaschenpost-normalize.js",
-    "flaschenpost-uncork": "bin/flaschenpost-uncork.js"
-  },
-  "main": "lib/flaschenpost.js",
+  "main": "build/lib/flaschenpost.js",
+  "types": "build/lib/flaschenpost.d.ts",
   "dependencies": {
     "app-root-path": "2.2.1",
     "chalk": "2.4.2",
+    "date-fns": "2.0.1",
     "find-root": "1.1.0",
-    "ismocha": "1.0.0",
-    "lodash": "4.17.11",
-    "moment": "2.24.0",
-    "processenv": "1.1.0",
+    "lodash": "4.17.15",
+    "processenv": "2.0.0",
     "serialize-error": "4.1.0",
-    "split2": "3.1.1",
     "stack-trace": "0.0.10",
-    "stringify-object": "3.3.0",
-    "untildify": "4.0.0",
-    "varname": "2.0.3"
+    "stringify-object": "3.3.0"
   },
   "devDependencies": {
-    "assertthat": "3.0.0",
-    "express": "4.16.4",
-    "fs-extra": "7.0.1",
-    "morgan": "1.9.1",
-    "nodeenv": "1.0.0",
-    "roboter": "4.1.0",
-    "shelljs": "0.8.3",
-    "sinon": "7.3.2",
-    "strip-ansi": "5.2.0",
-    "supertest": "4.0.2"
+    "@types/app-root-path": "1.2.4",
+    "@types/chalk": "2.2.0",
+    "@types/common-tags": "1.8.0",
+    "@types/express": "4.17.1",
+    "@types/find-root": "1.1.1",
+    "@types/lodash": "4.14.138",
+    "@types/node": "12.7.4",
+    "@types/serialize-error": "4.0.1",
+    "@types/stack-trace": "0.0.29",
+    "@types/stringify-object": "3.2.0",
+    "assertthat": "4.0.1",
+    "common-tags": "1.8.0",
+    "nodeenv": "2.0.0",
+    "record-stdstreams": "2.0.1",
+    "roboter": "7.1.5",
+    "strip-ansi": "5.2.0"
   },
   "repository": {
     "type": "git",

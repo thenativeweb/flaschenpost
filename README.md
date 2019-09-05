@@ -6,6 +6,16 @@ flaschenpost is a logger for cloud-based applications.
 
 > _A [/ˈflaʃənˌpɔst/](https://en.wiktionary.org/wiki/Flaschenpost) is a „message written on a scrap of paper, rolled-up and put in an empty bottle and set adrift on the ocean; traditionally, a method used by castaways to advertise their distress to the outside world”._ (from [Wiktionary](https://en.wiktionary.org/wiki/message_in_a_bottle))
 
+## Status
+
+| Category         | Status                                                                                                                                               |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Version          | [![npm](https://img.shields.io/npm/v/flaschenpost)](https://www.npmjs.com/package/flaschenpost)                                                      |
+| Dependencies     | ![David](https://img.shields.io/david/thenativeweb/flaschenpost)                                                                                     |
+| Dev dependencies | ![David](https://img.shields.io/david/dev/thenativeweb/flaschenpost)                                                                                 |
+| Build            | [![CircleCI](https://img.shields.io/circleci/build/github/thenativeweb/flaschenpost)](https://circleci.com/gh/thenativeweb/flaschenpost/tree/master) |
+| License          | ![GitHub](https://img.shields.io/github/license/thenativeweb/flaschenpost)                                                                           |
+
 ## Installation
 
 ```shell
@@ -14,160 +24,202 @@ $ npm install flaschenpost
 
 ## Quick start
 
-First you need to integrate flaschenpost into your application.
+First you need to add a reference to flaschenpost to your application:
 
 ```javascript
-const flaschenpost = require('flaschenpost');
+const flaschenpost = require('flaschenpost').default;
 ```
 
-### Using a logger
+If you use TypeScript, use the following code instead:
 
-Next, call the `getLogger` function to acquire a logger. If you don't provide a parameter flaschenpost identifies the caller automatically.
+```typescript
+import flaschenpost from 'flaschenpost';
+```
+
+Then, call the `getLogger` function to get a logger for the current file. Ideally, this is only done once per file:
 
 ```javascript
 const logger = flaschenpost.getLogger();
 ```
 
-In rare cases you need to specify the caller manually, e.g. if you wrap flaschenpost in your own logging module. In these cases, provide `__filename` as parameter.
+With this logger you can now log messages, using its `fatal`, `error`, `info`, `warn` and `debug` functions. E.g., to log an info message, call the `info` function with an appropriate log message:
 
 ```javascript
-const logger = flaschenpost.getLogger(__filename);
+logger.info('Server started.');
 ```
 
-Then you can use the functions `fatal`, `error`, `warn`, `info` and `debug` to write log messages. Simply provide the message you want to log as a parameter.
+From time to time you may want to also provide additional metadata for the log message. For this, hand over a metadata object as second parameter:
 
 ```javascript
-logger.info('App started.');
+logger.info('Server started.', { port: 3000 });
 ```
 
-#### Handling meta data
+*Please note that the metadata parameter must be an object. If you want to use other data types as metadata, such as booleans, numbers or strings, you need to wrap them within an object.*
 
-If you want to provide additional meta data, provide them as an object as the second parameter.
+### Managing log levels
 
-```javascript
-logger.info('App started.', { port: 3000 });
-```
-
-Please note that you may also use any other arbitrary type, as long as it can be stringified, but because the resulting log message will lack any descriptive keys, it will be less readable and harder to understand. That's why you should favor objects over other data types.
-
-```javascript
-logger.info('App started.', 3000);
-```
-
-#### Defining the log target
-
-Unlike other loggers, flaschenpost only supports logging to the console. This is because a modern cloud-based application [never concerns itself with routing or storage of its output stream](http://12factor.net/logs).
-
-When you are running an application using a TTY, the log messages will be written in a human-readable format. As soon as you redirect the output to a file or over the network, log messages are automatically written as JSON objects that can easily be processed by other tools.
-
-Some log processing tools, e.g. Graylog, expect the JSON to be in a slightly different format. In these cases use the environment variable `FLASCHENPOST_FORMATTER` to set the output format you want to use. The following formats are currently supported.
-
-| Name  | Description                                                                                          |
-| ----- | ---------------------------------------------------------------------------------------------------- |
-| gelf  | The `GELF` format used by Graylog.                                                                   |
-| human | The default human-readable format.                                                                   |
-| json  | The default json format.                                                                             |
-| js:   | A custom format (see [Using a custom human-readable format](#using-a-custom-human-readable-format)). |
-
-_Please note that by providing `human` you can force flaschenpost to always show human-readable output, no matter whether there is a TTY or not._
-
-##### Using a custom human-readable format
-
-Maybe you want to adjust the styling of the human-readable format. For that, you can provide a custom formatter. Basically, a custom formatter is nothing but a function that gets the log message as an object and returns a formatted string.
-
-Hence, a simple implementation may look like the following code snippet.
-
-```javascript
-'use strict';
-
-const format = function (log) {
-  return `${log.level}  ${log.message}`;
-};
-
-module.exports = format;
-```
-
-To actually use a custom human-readable format, set the environment variable `FLASCHENPOST_FORMATTER` to `js:` and add the absolute path to the file that contains the `format` function. Instead of a file you may also provide the name of a module that provides the `format` function.
+By default flaschenpost only logs `fatal`, `error`, `warn` and `info` messages, but not `debug` messages. To change this, set the `LOG_LEVEL` environment variable to the log level that you would like to log message up to. E.g., to enable logging for all log levels, set its value to `debug`:
 
 ```shell
-$ export FLASCHENPOST_FORMATTER=js:/foo/bar/myFormatter.js
-$ export FLASCHENPOST_FORMATTER=js:myFormatter
+$ export LOG_LEVEL=debug
 ```
 
-#### Setting a custom host
+If you only want to see log messages with levels `fatal` and `error`, set it to `error`. The same concept applies to all other log levels.
 
-By default, flaschenpost uses the current host's host name in log messages. If you want to change the host name being used, call the `use` function.
+Setting the log level to `debug` may result in a huge amount of log messages, which may not be what you want. Hence you can limit which modules you would like to see debug output for by setting the `LOG_DEBUG_MODULE_FILTER` environment variable to the name or a comma-separated list of the names of the appropriate modules.
+
+E.g., to only get debug log messages for modules `foo` and `bar`, use the following line:
+
+```shell
+$ export LOG_DEBUG_MODULE_FILTER=foo,bar
+```
+
+### Formatting log messages
+
+The core concept of flaschenpost is to always log to the standard output stream of a process, according to the [12 Factor Apps](https://12factor.net/logs) principles. However, it makes a difference if you use flaschenpost in an interactive shell session, or in a scripted environment.
+
+If flaschenpost detects a TTY, you will get the log messages as human-readable output. If it doesn't detect a TTY, you will get them formatted as newline-separated JSON.
+
+Sometimes it is necessary to override this default behavior, e.g. in tests. For this, set the `LOG_FORMATTER` environment variable to `human` or to `json`, to enforce one of the two styles:
+
+```shell
+$ LOG_FORMATTER=human
+```
+
+### Faking log sources
+
+Basically, when calling the `getLoggeer` function, flaschenpost automatically detects the file from which this call is done, and infers the appropriate file name. Sometimes, this is not desired, as you may want to manually set the file name used as source.
+
+Therefor, you can provide a file path as a parameter to the `getLogger` function. Please note that this file path must be an absolute path, and that it must point to an existing file:
 
 ```javascript
-flaschenpost.use('host', 'example.com');
+const logger = flaschenpost.getLogger('/.../app.js');
 ```
 
-### Enabling and disabling log levels
+### Using the morgan plugin
 
-By default, only the log levels `fatal`, `error`, `warn` and `info` are printed to the console. If you want to change this, set the environment variable `LOG_LEVELS` to the comma-separated list of desired log levels.
-
-```shell
-$ export LOG_LEVELS=fatal,error,warn,info,debug
-```
-
-If you want to enable all log levels at once, you can provide a `*` character as value for the `LOG_LEVELS` environment variable.
-
-```shell
-$ export LOG_LEVELS=*
-```
-
-_Please note that when using flaschenpost in Mocha, all log levels are always enabled, to make sure that you get all output within the tests._
-
-### Restricting `debug` logging
-
-If the log level `debug` is enabled, by default this affects all modules. From time to time it may be desired to restrict debug logging to specific modules. For that, set the `LOG_DEBUG_MODULES` environment variable to a comma-separated list of the modules' names that you want to track.
-
-```shell
-$ export LOG_DEBUG_MODULES=module1,@scoped/module2
-```
-
-### Using the Express middleware
-
-If you are writing an Express-based application and you use [morgan](https://github.com/expressjs/morgan) as logger, you can easily integrate flaschenpost into it.
-
-For that, provide the `stream` property when setting up morgan and call the `Middleware` constructor function with the desired log level.
+flaschenpost can be used as a plugin for the [morgan](https://www.npmjs.com/package/morgan) logger, e.g. to use flaschenpost in combination with Express. For this, first load flaschenpost's morgan plugin:
 
 ```javascript
-app.use(morgan('combined', {
-  stream: new flaschenpost.Middleware('info')
-}));
+const { MorganPlugin } = require('flaschenpost');
 ```
 
-Again, in rare cases it may be necessary to provide the file name of the caller on your own.
+If you use TypeScript, use the following code instead:
+
+```typescript
+import { MorganPlugin } from 'flaschenpost';
+```
+
+Create an instance of the `MorganPlugin` class and specify the log level you would like to use. Then hand over this instance to morgan by using its `stream` property:
 
 ```javascript
-app.use(morgan('combined', {
-  stream: new flaschenpost.Middleware('info', __filename)
-}));
+const morganPlugin = new MorganPlugin('info');
+
+app.use(morgan('combined', { stream: morganPlugin }))
 ```
 
-## Processing logs
+If you want to override the log source, you can provide the desired file path as second parameter to the constructor. See [faking log sources](#faking-log-sources) for details.
 
-To process logs, first you need to install the flaschenpost CLI globally.
+### Configuring flaschenpost programmatically
 
-```shell
-$ npm install -g flaschenpost
+Sometimes, you may need to change the configuration of flaschenpost programmatically. To do this, first get the current configuration using the `getConfiguration` function:
+
+```javascript
+const configuration = flaschenpost.getConfiguration();
 ```
 
-### Uncorking a flaschenpost
+The configuration object now has a number of functions (see section below) to adjust the configuration. E.g., if you want to change the hostname being used, call the `withHostname` function:
 
-From time to time you may want to inspect log output that was written using the JSON formatter. To turn that into human readable output again, run `flaschenpost-uncork` and provide the messages using the standard input stream.
-
-```shell
-$ cat sample.log | flaschenpost-uncork
+```javascript
+const updatedConfiguration = configuration.withHostname('localhost');
 ```
 
-### Normalizing messages
+*Please note that all of the functions on the configuration object do not mutate the configuration, but return a new instance instead!*
 
-However, this won't work when your log output does not only contain messages written by flaschenpost, but also arbitrary text. In this case, run `flaschenpost-normalize` and provide the messages using the standard input stream.
+Finally, set the new configuration using the `configure` function. Typically, because of the configuration object's immutability, you may want to do all of this in a single line:
 
-```shell
-$ node sample.js | flaschenpost-normalize
+```javascript
+flaschenpost.configure(
+  flaschenpost.getConfiguration().
+    withHighestEnabledLogLevel('debug').
+    withHostname('localhost')
+);
+```
+
+#### Setting application data
+
+To set the name and version of the application, use the `withApplication` function:
+
+```javascript
+const updatedConfiguration =
+  configuration.withApplication({ name: 'foo', version: '1.0.0' });
+```
+
+#### Setting the debug module filter
+
+To set the list of modules for which debug messages should be logged, use the `withDebugModuleFilter` function:
+
+```javascript
+const updatedConfiguration =
+  configuration.withDebugModuleFilter([ 'foo', 'bar' ]);
+```
+
+#### Setting the formatter
+
+To set the formatter, use the `withFormatter` function. As parameter, provide a function that takes a `LogEntry` and returns a string:
+
+```javascript
+const updatedConfiguration =
+  configuration.withFormatter(logEntry => '...');
+```
+
+For details on this see the [`Formatter`](https://github.com/thenativeweb/flaschenpost/blob/master/lib/formatters/Formatter.ts) interface and the [`LogEntry`](https://github.com/thenativeweb/flaschenpost/blob/master/lib/LogEntry.ts) class.
+
+If you want to programmatically enforce human-readable or JSON output, you first have to load all builtin formatters:
+
+```javascript
+const { formatters } = require('flaschenpost');
+```
+
+If you use TypeScript, use the following code instead:
+
+```typescript
+import { formatters } from 'flaschenpost';
+```
+
+Then access the `asHumanReadable` or the `asJson` function and hand it over using the `withFormatter` function.
+
+#### Setting the log level
+
+To set the log level, use the `withHighestEnabledLogLevel` function:
+
+```javascript
+const updatedConfiguration =
+  configuration.withHighestEnabledLogLevel('debug');
+```
+
+#### Setting the hostname
+
+To set the hostname, use the `withHostname` function:
+
+```javascript
+const updatedConfiguration =
+  configuration.withHostname('localhost');
+```
+
+#### Setting the log entry ID generator
+
+To set the log entry ID generator, use the `withLogEntryIdGenerator` function. As parameter, provide a generator function that endlessly returns new IDs, either of type `number` or of type `string`:
+
+```javascript
+const updatedConfiguration =
+  configuration.withLogEntryIdGenerator(function * () {
+    while (true) {
+      const nextId = // ...
+
+      yield nextId;
+    }
+  });
 ```
 
 ## Running the build
@@ -177,14 +229,3 @@ To build this module use [roboter](https://www.npmjs.com/package/roboter).
 ```shell
 $ npx roboter
 ```
-
-## License
-
-The MIT License (MIT)
-Copyright (c) 2013-2019 the native web.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
