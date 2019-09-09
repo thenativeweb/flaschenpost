@@ -73,9 +73,6 @@ class Flaschenpost {
    *
    * Checks the existence of the file at sourcePathOverride only if no
    * packageJsonOverride is given, otherwise accepts both.
-   *
-   * @param sourcePathOverride Path to source of log messages.
-   * @param packageJsonOverride Module definition for source module.
    */
   public getLogger (sourcePathOverride?: string, packageJsonOverride?: PackageJson): Logger {
     let sourcePath = stackTrace.get()[1].getFileName();

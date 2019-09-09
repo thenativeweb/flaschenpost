@@ -100,9 +100,9 @@ To provide a virtual file path that does not exist, pass an additional parameter
 
 ```javascript
 const logger = flaschenpost.getLogger(
-  '/vartual/path/.../app.js',
+  '/virtual/path/.../app.js',
   {
-    name: 'custome-package',
+    name: 'custom-package',
     version: '1.0.1'
   }
 );
