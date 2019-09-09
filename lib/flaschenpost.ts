@@ -1,5 +1,6 @@
 import { cloneDeep } from 'lodash';
 import Configuration from './Configuration';
+import findRoot from 'find-root';
 import formatters from './formatters';
 import fs from 'fs';
 import getLogEntryIdGenerator from './getLogEntryIdGenerator';
@@ -7,7 +8,9 @@ import isLogLevel from './isLogLevel';
 import Logger from './Logger';
 import MorganPlugin from './MorganPlugin';
 import os from 'os';
+import { PackageJson } from './PackageJson';
 import processenv from 'processenv';
+import readPackageJson from './readPackageJson';
 import stackTrace from 'stack-trace';
 
 class Flaschenpost {
@@ -65,20 +68,37 @@ class Flaschenpost {
     return cloneDeep(this.configuration);
   }
 
-  public getLogger (sourcePathOverride?: string): Logger {
+  /**
+   * Creates a logger for a given source.
+   *
+   * Checks the existence of the file at sourcePathOverride only if no
+   * packageJsonOverride is given, otherwise accepts both.
+   *
+   * @param sourcePathOverride Path to source of log messages.
+   * @param packageJsonOverride Module definition for source module.
+   */
+  public getLogger (sourcePathOverride?: string, packageJsonOverride?: PackageJson): Logger {
     let sourcePath = stackTrace.get()[1].getFileName();
+    let packageJson;
 
     if (sourcePathOverride) {
-      /* eslint-disable no-sync */
-      fs.accessSync(sourcePathOverride, fs.constants.R_OK);
-      /* eslint-enable no-sync */
-
+      if (!packageJsonOverride) {
+        /* eslint-disable no-sync */
+        fs.accessSync(sourcePathOverride, fs.constants.R_OK);
+        /* eslint-enable no-sync */
+      }
       sourcePath = sourcePathOverride;
     }
 
-    const logger = new Logger(this.configuration, sourcePath);
+    if (packageJsonOverride) {
+      packageJson = packageJsonOverride;
+    } else {
+      const modulePath = findRoot(sourcePath);
 
-    return logger;
+      packageJson = readPackageJson(modulePath);
+    }
+
+    return new Logger(this.configuration, sourcePath, packageJson);
   }
 }
 

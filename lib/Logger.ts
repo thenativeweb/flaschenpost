@@ -1,9 +1,7 @@
 import Configuration from './Configuration';
-import findRoot from 'find-root';
 import LogEntry from './LogEntry';
 import { LogLevel } from './LogLevel';
 import { PackageJson } from './PackageJson';
-import readPackageJson from './readPackageJson';
 
 class Logger {
   protected configuration: Configuration;
@@ -12,13 +10,10 @@ class Logger {
 
   protected sourcePath: string;
 
-  public constructor (configuration: Configuration, sourcePath: string) {
+  public constructor (configuration: Configuration, sourcePath: string, packageJson: PackageJson) {
     this.configuration = configuration;
     this.sourcePath = sourcePath;
-
-    const modulePath = findRoot(this.sourcePath);
-
-    this.module = readPackageJson(modulePath);
+    this.module = packageJson;
   }
 
   public fatal (message: string, metadata?: object): void {

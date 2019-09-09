@@ -90,10 +90,22 @@ $ LOG_FORMATTER=human
 
 Basically, when calling the `getLoggeer` function, flaschenpost automatically detects the file from which this call is done, and infers the appropriate file name. Sometimes, this is not desired, as you may want to manually set the file name used as source.
 
-Therefor, you can provide a file path as a parameter to the `getLogger` function. Please note that this file path must be an absolute path, and that it must point to an existing file:
+Therefore, you can provide a file path as a parameter to the `getLogger` function. Please note that this file path must be an absolute path, and that it must point to an existing file:
 
 ```javascript
 const logger = flaschenpost.getLogger('/.../app.js');
+```
+
+To provide a virtual file path that does not exist, pass an additional parameter defining the module the file belongs to:
+
+```javascript
+const logger = flaschenpost.getLogger(
+  '/vartual/path/.../app.js',
+  {
+    name: 'custome-package',
+    version: '1.0.1'
+  }
+);
 ```
 
 ### Using the morgan plugin
