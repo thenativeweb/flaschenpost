@@ -20,7 +20,7 @@ suite('MorganPlugin', (): void => {
     });
 
     test('passes writes to stream on to a flaschenpost.', async (): Promise<void> => {
-      const stop = record();
+      const stop = record(false);
       const morganPlugin = new MorganPlugin('info');
 
       morganPlugin.write('some log message');

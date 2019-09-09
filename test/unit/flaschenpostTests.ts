@@ -40,7 +40,7 @@ suite('flaschenpost', (): void => {
 
   test('debug filtering by module.', async (): Promise<void> => {
     const originalConfiguration = flaschenpost.getConfiguration();
-    const stop = record();
+    const stop = record(false);
 
     flaschenpost.configure(
       originalConfiguration.
@@ -53,6 +53,26 @@ suite('flaschenpost', (): void => {
     );
 
     const logger = flaschenpost.getLogger();
+
+    logger.debug('Some debug.');
+
+    const { stdout } = stop();
+
+    assert.that(stdout).is.equalTo('');
+
+    flaschenpost.configure(originalConfiguration);
+  });
+
+  test('debug filtering by module using logger source override.', async (): Promise<void> => {
+    const originalConfiguration = flaschenpost.getConfiguration();
+    const stop = record(false);
+
+    flaschenpost.configure(
+      originalConfiguration.
+        withDebugModuleFilter([ 'not-some-module' ]).
+        withHighestEnabledLogLevel('debug')
+    );
+    const logger = flaschenpost.getLogger(undefined, { name: 'some-module', version: 'irrelevant' });
 
     logger.debug('Some debug.');
 
