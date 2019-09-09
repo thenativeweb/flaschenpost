@@ -68,16 +68,18 @@ class Flaschenpost {
     return cloneDeep(this.configuration);
   }
 
-  // Creates a logger for a given source.
-  //
-  // Checks the existence of the file at sourcePathOverride only if no
-  // packageJsonOverride is given, otherwise accepts both.
-  public getLogger (sourcePathOverride?: string, packageJsonOverride?: PackageJson): Logger {
+  // When creating a logger, there are basically two options: Most probably you
+  // get a logger for an existing file, but from time to time you may want to
+  // get a logger for a virtual file. In this case you not only need to override
+  // the source path, but also the appropriate package.json definition, i.e. if
+  // you want to use a virtual file name, you must additionally provide a
+  // package.json override. If you refer to an existing file, you can skip this.
+  public getLogger (sourcePathOverride?: string, packageJsonOverrideForVirtualSourcePaths?: PackageJson): Logger {
     let sourcePath = stackTrace.get()[1].getFileName();
     let packageJson;
 
     if (sourcePathOverride) {
-      if (!packageJsonOverride) {
+      if (!packageJsonOverrideForVirtualSourcePaths) {
         /* eslint-disable no-sync */
         fs.accessSync(sourcePathOverride, fs.constants.R_OK);
         /* eslint-enable no-sync */
@@ -85,8 +87,8 @@ class Flaschenpost {
       sourcePath = sourcePathOverride;
     }
 
-    if (packageJsonOverride) {
-      packageJson = packageJsonOverride;
+    if (packageJsonOverrideForVirtualSourcePaths) {
+      packageJson = packageJsonOverrideForVirtualSourcePaths;
     } else {
       const modulePath = findRoot(sourcePath);
 
