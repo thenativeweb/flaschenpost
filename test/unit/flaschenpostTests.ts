@@ -40,7 +40,7 @@ suite('flaschenpost', (): void => {
 
   test('debug filtering by module.', async (): Promise<void> => {
     const originalConfiguration = flaschenpost.getConfiguration();
-    const stop = record();
+    const stop = record(false);
 
     flaschenpost.configure(
       originalConfiguration.
@@ -65,7 +65,7 @@ suite('flaschenpost', (): void => {
 
   test('debug filtering by module using logger source override.', async (): Promise<void> => {
     const originalConfiguration = flaschenpost.getConfiguration();
-    const stop = record();
+    const stop = record(false);
 
     flaschenpost.configure(
       originalConfiguration.

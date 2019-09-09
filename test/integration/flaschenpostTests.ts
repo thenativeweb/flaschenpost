@@ -27,7 +27,7 @@ suite('flaschenpost', (): void => {
     });
 
     test('logs in a human readable format up to info level.', async (): Promise<void> => {
-      const stop = record();
+      const stop = record(false);
       const logger = flaschenpostInstance.getLogger();
 
       logger.info('Info message');
@@ -60,7 +60,7 @@ suite('flaschenpost', (): void => {
     });
 
     test('logs in json format up to debug level.', async (): Promise<void> => {
-      const stop = record();
+      const stop = record(false);
       const logger = flaschenpostInstance.getLogger();
 
       logger.info('Info message');
@@ -100,7 +100,7 @@ suite('flaschenpost', (): void => {
     });
 
     test('overwrites configuration.', async (): Promise<void> => {
-      const stop = record();
+      const stop = record(false);
 
       flaschenpostInstance.configure(new Configuration(
         [ '' ],
