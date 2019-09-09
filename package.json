@@ -63,7 +63,7 @@
     "assertthat": "4.0.2",
     "common-tags": "1.8.0",
     "nodeenv": "2.0.1",
-    "record-stdstreams": "2.0.2",
+    "record-stdstreams": "2.1.0",
     "roboter": "7.2.0",
     "strip-ansi": "5.2.0"
   },
