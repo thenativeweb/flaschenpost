@@ -68,12 +68,10 @@ class Flaschenpost {
     return cloneDeep(this.configuration);
   }
 
-  /**
-   * Creates a logger for a given source.
-   *
-   * Checks the existence of the file at sourcePathOverride only if no
-   * packageJsonOverride is given, otherwise accepts both.
-   */
+  // Creates a logger for a given source.
+  //
+  // Checks the existence of the file at sourcePathOverride only if no
+  // packageJsonOverride is given, otherwise accepts both.
   public getLogger (sourcePathOverride?: string, packageJsonOverride?: PackageJson): Logger {
     let sourcePath = stackTrace.get()[1].getFileName();
     let packageJson;
