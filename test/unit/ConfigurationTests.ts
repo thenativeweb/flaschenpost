@@ -53,7 +53,10 @@ suite('Configuration', (): void => {
 
   suite('withFormatter', (): void => {
     test('returns a clone of the configuration with a new formatter.', async (): Promise<void> => {
+      /* eslint-disable unicorn/consistent-function-scoping */
       const newFormatter: Formatter = (): string => 'log entry';
+      /* eslint-enable unicorn/consistent-function-scoping */
+
       const newConfiguration = defaultConfiguration.withFormatter(newFormatter);
 
       assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);

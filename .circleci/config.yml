@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/workspace
   docker:
-    - image: node:12.9.0-alpine
+    - image: node:12.10.0-alpine
 
 only-publish-tags: &only-publish-tags
   filters:
