@@ -53,11 +53,8 @@ class Logger {
     if (this.configuration.highestEnabledLogLevel === 'error') {
       return [ 'fatal', 'error' ].includes(logLevel);
     }
-    if (this.configuration.highestEnabledLogLevel === 'fatal') {
-      return [ 'fatal' ].includes(logLevel);
-    }
 
-    throw new Error('Invalid operation.');
+    return [ 'fatal' ].includes(logLevel);
   }
 
   protected isDebugLoggingEnabled (): boolean {
