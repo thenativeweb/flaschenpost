@@ -11,11 +11,10 @@ const asHumanReadable: Formatter = function (logEntry: LogEntry): string {
       result = '';
 
   origin = `${logEntry.hostname}`;
-  if (logEntry.application) {
-    origin += `::${logEntry.application.name}@${logEntry.application.version}`;
-  }
 
-  if (!logEntry.application || logEntry.application.name !== logEntry.module.name) {
+  origin += `::${logEntry.application.name}@${logEntry.application.version}`;
+
+  if (logEntry.application.name !== logEntry.module.name) {
     origin += `::${logEntry.module.name}@${logEntry.module.version}`;
   }
 

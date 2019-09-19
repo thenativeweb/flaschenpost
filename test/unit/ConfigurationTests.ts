@@ -102,9 +102,11 @@ suite('Configuration', (): void => {
   suite('withLogEntryIdGenerator', (): void => {
     test('returns a clone of the configuration with a new log entry id generator.', async (): Promise<void> => {
       const newLogEntryIdGenerator = function * (): Generator<number, never> {
+        /* eslint-disable @typescript-eslint/no-unnecessary-condition */
         while (true) {
           yield 1337;
         }
+        /* eslint-enable @typescript-eslint/no-unnecessary-condition */
       };
       const newConfiguration = defaultConfiguration.withLogEntryIdGenerator(newLogEntryIdGenerator());
 
