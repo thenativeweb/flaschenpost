@@ -45,7 +45,7 @@
     "find-root": "1.1.0",
     "lodash": "4.17.15",
     "processenv": "2.0.1",
-    "serialize-error": "4.1.0",
+    "serialize-error": "5.0.0",
     "stack-trace": "0.0.10",
     "stringify-object": "3.3.0"
   },
