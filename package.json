@@ -45,7 +45,7 @@
     "find-root": "1.1.0",
     "lodash": "4.17.15",
     "processenv": "2.0.1",
-    "serialize-error": "4.1.0",
+    "serialize-error": "5.0.0",
     "stack-trace": "0.0.10",
     "stringify-object": "3.3.0"
   },
@@ -62,7 +62,7 @@
     "common-tags": "1.8.0",
     "nodeenv": "2.0.1",
     "record-stdstreams": "2.1.0",
-    "roboter": "7.4.0",
+    "roboter": "8.0.0",
     "strip-ansi": "5.2.0"
   },
   "repository": {
