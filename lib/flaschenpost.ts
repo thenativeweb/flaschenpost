@@ -100,4 +100,4 @@ class Flaschenpost {
 }
 
 export default new Flaschenpost();
-export { Configuration, Flaschenpost, formatters, MorganPlugin };
+export { Configuration, Flaschenpost, formatters, Logger, MorganPlugin };
