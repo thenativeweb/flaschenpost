@@ -39,7 +39,7 @@
   "main": "build/lib/flaschenpost.js",
   "types": "build/lib/flaschenpost.d.ts",
   "dependencies": {
-    "app-root-path": "2.2.1",
+    "app-root-path": "3.0.0",
     "chalk": "2.4.2",
     "date-fns": "2.6.0",
     "find-root": "1.1.0",
