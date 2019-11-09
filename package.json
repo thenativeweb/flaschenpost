@@ -40,7 +40,7 @@
   "types": "build/lib/flaschenpost.d.ts",
   "dependencies": {
     "app-root-path": "3.0.0",
-    "chalk": "2.4.2",
+    "chalk": "3.0.0",
     "date-fns": "2.7.0",
     "find-root": "1.1.0",
     "lodash": "4.17.15",
