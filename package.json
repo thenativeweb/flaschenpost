@@ -63,7 +63,7 @@
     "nodeenv": "2.0.1",
     "record-stdstreams": "2.1.0",
     "roboter": "9.1.0",
-    "strip-ansi": "5.2.0"
+    "strip-ansi": "6.0.0"
   },
   "repository": {
     "type": "git",
