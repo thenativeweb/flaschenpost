@@ -9,7 +9,7 @@ import Logger from './Logger';
 import MorganPlugin from './MorganPlugin';
 import os from 'os';
 import { PackageJson } from './PackageJson';
-import processenv from 'processenv';
+import { processenv } from 'processenv';
 import readPackageJson from './readPackageJson';
 import stackTrace from 'stack-trace';
 

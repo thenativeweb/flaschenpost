@@ -3,7 +3,7 @@ import assert from 'assertthat';
 import Configuration from '../../lib/Configuration';
 import { Flaschenpost } from '../../lib/flaschenpost';
 import getLogEntryIdGenerator from 'lib/getLogEntryIdGenerator';
-import nodeenv from 'nodeenv';
+import { nodeenv } from 'nodeenv';
 import record from 'record-stdstreams';
 import stripAnsi from 'strip-ansi';
 
