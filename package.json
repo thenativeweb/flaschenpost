@@ -60,7 +60,7 @@
     "@types/stringify-object": "3.2.0",
     "assertthat": "4.0.2",
     "common-tags": "1.8.0",
-    "nodeenv": "2.0.1",
+    "nodeenv": "3.0.0",
     "record-stdstreams": "2.1.0",
     "roboter": "9.1.0",
     "strip-ansi": "6.0.0"
