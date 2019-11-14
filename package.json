@@ -44,7 +44,7 @@
     "date-fns": "2.7.0",
     "find-root": "1.1.0",
     "lodash": "4.17.15",
-    "processenv": "2.0.1",
+    "processenv": "3.0.0",
     "serialize-error": "5.0.0",
     "stack-trace": "0.0.10",
     "stringify-object": "3.3.0"
