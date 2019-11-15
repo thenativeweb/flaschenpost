@@ -1,6 +1,6 @@
-import asJson from '../../../lib/formatters/asJson';
-import assert from 'assertthat';
-import LogEntry from '../../../lib/LogEntry';
+import { asJson } from '../../../lib/formatters/asJson';
+import { assert } from 'assertthat';
+import { LogEntry } from '../../../lib/LogEntry';
 import { oneLineTrim } from 'common-tags';
 
 suite('asJson', (): void => {

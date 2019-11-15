@@ -1,5 +1,5 @@
-import assert from 'assertthat';
-import isLogLevel from '../../lib/isLogLevel';
+import { assert } from 'assertthat';
+import { isLogLevel } from '../../lib/isLogLevel';
 
 suite('isLogLevel', (): void => {
   test('is a function.', async (): Promise<void> => {

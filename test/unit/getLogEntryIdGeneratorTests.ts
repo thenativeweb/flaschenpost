@@ -1,5 +1,5 @@
-import assert from 'assertthat';
-import getLogEntryIdGenerator from '../../lib/getLogEntryIdGenerator';
+import { assert } from 'assertthat';
+import { getLogEntryIdGenerator } from '../../lib/getLogEntryIdGenerator';
 
 suite('getLogEntryIdGenerator', (): void => {
   test('is a function.', async (): Promise<void> => {

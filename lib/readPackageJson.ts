@@ -23,4 +23,4 @@ const readPackageJson = function (directory: string): PackageJson {
   return { name, version };
 };
 
-export default readPackageJson;
+export { readPackageJson };

@@ -1,8 +1,8 @@
-import asJson from 'lib/formatters/asJson';
-import assert from 'assertthat';
-import Configuration from '../../lib/Configuration';
+import { asJson } from 'lib/formatters/asJson';
+import { assert } from 'assertthat';
+import { Configuration } from '../../lib/Configuration';
 import { Formatter } from '../../lib/formatters/Formatter';
-import getLogEntryIdGenerator from 'lib/getLogEntryIdGenerator';
+import { getLogEntryIdGenerator } from 'lib/getLogEntryIdGenerator';
 import { LogLevel } from '../../lib/LogLevel';
 
 suite('Configuration', (): void => {

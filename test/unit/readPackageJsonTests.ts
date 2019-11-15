@@ -1,6 +1,6 @@
-import assert from 'assertthat';
+import { assert } from 'assertthat';
 import path from 'path';
-import readPackageJson from '../../lib/readPackageJson';
+import { readPackageJson } from '../../lib/readPackageJson';
 
 suite('readPackageJson', (): void => {
   test('is a function.', async (): Promise<void> => {

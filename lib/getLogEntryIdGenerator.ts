@@ -1,4 +1,5 @@
 import { LogEntryIdGenerator } from './LogEntryIdGenerator';
+
 let nextId = 0;
 
 const getLogEntryIdGenerator = function * (): LogEntryIdGenerator {
@@ -11,4 +12,4 @@ const getLogEntryIdGenerator = function * (): LogEntryIdGenerator {
   /* eslint-enable @typescript-eslint/no-unnecessary-condition */
 };
 
-export default getLogEntryIdGenerator;
+export { getLogEntryIdGenerator };

@@ -8,4 +8,4 @@ const isLogLevel = function (name: any): name is LogLevel {
   return [ 'fatal', 'error', 'warn', 'info', 'debug' ].includes(name);
 };
 
-export default isLogLevel;
+export { isLogLevel };

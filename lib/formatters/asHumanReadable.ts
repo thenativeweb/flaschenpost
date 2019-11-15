@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { Formatter } from './Formatter';
 import { lightFormat } from 'date-fns';
-import LogEntry from '../LogEntry';
+import { LogEntry } from '../LogEntry';
 import stringifyObject from 'stringify-object';
 
 const asHumanReadable: Formatter = function (logEntry: LogEntry): string {
@@ -48,4 +48,4 @@ const asHumanReadable: Formatter = function (logEntry: LogEntry): string {
   return result;
 };
 
-export default asHumanReadable;
+export { asHumanReadable };

@@ -1,6 +1,6 @@
-import asHumanReadable from '../../../lib/formatters/asHumanReadable';
-import assert from 'assertthat';
-import LogEntry from '../../../lib/LogEntry';
+import { asHumanReadable } from '../../../lib/formatters/asHumanReadable';
+import { assert } from 'assertthat';
+import { LogEntry } from '../../../lib/LogEntry';
 import stripAnsi from 'strip-ansi';
 
 suite('asHumanReadable', (): void => {

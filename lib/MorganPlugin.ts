@@ -1,5 +1,5 @@
-import flaschenpost from './flaschenpost';
-import Logger from './Logger';
+import { flaschenpost } from './flaschenpost';
+import { Logger } from './Logger';
 import { LogLevel } from './LogLevel';
 import stackTrace from 'stack-trace';
 import { Writable } from 'stream';
@@ -23,11 +23,11 @@ class MorganPlugin extends Writable {
   }
 
   /* eslint-disable no-underscore-dangle, @typescript-eslint/member-naming */
-  public _write (chunk: any, encoding: string, callback: (err?: Error) => void): void {
+  public _write (chunk: any, _encoding: string, callback: (err?: Error) => void): void {
     this.logger[this.logLevel](chunk);
     callback();
   }
   /* eslint-enable no-underscore-dangle, @typescript-eslint/member-naming */
 }
 
-export default MorganPlugin;
+export { MorganPlugin };

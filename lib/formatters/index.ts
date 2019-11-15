@@ -1,4 +1,4 @@
-import asHumanReadable from './asHumanReadable';
-import asJson from './asJson';
+import { asHumanReadable } from './asHumanReadable';
+import { asJson } from './asJson';
 
-export default { asHumanReadable, asJson };
+export { asHumanReadable, asJson };

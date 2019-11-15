@@ -1,10 +1,10 @@
-import asHumanReadable from 'lib/formatters/asHumanReadable';
-import assert from 'assertthat';
-import Configuration from '../../lib/Configuration';
+import { asHumanReadable } from 'lib/formatters/asHumanReadable';
+import { assert } from 'assertthat';
+import { Configuration } from '../../lib/Configuration';
 import { Flaschenpost } from '../../lib/flaschenpost';
-import getLogEntryIdGenerator from 'lib/getLogEntryIdGenerator';
+import { getLogEntryIdGenerator } from 'lib/getLogEntryIdGenerator';
 import { nodeenv } from 'nodeenv';
-import record from 'record-stdstreams';
+import { record } from 'record-stdstreams';
 import stripAnsi from 'strip-ansi';
 
 suite('flaschenpost', (): void => {

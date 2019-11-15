@@ -27,13 +27,13 @@ $ npm install flaschenpost
 First you need to add a reference to flaschenpost to your application:
 
 ```javascript
-const flaschenpost = require('flaschenpost').default;
+const { flaschenpost } = require('flaschenpost');
 ```
 
 If you use TypeScript, use the following code instead:
 
 ```typescript
-import flaschenpost from 'flaschenpost';
+import { flaschenpost } from 'flaschenpost';
 ```
 
 Then, call the `getLogger` function to get a logger for the current file. Ideally, this is only done once per file:

@@ -1,6 +1,5 @@
-import cloneDeepWith from 'lodash/cloneDeepWith';
-import isError from 'lodash/isError';
 import { serializeError } from 'serialize-error';
+import { cloneDeepWith, isError } from 'lodash';
 
 const sanitizeMetadata = function (metadata: object): object {
   const cloner = function (value: any): any {
@@ -14,4 +13,4 @@ const sanitizeMetadata = function (metadata: object): object {
   return cloneDeepWith(metadata, cloner);
 };
 
-export default sanitizeMetadata;
+export { sanitizeMetadata };

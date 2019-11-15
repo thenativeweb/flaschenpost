@@ -1,6 +1,6 @@
 import { LogLevel } from './LogLevel';
 import { PackageJson } from './PackageJson';
-import sanitizeMetadata from './sanitizeMetadata';
+import { sanitizeMetadata } from './sanitizeMetadata';
 
 class LogEntry {
   public id: number | string;
@@ -51,4 +51,4 @@ class LogEntry {
   }
 }
 
-export default LogEntry;
+export { LogEntry };

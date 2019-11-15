@@ -1,17 +1,17 @@
 import { cloneDeep } from 'lodash';
-import Configuration from './Configuration';
+import { Configuration } from './Configuration';
 import findRoot from 'find-root';
-import formatters from './formatters';
 import fs from 'fs';
-import getLogEntryIdGenerator from './getLogEntryIdGenerator';
-import isLogLevel from './isLogLevel';
-import Logger from './Logger';
-import MorganPlugin from './MorganPlugin';
+import { getLogEntryIdGenerator } from './getLogEntryIdGenerator';
+import { isLogLevel } from './isLogLevel';
+import { Logger } from './Logger';
+import { MorganPlugin } from './MorganPlugin';
 import os from 'os';
 import { PackageJson } from './PackageJson';
 import { processenv } from 'processenv';
-import readPackageJson from './readPackageJson';
+import { readPackageJson } from './readPackageJson';
 import stackTrace from 'stack-trace';
+import { asHumanReadable, asJson } from './formatters';
 
 class Flaschenpost {
   protected configuration: Configuration;
@@ -27,16 +27,12 @@ class Flaschenpost {
       split(',').
       filter((item: string): boolean => Boolean(item));
 
-    let formatter = process.stdout.isTTY ?
-      formatters.asHumanReadable :
-      formatters.asJson;
+    let formatter = process.stdout.isTTY ? asHumanReadable : asJson;
 
     const formatterOverride = processenv('LOG_FORMATTER');
 
     if (formatterOverride) {
-      formatter = formatterOverride === 'human' ?
-        formatters.asHumanReadable :
-        formatters.asJson;
+      formatter = formatterOverride === 'human' ? asHumanReadable : asJson;
     }
 
     const logLevel = processenv('LOG_LEVEL', 'info');
@@ -99,5 +95,6 @@ class Flaschenpost {
   }
 }
 
-export default new Flaschenpost();
-export { Configuration, Flaschenpost, formatters, Logger, MorganPlugin };
+const flaschenpost = new Flaschenpost();
+
+export { flaschenpost, Configuration, Flaschenpost, asHumanReadable, asJson, Logger, MorganPlugin };

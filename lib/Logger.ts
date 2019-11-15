@@ -1,5 +1,5 @@
-import Configuration from './Configuration';
-import LogEntry from './LogEntry';
+import { Configuration } from './Configuration';
+import { LogEntry } from './LogEntry';
 import { LogLevel } from './LogLevel';
 import { PackageJson } from './PackageJson';
 
@@ -91,4 +91,4 @@ class Logger {
   }
 }
 
-export default Logger;
+export { Logger };

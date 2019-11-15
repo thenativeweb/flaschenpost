@@ -1,9 +1,9 @@
-import asHumanReadable from '../../lib/formatters/asHumanReadable';
-import assert from 'assertthat';
-import Configuration from '../../lib/Configuration';
-import flaschenpost from '../../lib/flaschenpost';
-import MorganPlugin from '../../lib/MorganPlugin';
-import record from 'record-stdstreams';
+import { asHumanReadable } from '../../lib/formatters/asHumanReadable';
+import { assert } from 'assertthat';
+import { Configuration } from '../../lib/Configuration';
+import { flaschenpost } from '../../lib/flaschenpost';
+import { MorganPlugin } from '../../lib/MorganPlugin';
+import { record } from 'record-stdstreams';
 import stripAnsi from 'strip-ansi';
 
 suite('MorganPlugin', (): void => {

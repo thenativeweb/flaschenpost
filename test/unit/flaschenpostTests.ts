@@ -1,6 +1,6 @@
-import assert from 'assertthat';
-import flaschenpost from '../../lib/flaschenpost';
-import record from 'record-stdstreams';
+import { assert } from 'assertthat';
+import { flaschenpost } from '../../lib/flaschenpost';
+import { record } from 'record-stdstreams';
 
 suite('flaschenpost', (): void => {
   test('has configure and getLogger functions.', async (): Promise<void> => {

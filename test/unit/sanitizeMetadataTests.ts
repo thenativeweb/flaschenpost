@@ -1,5 +1,5 @@
-import assert from 'assertthat';
-import sanitizeMetadata from '../../lib/sanitizeMetadata';
+import { assert } from 'assertthat';
+import { sanitizeMetadata } from '../../lib/sanitizeMetadata';
 
 suite('sanitizeMetadata', (): void => {
   test('is a function.', async (): Promise<void> => {
