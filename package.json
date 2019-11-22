@@ -62,7 +62,7 @@
     "common-tags": "1.8.0",
     "nodeenv": "3.0.0",
     "record-stdstreams": "3.0.0",
-    "roboter": "9.2.4",
+    "roboter": "9.2.5",
     "strip-ansi": "6.0.0"
   },
   "repository": {
