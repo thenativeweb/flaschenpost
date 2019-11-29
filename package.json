@@ -58,7 +58,7 @@
     "@types/node": "12.12.14",
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "3.2.0",
-    "assertthat": "5.0.2",
+    "assertthat": "5.1.0",
     "common-tags": "1.8.0",
     "nodeenv": "3.0.0",
     "record-stdstreams": "3.0.0",
