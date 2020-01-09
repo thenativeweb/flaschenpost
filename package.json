@@ -55,7 +55,7 @@
     "@types/express": "4.17.2",
     "@types/find-root": "1.1.1",
     "@types/lodash": "4.14.149",
-    "@types/node": "13.1.5",
+    "@types/node": "13.1.6",
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "3.2.0",
     "assertthat": "5.1.0",
