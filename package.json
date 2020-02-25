@@ -41,7 +41,7 @@
   "dependencies": {
     "app-root-path": "3.0.0",
     "chalk": "3.0.0",
-    "date-fns": "2.9.0",
+    "date-fns": "2.10.0",
     "find-root": "1.1.0",
     "lodash": "4.17.15",
     "processenv": "3.0.1",
