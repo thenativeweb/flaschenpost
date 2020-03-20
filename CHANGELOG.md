@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/thenativeweb/flaschenpost/compare/4.0.5...4.0.6) (2020-03-20)
+
+
+### Bug Fixes
+
+* Fix typo in documenation. ([#238](https://github.com/thenativeweb/flaschenpost/issues/238)) ([70badda](https://github.com/thenativeweb/flaschenpost/commit/70baddafc8275ec0ff3359aba59f39e17a5cb401))
+
 ## [4.0.5](https://github.com/thenativeweb/flaschenpost/compare/4.0.4...4.0.5) (2020-03-15)
 
 
