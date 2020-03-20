@@ -127,7 +127,7 @@ Create an instance of the `MorganPlugin` class and specify the log level you wou
 ```javascript
 const morganPlugin = new MorganPlugin('info');
 
-app.use(morgan('combined', { stream: morganPlugin }))
+app.use(morgan('combined', { stream: morganPlugin }));
 ```
 
 If you want to override the log source, you can provide the desired file path as second parameter to the constructor. See [faking log sources](#faking-log-sources) for details.
