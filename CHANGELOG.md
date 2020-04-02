@@ -1,3 +1,10 @@
+## [4.0.8](https://github.com/thenativeweb/flaschenpost/compare/4.0.7...4.0.8) (2020-04-02)
+
+
+### Bug Fixes
+
+* bump chalk from 3.0.0 to 4.0.0 ([#250](https://github.com/thenativeweb/flaschenpost/issues/250)) ([5013531](https://github.com/thenativeweb/flaschenpost/commit/501353142312a1e163827a6699453b33b7b59b45))
+
 ## [4.0.7](https://github.com/thenativeweb/flaschenpost/compare/4.0.6...4.0.7) (2020-03-26)
 
 
