@@ -1,3 +1,10 @@
+## [4.0.10](https://github.com/thenativeweb/flaschenpost/compare/4.0.9...4.0.10) (2020-04-30)
+
+
+### Bug Fixes
+
+* bump processenv from 3.0.1 to 3.0.2 ([#265](https://github.com/thenativeweb/flaschenpost/issues/265)) ([20f1d22](https://github.com/thenativeweb/flaschenpost/commit/20f1d22e4a96c209af3de069972785bed94bec40))
+
 ## [4.0.9](https://github.com/thenativeweb/flaschenpost/compare/4.0.8...4.0.9) (2020-04-10)
 
 
