@@ -1,3 +1,10 @@
+## [4.0.12](https://github.com/thenativeweb/flaschenpost/compare/4.0.11...4.0.12) (2020-05-12)
+
+
+### Bug Fixes
+
+* bump serialize-error from 6.0.0 to 7.0.1 ([#271](https://github.com/thenativeweb/flaschenpost/issues/271)) ([9ae9891](https://github.com/thenativeweb/flaschenpost/commit/9ae98914a137d4af54b35f44f11f2bc83005da82))
+
 ## [4.0.11](https://github.com/thenativeweb/flaschenpost/compare/4.0.10...4.0.11) (2020-05-07)
 
 
