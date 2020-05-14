@@ -57,7 +57,7 @@
     "@types/lodash": "4.14.150",
     "@types/node": "14.0.1",
     "@types/stack-trace": "0.0.29",
-    "@types/stringify-object": "3.2.0",
+    "@types/stringify-object": "3.3.0",
     "assertthat": "5.1.1",
     "common-tags": "1.8.0",
     "nodeenv": "3.0.0",
