@@ -60,7 +60,7 @@
     "@types/express": "4.17.7",
     "assertthat": "5.1.1",
     "common-tags": "1.8.0",
-    "nodeenv": "3.0.1",
+    "nodeenv": "3.0.2",
     "record-stdstreams": "3.0.2",
     "roboter": "11.2.4",
     "semantic-release-configuration": "1.0.20",
