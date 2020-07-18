@@ -1,3 +1,10 @@
+## [4.0.24](https://github.com/thenativeweb/flaschenpost/compare/4.0.23...4.0.24) (2020-07-18)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.14.0 to 2.15.0 ([#326](https://github.com/thenativeweb/flaschenpost/issues/326)) ([ab8f57a](https://github.com/thenativeweb/flaschenpost/commit/ab8f57abb97a39cbe63198cf3de27c7af778057d))
+
 ## [4.0.23](https://github.com/thenativeweb/flaschenpost/compare/4.0.22...4.0.23) (2020-07-14)
 
 
