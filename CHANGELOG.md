@@ -1,3 +1,10 @@
+## [4.0.33](https://github.com/thenativeweb/flaschenpost/compare/4.0.32...4.0.33) (2020-08-23)
+
+
+### Bug Fixes
+
+* bump @types/find-root from 1.1.1 to 1.1.2 ([#358](https://github.com/thenativeweb/flaschenpost/issues/358)) ([c065e22](https://github.com/thenativeweb/flaschenpost/commit/c065e22a68874d3b865acb624662b77d014beb79))
+
 ## [4.0.32](https://github.com/thenativeweb/flaschenpost/compare/4.0.31...4.0.32) (2020-08-18)
 
 
