@@ -1,3 +1,10 @@
+## [4.0.34](https://github.com/thenativeweb/flaschenpost/compare/4.0.33...4.0.34) (2020-08-25)
+
+
+### Bug Fixes
+
+* bump @types/lodash from 4.14.159 to 4.14.160 ([#362](https://github.com/thenativeweb/flaschenpost/issues/362)) ([b660cd6](https://github.com/thenativeweb/flaschenpost/commit/b660cd6e81613bbaf41c0f21463eb731b33209c7))
+
 ## [4.0.33](https://github.com/thenativeweb/flaschenpost/compare/4.0.32...4.0.33) (2020-08-23)
 
 
