@@ -47,7 +47,7 @@
     "@types/stringify-object": "3.3.0",
     "app-root-path": "3.0.0",
     "chalk": "4.1.0",
-    "date-fns": "2.16.0",
+    "date-fns": "2.16.1",
     "find-root": "1.1.0",
     "lodash": "4.17.20",
     "processenv": "3.0.2",
