@@ -24,6 +24,8 @@ class Logger {
 
   protected numericLogLevel: number;
 
+  protected isDebugFilterEnabled: boolean;
+
   public constructor (configuration: Configuration, sourcePath: string, packageJson: PackageJson) {
     this.configuration = configuration;
     this.sourcePath = sourcePath;
@@ -42,6 +44,12 @@ class Logger {
     }
     if (this.numericLogLevel < 2) {
       this.error = noop;
+    }
+
+    if (this.configuration.debugModuleFilter.length === 0) {
+      this.isDebugFilterEnabled = true;
+    } else {
+      this.isDebugFilterEnabled = this.configuration.debugModuleFilter.includes(this.module.name);
     }
   }
 
@@ -62,19 +70,11 @@ class Logger {
   }
 
   public debug (message: string, metadata?: object): void {
-    if (!this.isDebugFilterEnabled()) {
+    if (!this.isDebugFilterEnabled) {
       return;
     }
 
     this.log('debug', message, metadata);
-  }
-
-  protected isDebugFilterEnabled (): boolean {
-    if (this.configuration.debugModuleFilter.length === 0) {
-      return true;
-    }
-
-    return this.configuration.debugModuleFilter.includes(this.module.name);
   }
 
   protected log (logLevel: LogLevel, message: string, metadata?: object): void {
