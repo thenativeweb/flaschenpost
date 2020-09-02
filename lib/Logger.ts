@@ -34,15 +34,19 @@ class Logger {
     this.numericLogLevel = logLevelMap[configuration.highestEnabledLogLevel];
 
     if (this.numericLogLevel < 5) {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       this.debug = noop;
     }
     if (this.numericLogLevel < 4) {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       this.info = noop;
     }
     if (this.numericLogLevel < 3) {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       this.warn = noop;
     }
     if (this.numericLogLevel < 2) {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       this.error = noop;
     }
 
