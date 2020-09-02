@@ -3,6 +3,18 @@ import { LogEntry } from './LogEntry';
 import { LogLevel } from './LogLevel';
 import { PackageJson } from './PackageJson';
 
+const noop = function (): void {
+  // Intentionally left blank.
+};
+
+const logLevelMap = {
+  debug: 5,
+  info: 4,
+  warn: 3,
+  error: 2,
+  fatal: 1
+};
+
 class Logger {
   protected configuration: Configuration;
 
@@ -10,10 +22,27 @@ class Logger {
 
   protected sourcePath: string;
 
+  protected numericLogLevel: number;
+
   public constructor (configuration: Configuration, sourcePath: string, packageJson: PackageJson) {
     this.configuration = configuration;
     this.sourcePath = sourcePath;
     this.module = packageJson;
+
+    this.numericLogLevel = logLevelMap[configuration.highestEnabledLogLevel];
+
+    if (this.numericLogLevel < 5) {
+      this.debug = noop;
+    }
+    if (this.numericLogLevel < 4) {
+      this.info = noop;
+    }
+    if (this.numericLogLevel < 3) {
+      this.warn = noop;
+    }
+    if (this.numericLogLevel < 2) {
+      this.error = noop;
+    }
   }
 
   public fatal (message: string, metadata?: object): void {
@@ -33,31 +62,14 @@ class Logger {
   }
 
   public debug (message: string, metadata?: object): void {
-    if (!this.isDebugLoggingEnabled()) {
+    if (!this.isDebugFilterEnabled()) {
       return;
     }
 
     this.log('debug', message, metadata);
   }
 
-  protected isLogLevelEnabled (logLevel: LogLevel): boolean {
-    if (this.configuration.highestEnabledLogLevel === 'debug') {
-      return [ 'fatal', 'error', 'warn', 'info', 'debug' ].includes(logLevel);
-    }
-    if (this.configuration.highestEnabledLogLevel === 'info') {
-      return [ 'fatal', 'error', 'warn', 'info' ].includes(logLevel);
-    }
-    if (this.configuration.highestEnabledLogLevel === 'warn') {
-      return [ 'fatal', 'error', 'warn' ].includes(logLevel);
-    }
-    if (this.configuration.highestEnabledLogLevel === 'error') {
-      return [ 'fatal', 'error' ].includes(logLevel);
-    }
-
-    return [ 'fatal' ].includes(logLevel);
-  }
-
-  protected isDebugLoggingEnabled (): boolean {
+  protected isDebugFilterEnabled (): boolean {
     if (this.configuration.debugModuleFilter.length === 0) {
       return true;
     }
@@ -66,10 +78,6 @@ class Logger {
   }
 
   protected log (logLevel: LogLevel, message: string, metadata?: object): void {
-    if (!this.isLogLevelEnabled(logLevel)) {
-      return;
-    }
-
     const logEntry = new LogEntry(
       this.configuration.logEntryIdGenerator.next().value,
       this.configuration.hostname,
