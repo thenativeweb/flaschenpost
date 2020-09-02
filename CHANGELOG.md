@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/thenativeweb/flaschenpost/compare/4.0.39...4.1.0) (2020-09-02)
+
+
+### Features
+
+* Replace disabled log functions with noops. ([#375](https://github.com/thenativeweb/flaschenpost/issues/375)) ([4d2eb51](https://github.com/thenativeweb/flaschenpost/commit/4d2eb5121771db61cdaa1759795a86088608a7da))
+
 ## [4.0.39](https://github.com/thenativeweb/flaschenpost/compare/4.0.38...4.0.39) (2020-09-01)
 
 
