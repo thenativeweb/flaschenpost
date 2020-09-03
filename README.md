@@ -56,6 +56,14 @@ logger.info('Server started.', { port: 3000 });
 
 _Please note that the metadata parameter must be an object. If you want to use other data types as metadata, such as booleans, numbers or strings, you need to wrap them within an object._
 
+If at any point in your application code you want to check wether debug logging is enabled (to e.g. measure times for more detailled logging), you can do so via the public readonly property `isDebugMode` on the logger instance:
+
+```javascript
+if (logger.isDebugMode) {
+  // Collect more data and log it.
+}
+```
+
 ### Managing log levels
 
 By default flaschenpost only logs `fatal`, `error`, `warn` and `info` messages, but not `debug` messages. To change this, set the `LOG_LEVEL` environment variable to the log level that you would like to log message up to. E.g., to enable logging for all log levels, set its value to `debug`:
