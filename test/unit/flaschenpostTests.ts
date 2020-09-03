@@ -36,6 +36,19 @@ suite('flaschenpost', (): void => {
 
       flaschenpost.configure(originalConfiguration);
     });
+
+    test('sets isDebugMode on creation.', async (): Promise<void> => {
+      const originalConfiguration = flaschenpost.getConfiguration();
+      const newLogLevel = 'debug';
+
+      flaschenpost.configure(originalConfiguration.withHighestEnabledLogLevel(newLogLevel));
+
+      const logger = flaschenpost.getLogger();
+
+      assert.that(logger.isDebugMode).is.true();
+
+      flaschenpost.configure(originalConfiguration);
+    });
   });
 
   test('debug filtering by module.', async (): Promise<void> => {
