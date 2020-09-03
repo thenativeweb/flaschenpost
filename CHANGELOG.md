@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/thenativeweb/flaschenpost/compare/4.1.1...4.2.0) (2020-09-03)
+
+
+### Features
+
+* Add public readonly field isDebugMode to logger class. ([#377](https://github.com/thenativeweb/flaschenpost/issues/377)) ([56517e1](https://github.com/thenativeweb/flaschenpost/commit/56517e1ce06d0d53ee9dc201fb6e832c81ca2553))
+
 ## [4.1.1](https://github.com/thenativeweb/flaschenpost/compare/4.1.0...4.1.1) (2020-09-03)
 
 
