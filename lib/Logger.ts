@@ -26,11 +26,14 @@ class Logger {
 
   protected isDebugFilterEnabled: boolean;
 
+  public readonly isDebugMode: boolean;
+
   public constructor (configuration: Configuration, sourcePath: string, packageJson: PackageJson) {
     this.configuration = configuration;
     this.sourcePath = sourcePath;
     this.module = packageJson;
 
+    this.isDebugMode = configuration.highestEnabledLogLevel === 'debug';
     this.numericLogLevel = logLevelMap[configuration.highestEnabledLogLevel];
 
     if (this.numericLogLevel < 5) {
