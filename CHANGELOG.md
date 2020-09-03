@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/thenativeweb/flaschenpost/compare/4.2.0...4.3.0) (2020-09-03)
+
+
+### Features
+
+* Add notice regarding `isDebugMode` to readme. ([#378](https://github.com/thenativeweb/flaschenpost/issues/378)) ([2f0ce8c](https://github.com/thenativeweb/flaschenpost/commit/2f0ce8c04abcd25125aa1f6c8fa5317e7989d3b6))
+
 # [4.2.0](https://github.com/thenativeweb/flaschenpost/compare/4.1.1...4.2.0) (2020-09-03)
 
 
