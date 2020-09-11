@@ -1,3 +1,10 @@
+## [4.3.3](https://github.com/thenativeweb/flaschenpost/compare/4.3.2...4.3.3) (2020-09-11)
+
+
+### Performance Improvements
+
+* Get stack traces only when needed. ([#387](https://github.com/thenativeweb/flaschenpost/issues/387)) ([90ad02e](https://github.com/thenativeweb/flaschenpost/commit/90ad02e12db9f0481df3fda25ba2f93d02cec905))
+
 ## [4.3.2](https://github.com/thenativeweb/flaschenpost/compare/4.3.1...4.3.2) (2020-09-11)
 
 
