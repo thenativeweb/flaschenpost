@@ -71,7 +71,7 @@ class Flaschenpost {
   // you want to use a virtual file name, you must additionally provide a
   // package.json override. If you refer to an existing file, you can skip this.
   public getLogger (sourcePathOverride?: string, packageJsonOverrideForVirtualSourcePaths?: PackageJson): Logger {
-    let sourcePath = stackTrace.get()[1].getFileName();
+    let sourcePath;
     let packageJson;
 
     if (sourcePathOverride) {
@@ -81,6 +81,11 @@ class Flaschenpost {
         /* eslint-enable no-sync */
       }
       sourcePath = sourcePathOverride;
+    } else {
+      // Do not move this line to outside the if statement as default value, as
+      // getting the stack trace is pretty slow, so it should be kept here for
+      // performance reasons.
+      sourcePath = stackTrace.get()[1].getFileName();
     }
 
     if (packageJsonOverrideForVirtualSourcePaths) {
