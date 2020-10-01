@@ -60,23 +60,23 @@ class Logger {
     }
   }
 
-  public fatal (message: string, metadata?: object): void {
+  public fatal (message: string, metadata?: Record<string, unknown>): void {
     this.log('fatal', message, metadata);
   }
 
-  public error (message: string, metadata?: object): void {
+  public error (message: string, metadata?: Record<string, unknown>): void {
     this.log('error', message, metadata);
   }
 
-  public warn (message: string, metadata?: object): void {
+  public warn (message: string, metadata?: Record<string, unknown>): void {
     this.log('warn', message, metadata);
   }
 
-  public info (message: string, metadata?: object): void {
+  public info (message: string, metadata?: Record<string, unknown>): void {
     this.log('info', message, metadata);
   }
 
-  public debug (message: string, metadata?: object): void {
+  public debug (message: string, metadata?: Record<string, unknown>): void {
     if (!this.isDebugFilterEnabled) {
       return;
     }
@@ -84,7 +84,7 @@ class Logger {
     this.log('debug', message, metadata);
   }
 
-  protected log (logLevel: LogLevel, message: string, metadata?: object): void {
+  protected log (logLevel: LogLevel, message: string, metadata?: Record<string, unknown>): void {
     const logEntry = new LogEntry(
       this.configuration.logEntryIdGenerator.next().value,
       this.configuration.hostname,

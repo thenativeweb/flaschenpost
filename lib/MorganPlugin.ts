@@ -27,12 +27,11 @@ class MorganPlugin extends Writable {
     this.logger = flaschenpost.getLogger(sourcePath);
   }
 
-  /* eslint-disable no-underscore-dangle, @typescript-eslint/member-naming */
-  public _write (chunk: any, _encoding: string, callback: (err?: Error) => void): void {
+  // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
+  public _write (chunk: any, encoding: string, callback: (err?: Error) => void): void {
     this.logger[this.logLevel](chunk);
     callback();
   }
-  /* eslint-enable no-underscore-dangle, @typescript-eslint/member-naming */
 }
 
 export { MorganPlugin };
