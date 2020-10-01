@@ -21,7 +21,7 @@ class LogEntry {
 
   public message: string;
 
-  public metadata?: object;
+  public metadata?: Record<string, unknown>;
 
   public constructor (
     id: number | string,
@@ -33,7 +33,7 @@ class LogEntry {
     timestamp: number,
     level: LogLevel,
     message: string,
-    metadata?: object
+    metadata?: Record<string, unknown>
   ) {
     this.id = id;
     this.hostname = hostname;

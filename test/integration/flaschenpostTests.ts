@@ -14,9 +14,11 @@ suite('flaschenpost', (): void => {
 
     setup(async (): Promise<void> => {
       restore = nodeenv({
+        /* eslint-disable @typescript-eslint/naming-convention */
         LOG_DEBUG_MODULE_FILTER: '',
         LOG_FORMATTER: 'human',
         LOG_LEVEL: 'info'
+        /* eslint-enable @typescript-eslint/naming-convention */
       });
 
       flaschenpostInstance = new Flaschenpost();
@@ -47,9 +49,11 @@ suite('flaschenpost', (): void => {
 
     setup(async (): Promise<void> => {
       restore = nodeenv({
+        /* eslint-disable @typescript-eslint/naming-convention */
         LOG_DEBUG_MODULE_FILTER: '',
         LOG_FORMATTER: 'json',
         LOG_LEVEL: 'debug'
+        /* eslint-enable @typescript-eslint/naming-convention */
       });
 
       flaschenpostInstance = new Flaschenpost();
@@ -87,9 +91,11 @@ suite('flaschenpost', (): void => {
 
     setup(async (): Promise<void> => {
       restore = nodeenv({
+        /* eslint-disable @typescript-eslint/naming-convention */
         LOG_DEBUG_MODULE_FILTER: '',
         LOG_FORMATTER: 'json',
         LOG_LEVEL: 'debug'
+        /* eslint-enable @typescript-eslint/naming-convention */
       });
 
       flaschenpostInstance = new Flaschenpost();

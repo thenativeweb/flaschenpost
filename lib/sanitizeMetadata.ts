@@ -1,13 +1,13 @@
 import { serializeError } from 'serialize-error';
 import { cloneDeepWith, isError } from 'lodash';
 
-const sanitizeMetadata = function (metadata: object): object {
+const sanitizeMetadata = function (metadata: Record<string, unknown>): Record<string, unknown> {
   const cloner = function (value: any): any {
-    if (isError(value)) {
-      return serializeError(value);
+    if (!isError(value)) {
+      return;
     }
 
-    return undefined;
+    return serializeError(value);
   };
 
   return cloneDeepWith(metadata, cloner);
