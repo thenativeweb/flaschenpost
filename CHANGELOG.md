@@ -1,3 +1,10 @@
+## [4.3.9](https://github.com/thenativeweb/flaschenpost/compare/4.3.8...4.3.9) (2020-10-09)
+
+
+### Bug Fixes
+
+* bump roboter from 11.3.12 to 11.3.14 ([#419](https://github.com/thenativeweb/flaschenpost/issues/419)) ([60a6679](https://github.com/thenativeweb/flaschenpost/commit/60a6679282efc2594b8f28128ab1298ec2b66c0c))
+
 ## [4.3.8](https://github.com/thenativeweb/flaschenpost/compare/4.3.7...4.3.8) (2020-10-06)
 
 
