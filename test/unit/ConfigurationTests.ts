@@ -101,12 +101,12 @@ suite('Configuration', (): void => {
 
   suite('withLogEntryIdGenerator', (): void => {
     test('returns a clone of the configuration with a new log entry id generator.', async (): Promise<void> => {
+      // eslint-disable-next-line unicorn/consistent-function-scoping
       const newLogEntryIdGenerator = function * (): Generator<number, never> {
-        /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         while (true) {
-          yield 1337;
+          yield 1_337;
         }
-        /* eslint-enable @typescript-eslint/no-unnecessary-condition */
       };
       const newConfiguration = defaultConfiguration.withLogEntryIdGenerator(newLogEntryIdGenerator());
 
@@ -116,7 +116,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
-      assert.that(newConfiguration.logEntryIdGenerator.next().value).is.equalTo(1337);
+      assert.that(newConfiguration.logEntryIdGenerator.next().value).is.equalTo(1_337);
     });
   });
 });

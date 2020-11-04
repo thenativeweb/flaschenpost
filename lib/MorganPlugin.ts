@@ -10,16 +10,7 @@ class MorganPlugin extends Writable {
   protected logger: Logger;
 
   public constructor (logLevel: LogLevel, sourcePathOverride?: string) {
-    let sourcePath;
-
-    if (sourcePathOverride) {
-      sourcePath = sourcePathOverride;
-    } else {
-      // Do not move this line to outside the if statement as default value, as
-      // getting the stack trace is pretty slow, so it should be kept here for
-      // performance reasons.
-      sourcePath = stackTrace.get()[1].getFileName();
-    }
+    const sourcePath = sourcePathOverride ?? stackTrace.get()[1].getFileName();
 
     super({ objectMode: true });
 

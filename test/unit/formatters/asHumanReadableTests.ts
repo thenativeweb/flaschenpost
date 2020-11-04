@@ -12,11 +12,11 @@ suite('asHumanReadable', (): void => {
     const logEntry = new LogEntry(
       0,
       'localhost',
-      12345,
+      12_345,
       { name: 'test-app', version: '1.0.0' },
       { name: 'test-module', version: '1.0.0' },
       '/foo/bar.js',
-      1567581970578,
+      1_567_581_970_578,
       'info',
       'Server started.'
     );
