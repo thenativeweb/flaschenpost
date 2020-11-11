@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@types/common-tags": "1.8.0",
-    "@types/express": "4.17.8",
+    "@types/express": "4.17.9",
     "assertthat": "5.2.5",
     "common-tags": "1.8.0",
     "nodeenv": "3.0.27",
