@@ -1,3 +1,10 @@
+## [4.3.24](https://github.com/thenativeweb/flaschenpost/compare/4.3.23...4.3.24) (2020-12-08)
+
+
+### Bug Fixes
+
+* bump @types/node from 14.14.10 to 14.14.11 ([#503](https://github.com/thenativeweb/flaschenpost/issues/503)) ([6b64e95](https://github.com/thenativeweb/flaschenpost/commit/6b64e95efb3eac1dafd90f22c91d34aded9a1532))
+
 ## [4.3.23](https://github.com/thenativeweb/flaschenpost/compare/4.3.22...4.3.23) (2020-11-25)
 
 
