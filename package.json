@@ -63,7 +63,7 @@
     "nodeenv": "3.0.36",
     "record-stdstreams": "3.0.36",
     "roboter": "11.5.29",
-    "semantic-release-configuration": "1.0.28",
+    "semantic-release-configuration": "1.0.29",
     "strip-ansi": "6.0.0"
   },
   "repository": {
