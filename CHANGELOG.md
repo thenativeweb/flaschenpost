@@ -1,3 +1,10 @@
+## [4.3.32](https://github.com/thenativeweb/flaschenpost/compare/4.3.31...4.3.32) (2021-01-08)
+
+
+### Bug Fixes
+
+* bump serialize-error from 7.0.1 to 8.0.0 ([#538](https://github.com/thenativeweb/flaschenpost/issues/538)) ([b811f89](https://github.com/thenativeweb/flaschenpost/commit/b811f89634c1dda1f28d0ea7befcc45857cd4fbd))
+
 ## [4.3.31](https://github.com/thenativeweb/flaschenpost/compare/4.3.30...4.3.31) (2021-01-04)
 
 
