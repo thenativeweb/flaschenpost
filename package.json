@@ -41,7 +41,7 @@
   "dependencies": {
     "@types/app-root-path": "1.2.4",
     "@types/find-root": "1.1.2",
-    "@types/lodash": "4.14.167",
+    "@types/lodash": "4.14.168",
     "@types/node": "14.14.21",
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "3.3.0",
