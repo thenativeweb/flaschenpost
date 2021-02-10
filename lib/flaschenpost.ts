@@ -5,7 +5,6 @@ import fs from 'fs';
 import { getLogEntryIdGenerator } from './getLogEntryIdGenerator';
 import { isLogLevel } from './isLogLevel';
 import { Logger } from './Logger';
-import { MorganPlugin } from './MorganPlugin';
 import os from 'os';
 import { PackageJson } from './PackageJson';
 import { processenv } from 'processenv';
@@ -102,4 +101,4 @@ class Flaschenpost {
 
 const flaschenpost = new Flaschenpost();
 
-export { flaschenpost, Configuration, Flaschenpost, asHumanReadable, asJson, Logger, MorganPlugin };
+export { flaschenpost, Flaschenpost };

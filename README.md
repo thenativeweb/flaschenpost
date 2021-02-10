@@ -116,29 +116,37 @@ const logger = flaschenpost.getLogger(
 );
 ```
 
-### Using the morgan plugin
+### Using the flaschenpost middleware
 
-flaschenpost can be used as a plugin for the [morgan](https://www.npmjs.com/package/morgan) logger, e.g. to use flaschenpost in combination with Express. For this, first load flaschenpost's morgan plugin:
+flaschenpost can be used as a middleware for Express. For this, first load flaschenpost's `getMiddleware` function:
 
 ```javascript
-const { MorganPlugin } = require('flaschenpost');
+const { getMiddleware } = require('flaschenpost');
 ```
 
 If you use TypeScript, use the following code instead:
 
 ```typescript
-import { MorganPlugin } from 'flaschenpost';
+import { getMiddleware } from 'flaschenpost';
 ```
 
-Create an instance of the `MorganPlugin` class and specify the log level you would like to use. Then hand over this instance to morgan by using its `stream` property:
+Create an instance of the middleware by calling `getMiddleware` and register it via the usual way in your Express application:
 
 ```javascript
-const morganPlugin = new MorganPlugin('info');
-
-app.use(morgan('combined', { stream: morganPlugin }));
+app.use(getMiddleware());
 ```
 
-If you want to override the log source, you can provide the desired file path as second parameter to the constructor. See [faking log sources](#faking-log-sources) for details.
+Sometimes you may want to log when the request is received, not when the response was sent, e.g. for long-running connections. For these cases, provide the `logOn` option and set it to `request`:
+
+```javascript
+app.use(getMiddleware({ logOn: 'request' }));
+```
+
+By default, the middleware uses `info` as log level. To change this, provide the `logLevel` option and set it to the desired value:
+
+```javascript
+app.use(getMiddleware({ logLevel: 'warn' }));
+```
 
 ### Configuring flaschenpost programmatically
 
