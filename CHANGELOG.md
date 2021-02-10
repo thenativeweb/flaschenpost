@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/thenativeweb/flaschenpost/compare/4.3.37...5.0.0) (2021-02-10)
+
+
+### Features
+
+* Replace Morgan plugin by new middleware. ([#569](https://github.com/thenativeweb/flaschenpost/issues/569)) ([16802a3](https://github.com/thenativeweb/flaschenpost/commit/16802a33b9ba8239ae49bfa62737d24852334615))
+
+
+### BREAKING CHANGES
+
+* The morgan plugin was replaced by a new middleware that was written from scratch that now works without morgan.
+
 ## [4.3.37](https://github.com/thenativeweb/flaschenpost/compare/4.3.36...4.3.37) (2021-02-08)
 
 
