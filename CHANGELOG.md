@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/thenativeweb/flaschenpost/compare/5.0.2...5.0.3) (2021-02-15)
+
+
+### Bug Fixes
+
+* bump @types/node from 14.14.27 to 14.14.28 ([#578](https://github.com/thenativeweb/flaschenpost/issues/578)) ([1996d94](https://github.com/thenativeweb/flaschenpost/commit/1996d94ed3da3504e5576ee2c4e313364411e5b2))
+
 ## [5.0.2](https://github.com/thenativeweb/flaschenpost/compare/5.0.1...5.0.2) (2021-02-12)
 
 
