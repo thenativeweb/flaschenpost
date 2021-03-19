@@ -116,6 +116,14 @@ const logger = flaschenpost.getLogger(
 );
 ```
 
+### Enable ISO timestamp
+
+To enable a human readable timestamp in ISO format additionally to the unix timestamp, set the `LOG_ISO_TIMESTAMP` environment variable to `true`:
+
+```shell
+$ LOG_ISO_TIMESTAMP=true
+```
+
 ### Using the flaschenpost middleware
 
 flaschenpost can be used as a middleware for Express. For this, first load flaschenpost's `getMiddleware` function:
