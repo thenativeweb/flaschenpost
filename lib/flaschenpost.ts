@@ -46,12 +46,15 @@ class Flaschenpost {
 
     const logEntryIdGenerator = getLogEntryIdGenerator();
 
+    const logIsoTimestamp = processenv('LOG_ISO_TIMESTAMP', false);
+
     this.configuration = new Configuration(
       debugModuleFilter,
       formatter,
       highestEnabledLogLevel,
       hostname,
-      logEntryIdGenerator
+      logEntryIdGenerator,
+      logIsoTimestamp === true
     );
   }
 

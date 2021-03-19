@@ -21,6 +21,8 @@ class LogEntry {
 
   public message: string;
 
+  public isoTimestamp?: string;
+
   public metadata?: Record<string, unknown>;
 
   public constructor (
@@ -33,6 +35,7 @@ class LogEntry {
     timestamp: number,
     level: LogLevel,
     message: string,
+    logIsoTimestamp: boolean,
     metadata?: Record<string, unknown>
   ) {
     this.id = id;
@@ -44,6 +47,10 @@ class LogEntry {
     this.timestamp = timestamp;
     this.level = level;
     this.message = message;
+
+    if (logIsoTimestamp) {
+      this.isoTimestamp = new Date(timestamp).toISOString();
+    }
 
     if (metadata) {
       this.metadata = sanitizeMetadata(metadata);

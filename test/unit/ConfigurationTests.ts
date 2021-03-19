@@ -15,7 +15,8 @@ suite('Configuration', (): void => {
     asJson,
     'info',
     'localhost',
-    getLogEntryIdGenerator()
+    getLogEntryIdGenerator(),
+    false
   );
 
   suite('withApplication', (): void => {
@@ -33,6 +34,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+      assert.that(newConfiguration.logIsoTimestamp).is.false();
     });
   });
 
@@ -48,6 +50,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+      assert.that(newConfiguration.logIsoTimestamp).is.false();
     });
   });
 
@@ -66,6 +69,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+      assert.that(newConfiguration.logIsoTimestamp).is.false();
     });
   });
 
@@ -81,6 +85,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.highestEnabledLogLevel).is.sameAs(newHighestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+      assert.that(newConfiguration.logIsoTimestamp).is.false();
     });
   });
 
@@ -96,6 +101,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.sameAs(newHostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+      assert.that(newConfiguration.logIsoTimestamp).is.false();
     });
   });
 
@@ -117,6 +123,23 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator.next().value).is.equalTo(1_337);
+      assert.that(newConfiguration.logIsoTimestamp).is.false();
+    });
+  });
+
+  suite('withIsoTimestamp', (): void => {
+    test('returns a clone of the configuration with new ISO timestamp setting.', async (): Promise<void> => {
+      const logIsoTimestamp = true;
+      const newConfiguration = defaultConfiguration.withIsoTimestamp(logIsoTimestamp);
+
+      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
+      assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
+      assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
+      assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
+      assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
+      assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+      assert.that(newConfiguration.logIsoTimestamp).is.equalTo(logIsoTimestamp);
     });
   });
 });

@@ -19,12 +19,15 @@ class Configuration {
 
   public logEntryIdGenerator: LogEntryIdGenerator;
 
+  public logIsoTimestamp: boolean;
+
   public constructor (
     debugModuleFilter: string[],
     formatter: Formatter,
     highestEnabledLogLevel: LogLevel,
     hostname: string,
-    logEntryIdGenerator: LogEntryIdGenerator
+    logEntryIdGenerator: LogEntryIdGenerator,
+    logIsoTimestamp: boolean
   ) {
     this.application = readPackageJson(appRootPath.path);
     this.debugModuleFilter = debugModuleFilter;
@@ -32,6 +35,7 @@ class Configuration {
     this.highestEnabledLogLevel = highestEnabledLogLevel;
     this.hostname = hostname;
     this.logEntryIdGenerator = logEntryIdGenerator;
+    this.logIsoTimestamp = logIsoTimestamp;
   }
 
   public withApplication (application: PackageJson): Configuration {
@@ -78,6 +82,14 @@ class Configuration {
     const newConfiguration = cloneDeep(this);
 
     newConfiguration.logEntryIdGenerator = logEntryIdGenerator;
+
+    return newConfiguration;
+  }
+
+  public withIsoTimestamp (logIsoTimestamp: boolean): Configuration {
+    const newConfiguration = cloneDeep(this);
+
+    newConfiguration.logIsoTimestamp = logIsoTimestamp;
 
     return newConfiguration;
   }

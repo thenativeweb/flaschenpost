@@ -250,6 +250,15 @@ const updatedConfiguration =
   });
 ```
 
+#### Setting ISO timestamp
+
+To set the ISO timestamp switch, use the `withIsoTimestamp` function:
+
+```javascript
+const updatedConfiguration =
+  configuration.withIsoTimestamp(true);
+```
+
 ## Running quality assurance
 
 To run quality assurance for this module use [roboter](https://www.npmjs.com/package/roboter):

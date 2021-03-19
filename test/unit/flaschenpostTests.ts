@@ -83,7 +83,8 @@ suite('flaschenpost', (): void => {
           asHumanReadable,
           'error',
           'localhost',
-          getLogEntryIdGenerator()
+          getLogEntryIdGenerator(),
+          false
         ));
         const logger = flaschenpostInstance.getLogger();
 

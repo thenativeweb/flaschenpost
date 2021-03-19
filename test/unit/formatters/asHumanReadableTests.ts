@@ -18,7 +18,8 @@ suite('asHumanReadable', (): void => {
       '/foo/bar.js',
       1_567_581_970_578,
       'info',
-      'Server started.'
+      'Server started.',
+      false
     );
 
     const formattedLogEntry = asHumanReadable(logEntry);

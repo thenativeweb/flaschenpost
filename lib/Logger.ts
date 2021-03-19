@@ -95,6 +95,7 @@ class Logger {
       Date.now(),
       logLevel,
       message,
+      this.configuration.logIsoTimestamp,
       metadata
     );
 
