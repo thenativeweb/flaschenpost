@@ -13,7 +13,7 @@ flaschenpost is a logger for cloud-based applications.
 | Version          | [![npm](https://img.shields.io/npm/v/flaschenpost)](https://www.npmjs.com/package/flaschenpost)           |
 | Dependencies     | ![David](https://img.shields.io/david/thenativeweb/flaschenpost)                                          |
 | Dev dependencies | ![David](https://img.shields.io/david/dev/thenativeweb/flaschenpost)                                      |
-| Build            | ![GitHub Actions](https://github.com/thenativeweb/flaschenpost/workflows/Release/badge.svg?branch=master) |
+| Build            | ![GitHub Actions](https://github.com/thenativeweb/flaschenpost/workflows/Release/badge.svg?branch=main) |
 | License          | ![GitHub](https://img.shields.io/github/license/thenativeweb/flaschenpost)                                |
 
 ## Installation
