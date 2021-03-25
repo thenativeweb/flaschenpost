@@ -1,3 +1,10 @@
+## [5.0.12](https://github.com/thenativeweb/flaschenpost/compare/5.0.11...5.0.12) (2021-03-25)
+
+
+### Bug Fixes
+
+* Migrate from master to main. ([#620](https://github.com/thenativeweb/flaschenpost/issues/620)) ([ad87daa](https://github.com/thenativeweb/flaschenpost/commit/ad87daa20db3823a940fc48d64e67f047d2b8aae))
+
 ## [5.0.11](https://github.com/thenativeweb/flaschenpost/compare/5.0.10...5.0.11) (2021-03-19)
 
 
