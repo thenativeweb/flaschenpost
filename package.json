@@ -64,7 +64,7 @@
     "assertthat": "5.2.7",
     "common-tags": "1.8.0",
     "express": "4.17.1",
-    "nodeenv": "3.0.47",
+    "nodeenv": "3.0.48",
     "record-stdstreams": "3.0.47",
     "roboter": "11.6.31",
     "semantic-release-configuration": "2.0.0",
