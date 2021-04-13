@@ -1,3 +1,10 @@
+## [5.0.19](https://github.com/thenativeweb/flaschenpost/compare/5.0.18...5.0.19) (2021-04-13)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.20.2 to 2.20.3 ([#644](https://github.com/thenativeweb/flaschenpost/issues/644)) ([c935b46](https://github.com/thenativeweb/flaschenpost/commit/c935b4673fe2cc20eb08fe9156d132352413f481))
+
 ## [5.0.18](https://github.com/thenativeweb/flaschenpost/compare/5.0.17...5.0.18) (2021-04-13)
 
 
