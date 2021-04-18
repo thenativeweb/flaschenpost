@@ -96,7 +96,7 @@ $ LOG_FORMATTER=human
 
 ### Faking log sources
 
-Basically, when calling the `getLoggeer` function, flaschenpost automatically detects the file from which this call is done, and infers the appropriate file name. Sometimes, this is not desired, as you may want to manually set the file name used as source.
+Basically, when calling the `getLogger` function, flaschenpost automatically detects the file from which this call is done, and infers the appropriate file name. Sometimes, this is not desired, as you may want to manually set the file name used as source.
 
 Therefore, you can provide a file path as a parameter to the `getLogger` function. Please note that this file path must be an absolute path, and that it must point to an existing file:
 
