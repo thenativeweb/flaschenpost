@@ -1,3 +1,31 @@
+## [5.0.21](https://github.com/thenativeweb/flaschenpost/compare/5.0.20...5.0.21) (2021-04-18)
+
+
+### Bug Fixes
+
+* bump @types/node from 14.14.37 to 14.14.39 ([#645](https://github.com/thenativeweb/flaschenpost/issues/645)) ([8754534](https://github.com/thenativeweb/flaschenpost/commit/8754534537025864bdfe34c431f5ee94063d85e4))
+
+## [5.0.20](https://github.com/thenativeweb/flaschenpost/compare/5.0.19...5.0.20) (2021-04-16)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.20.3 to 2.21.1 ([#647](https://github.com/thenativeweb/flaschenpost/issues/647)) ([fe052e6](https://github.com/thenativeweb/flaschenpost/commit/fe052e6e9a99d16f4d7dddcfe87cf4cdb09375f4))
+
+## [5.0.19](https://github.com/thenativeweb/flaschenpost/compare/5.0.18...5.0.19) (2021-04-13)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.20.2 to 2.20.3 ([#644](https://github.com/thenativeweb/flaschenpost/issues/644)) ([c935b46](https://github.com/thenativeweb/flaschenpost/commit/c935b4673fe2cc20eb08fe9156d132352413f481))
+
+## [5.0.18](https://github.com/thenativeweb/flaschenpost/compare/5.0.17...5.0.18) (2021-04-13)
+
+
+### Bug Fixes
+
+* bump date-fns from 2.20.1 to 2.20.2 ([#643](https://github.com/thenativeweb/flaschenpost/issues/643)) ([2356230](https://github.com/thenativeweb/flaschenpost/commit/2356230d6eeb83c743738d5710f00e532648d1ea))
+
 ## [5.0.17](https://github.com/thenativeweb/flaschenpost/compare/5.0.16...5.0.17) (2021-04-11)
 
 
