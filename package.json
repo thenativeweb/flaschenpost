@@ -1,6 +1,6 @@
 {
   "name": "flaschenpost",
-  "version": "5.0.22",
+  "version": "5.0.23",
   "description": "flaschenpost is a logger for cloud-based applications.",
   "contributors": [
     {
@@ -48,7 +48,7 @@
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "3.3.0",
     "app-root-path": "3.0.0",
-    "chalk": "4.1.0",
+    "chalk": "4.1.1",
     "date-fns": "2.21.1",
     "find-root": "1.1.0",
     "lodash": "4.17.21",
