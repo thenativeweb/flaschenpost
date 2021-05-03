@@ -1,3 +1,10 @@
+## [5.0.26](https://github.com/thenativeweb/flaschenpost/compare/5.0.25...5.0.26) (2021-05-03)
+
+
+### Bug Fixes
+
+* Fix path to image. ([#664](https://github.com/thenativeweb/flaschenpost/issues/664)) ([de9694b](https://github.com/thenativeweb/flaschenpost/commit/de9694b48ee5d6c005ff46afb583e51c126fb18b))
+
 ## [5.0.25](https://github.com/thenativeweb/flaschenpost/compare/5.0.24...5.0.25) (2021-04-28)
 
 
