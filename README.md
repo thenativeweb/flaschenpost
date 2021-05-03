@@ -2,7 +2,7 @@
 
 flaschenpost is a logger for cloud-based applications.
 
-![flaschenpost](https://github.com/thenativeweb/flaschenpost/raw/master/images/logo.jpg "flaschenpost")
+![flaschenpost](https://github.com/thenativeweb/flaschenpost/raw/main/images/logo.jpg "flaschenpost")
 
 > _A [/ˈflaʃənˌpɔst/](https://en.wiktionary.org/wiki/Flaschenpost) is a „message written on a scrap of paper, rolled-up and put in an empty bottle and set adrift on the ocean; traditionally, a method used by castaways to advertise their distress to the outside world”._ (from [Wiktionary](https://en.wiktionary.org/wiki/message_in_a_bottle))
 
