@@ -26,8 +26,8 @@ suite('Configuration', (): void => {
       };
       const newConfiguration = defaultConfiguration.withApplication(newApplication);
 
-      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
-      assert.that(newConfiguration.application).is.sameAs(newApplication);
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
+      assert.that(newConfiguration.application).is.identicalTo(newApplication);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
@@ -41,9 +41,9 @@ suite('Configuration', (): void => {
       const newDebugModuleFilter: string[] = [];
       const newConfiguration = defaultConfiguration.withDebugModuleFilter(newDebugModuleFilter);
 
-      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
-      assert.that(newConfiguration.debugModuleFilter).is.sameAs(newDebugModuleFilter);
+      assert.that(newConfiguration.debugModuleFilter).is.identicalTo(newDebugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
@@ -59,10 +59,10 @@ suite('Configuration', (): void => {
 
       const newConfiguration = defaultConfiguration.withFormatter(newFormatter);
 
-      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
-      assert.that(newConfiguration.formatter).is.sameAs(newFormatter);
+      assert.that(newConfiguration.formatter).is.identicalTo(newFormatter);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
@@ -74,11 +74,11 @@ suite('Configuration', (): void => {
       const newHighestEnabledLogLevel: LogLevel = 'error';
       const newConfiguration = defaultConfiguration.withHighestEnabledLogLevel(newHighestEnabledLogLevel);
 
-      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
-      assert.that(newConfiguration.highestEnabledLogLevel).is.sameAs(newHighestEnabledLogLevel);
+      assert.that(newConfiguration.highestEnabledLogLevel).is.identicalTo(newHighestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
     });
@@ -89,12 +89,12 @@ suite('Configuration', (): void => {
       const newHostname = 'new host name';
       const newConfiguration = defaultConfiguration.withHostname(newHostname);
 
-      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
-      assert.that(newConfiguration.hostname).is.sameAs(newHostname);
+      assert.that(newConfiguration.hostname).is.identicalTo(newHostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
     });
   });
@@ -110,7 +110,7 @@ suite('Configuration', (): void => {
       };
       const newConfiguration = defaultConfiguration.withLogEntryIdGenerator(newLogEntryIdGenerator());
 
-      assert.that(newConfiguration).is.not.sameAs(defaultConfiguration);
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
