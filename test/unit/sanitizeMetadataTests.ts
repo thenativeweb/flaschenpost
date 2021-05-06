@@ -17,7 +17,7 @@ suite('sanitizeMetadata', (): void => {
     const metadata = { foo: 'bar' };
     const sanitizedMetadata = sanitizeMetadata(metadata);
 
-    assert.that(sanitizedMetadata).is.not.sameAs(metadata);
+    assert.that(sanitizedMetadata).is.not.identicalTo(metadata);
   });
 
   test('correctly serializes errors.', async (): Promise<void> => {

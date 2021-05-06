@@ -42,7 +42,7 @@ suite('getMiddleware', (): void => {
     assert.that(source).is.equalTo(__filename);
     assert.that(message).is.equalTo(`Receiving 'GET /hello-pre'...`);
     assert.that(level).is.equalTo('info');
-    assert.that(metadata).is.atLeast({
+    assert.that(metadata as object).is.atLeast({
       request: {
         method: 'GET',
         path: '/hello-pre',
@@ -62,7 +62,7 @@ suite('getMiddleware', (): void => {
     assert.that(source).is.equalTo(__filename);
     assert.that(message).is.equalTo(`Responded 'GET /hello-post'.`);
     assert.that(level).is.equalTo('info');
-    assert.that(metadata).is.atLeast({
+    assert.that(metadata as object).is.atLeast({
       request: {
         method: 'GET',
         path: '/hello-post',
@@ -73,7 +73,7 @@ suite('getMiddleware', (): void => {
         contentLength: content.length
       }
     });
-    assert.that(metadata.response.time).is.atLeast(0);
+    assert.that(metadata.response.time as number).is.atLeast(0);
   });
 
   test('logs on response by default.', async (): Promise<void> => {
