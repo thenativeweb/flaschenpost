@@ -1,3 +1,10 @@
+## [5.0.30](https://github.com/thenativeweb/flaschenpost/compare/5.0.29...5.0.30) (2021-05-10)
+
+
+### Bug Fixes
+
+* bump hosted-git-info from 2.8.8 to 2.8.9 ([#670](https://github.com/thenativeweb/flaschenpost/issues/670)) ([d06738f](https://github.com/thenativeweb/flaschenpost/commit/d06738f0576e6d49c0169c5047c95068b56da8e3))
+
 ## [5.0.29](https://github.com/thenativeweb/flaschenpost/compare/5.0.28...5.0.29) (2021-05-10)
 
 
