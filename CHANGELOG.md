@@ -1,3 +1,17 @@
+## [5.0.32](https://github.com/thenativeweb/flaschenpost/compare/5.0.31...5.0.32) (2021-05-17)
+
+
+### Bug Fixes
+
+* bump @types/node from 15.0.2 to 15.3.0 ([#674](https://github.com/thenativeweb/flaschenpost/issues/674)) ([3cfaaf4](https://github.com/thenativeweb/flaschenpost/commit/3cfaaf49bb59b4d092caa6119537f311377139f9))
+
+## [5.0.31](https://github.com/thenativeweb/flaschenpost/compare/5.0.30...5.0.31) (2021-05-17)
+
+
+### Bug Fixes
+
+* bump @types/lodash from 4.14.168 to 4.14.169 ([#676](https://github.com/thenativeweb/flaschenpost/issues/676)) ([4b7ad79](https://github.com/thenativeweb/flaschenpost/commit/4b7ad792194d09e66f2c0c507fdca5b59db986d8))
+
 ## [5.0.30](https://github.com/thenativeweb/flaschenpost/compare/5.0.29...5.0.30) (2021-05-10)
 
 
