@@ -1,3 +1,10 @@
+## [5.0.36](https://github.com/thenativeweb/flaschenpost/compare/5.0.35...5.0.36) (2021-05-31)
+
+
+### Bug Fixes
+
+* Update dependencies. ([#694](https://github.com/thenativeweb/flaschenpost/issues/694)) ([7608376](https://github.com/thenativeweb/flaschenpost/commit/7608376240a6bf22f413bb20ef85b4a3eaec4565))
+
 ## [5.0.35](https://github.com/thenativeweb/flaschenpost/compare/5.0.34...5.0.35) (2021-05-25)
 
 
