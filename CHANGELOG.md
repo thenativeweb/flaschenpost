@@ -1,3 +1,10 @@
+## [5.0.37](https://github.com/thenativeweb/flaschenpost/compare/5.0.36...5.0.37) (2021-06-14)
+
+
+### Bug Fixes
+
+* bump processenv from 3.0.5 to 3.0.8 ([#703](https://github.com/thenativeweb/flaschenpost/issues/703)) ([a0b9189](https://github.com/thenativeweb/flaschenpost/commit/a0b9189174e5ebc759ed2b3b335cb7f6b4793ee8))
+
 ## [5.0.36](https://github.com/thenativeweb/flaschenpost/compare/5.0.35...5.0.36) (2021-05-31)
 
 
