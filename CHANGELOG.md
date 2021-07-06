@@ -1,3 +1,10 @@
+## [5.0.38](https://github.com/thenativeweb/flaschenpost/compare/5.0.37...5.0.38) (2021-07-06)
+
+
+### Bug Fixes
+
+* bump @types/stringify-object from 3.3.0 to 3.3.1 ([#716](https://github.com/thenativeweb/flaschenpost/issues/716)) ([a37c576](https://github.com/thenativeweb/flaschenpost/commit/a37c57626ee302281b18745fcbc63176db6add8a))
+
 ## [5.0.37](https://github.com/thenativeweb/flaschenpost/compare/5.0.36...5.0.37) (2021-06-14)
 
 
