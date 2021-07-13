@@ -1,3 +1,10 @@
+## [5.0.40](https://github.com/thenativeweb/flaschenpost/compare/5.0.39...5.0.40) (2021-07-13)
+
+
+### Bug Fixes
+
+* bump @types/express from 4.17.12 to 4.17.13 ([#719](https://github.com/thenativeweb/flaschenpost/issues/719)) ([7530d54](https://github.com/thenativeweb/flaschenpost/commit/7530d54803fbe31884a2f61a7671339baba46d3e))
+
 ## [5.0.39](https://github.com/thenativeweb/flaschenpost/compare/5.0.38...5.0.39) (2021-07-13)
 
 
