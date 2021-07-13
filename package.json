@@ -59,13 +59,13 @@
     "stringify-object": "3.3.0"
   },
   "devDependencies": {
-    "@types/common-tags": "1.8.0",
+    "@types/common-tags": "1.8.1",
     "@types/supertest": "2.0.11",
-    "assertthat": "6.3.5",
+    "assertthat": "6.3.7",
     "common-tags": "1.8.0",
     "express": "4.17.1",
     "nodeenv": "3.0.65",
-    "record-stdstreams": "3.0.63",
+    "record-stdstreams": "3.0.64",
     "roboter": "11.7.7",
     "semantic-release-configuration": "2.0.5",
     "strip-ansi": "6.0.0",
