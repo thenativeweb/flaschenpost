@@ -1,3 +1,10 @@
+## [5.0.45](https://github.com/thenativeweb/flaschenpost/compare/5.0.44...5.0.45) (2021-08-02)
+
+
+### Bug Fixes
+
+* bump chalk from 4.1.1 to 4.1.2 ([#741](https://github.com/thenativeweb/flaschenpost/issues/741)) ([3d5b3f8](https://github.com/thenativeweb/flaschenpost/commit/3d5b3f896c57928d0ad28158e046ae6af8eba333))
+
 ## [5.0.44](https://github.com/thenativeweb/flaschenpost/compare/5.0.43...5.0.44) (2021-08-02)
 
 
