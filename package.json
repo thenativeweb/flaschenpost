@@ -1,6 +1,6 @@
 {
   "name": "flaschenpost",
-  "version": "5.0.43",
+  "version": "5.0.44",
   "description": "flaschenpost is a logger for cloud-based applications.",
   "contributors": [
     {
@@ -43,7 +43,7 @@
     "@types/express": "4.17.13",
     "@types/find-root": "1.1.2",
     "@types/lodash": "4.14.171",
-    "@types/node": "16.4.3",
+    "@types/node": "16.4.10",
     "@types/on-finished": "2.3.1",
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "3.3.1",
@@ -64,8 +64,8 @@
     "assertthat": "6.3.11",
     "common-tags": "1.8.0",
     "express": "4.17.1",
-    "nodeenv": "3.0.67",
-    "record-stdstreams": "3.0.66",
+    "nodeenv": "3.0.68",
+    "record-stdstreams": "3.0.67",
     "roboter": "11.7.8",
     "semantic-release-configuration": "2.0.5",
     "strip-ansi": "6.0.0",
