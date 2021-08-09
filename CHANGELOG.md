@@ -1,3 +1,10 @@
+## [5.0.47](https://github.com/thenativeweb/flaschenpost/compare/5.0.46...5.0.47) (2021-08-09)
+
+
+### Bug Fixes
+
+* bump @types/lodash from 4.14.171 to 4.14.172 ([#743](https://github.com/thenativeweb/flaschenpost/issues/743)) ([f5c742b](https://github.com/thenativeweb/flaschenpost/commit/f5c742b1ef0a9ad6414f2fb65258f0bda557ac8d))
+
 ## [5.0.46](https://github.com/thenativeweb/flaschenpost/compare/5.0.45...5.0.46) (2021-08-09)
 
 
