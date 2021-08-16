@@ -69,7 +69,7 @@
     "roboter": "11.7.8",
     "semantic-release-configuration": "2.0.5",
     "strip-ansi": "6.0.0",
-    "supertest": "6.1.4"
+    "supertest": "6.1.5"
   },
   "repository": {
     "type": "git",
