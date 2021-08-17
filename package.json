@@ -61,15 +61,15 @@
   "devDependencies": {
     "@types/common-tags": "1.8.1",
     "@types/supertest": "2.0.11",
-    "assertthat": "6.3.11",
+    "assertthat": "6.3.13",
     "common-tags": "1.8.0",
     "express": "4.17.1",
-    "nodeenv": "3.0.69",
-    "record-stdstreams": "3.0.68",
+    "nodeenv": "3.0.71",
+    "record-stdstreams": "3.0.69",
     "roboter": "11.7.8",
     "semantic-release-configuration": "2.0.5",
     "strip-ansi": "6.0.0",
-    "supertest": "6.1.4"
+    "supertest": "6.1.5"
   },
   "repository": {
     "type": "git",
