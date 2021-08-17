@@ -1,3 +1,10 @@
+## [5.0.49](https://github.com/thenativeweb/flaschenpost/compare/5.0.48...5.0.49) (2021-08-17)
+
+
+### Bug Fixes
+
+* bump @types/node from 16.4.13 to 16.6.1 ([#747](https://github.com/thenativeweb/flaschenpost/issues/747)) ([fc43e37](https://github.com/thenativeweb/flaschenpost/commit/fc43e37f8adedc6a79e6180a850dc731f9c81f4a))
+
 ## [5.0.48](https://github.com/thenativeweb/flaschenpost/compare/5.0.47...5.0.48) (2021-08-17)
 
 
