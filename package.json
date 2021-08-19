@@ -36,8 +36,12 @@
       "email": "hannes.leutloff@thenativeweb.io"
     }
   ],
+  "private": false,
   "main": "build/lib/index.js",
   "types": "build/lib/index.d.ts",
+  "engines": {
+    "node": ">= 16.7.0"
+  },
   "dependencies": {
     "@types/app-root-path": "1.2.4",
     "@types/express": "4.17.13",
@@ -71,6 +75,7 @@
     "strip-ansi": "6.0.0",
     "supertest": "6.1.5"
   },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/thenativeweb/flaschenpost.git"
