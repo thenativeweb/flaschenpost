@@ -1,7 +1,7 @@
-import { asHumanReadable } from 'lib/formatters/asHumanReadable';
+import { asHumanReadable } from '../../lib/formatters/asHumanReadable';
 import { assert } from 'assertthat';
 import { Configuration } from '../../lib/Configuration';
-import { getLogEntryIdGenerator } from 'lib/getLogEntryIdGenerator';
+import { getLogEntryIdGenerator } from '../../lib/getLogEntryIdGenerator';
 import { nodeenv } from 'nodeenv';
 import { record } from 'record-stdstreams';
 import stripAnsi from 'strip-ansi';
