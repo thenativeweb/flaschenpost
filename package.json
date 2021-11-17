@@ -63,7 +63,7 @@
     "@types/common-tags": "1.8.1",
     "@types/supertest": "2.0.11",
     "assertthat": "6.3.14",
-    "common-tags": "1.8.0",
+    "common-tags": "1.8.1",
     "express": "4.17.1",
     "nodeenv": "3.0.71",
     "record-stdstreams": "3.0.69",
