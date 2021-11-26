@@ -40,7 +40,7 @@ const asHumanReadable: Formatter = function (logEntry: LogEntry): string {
     result += chalk.gray(stringifyObject(logEntry.metadata, {
       indent: '  ',
       singleQuotes: true
-    }).replace(/\\n/gu, '\n'));
+    }).replaceAll(/\\n/gu, '\n'));
     result += '\n';
   }
   result += chalk.gray('\u2500'.repeat(process.stdout.columns || 80));
