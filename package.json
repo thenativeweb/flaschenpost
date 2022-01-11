@@ -66,7 +66,7 @@
     "common-tags": "1.8.2",
     "express": "4.17.2",
     "nodeenv": "3.0.72",
-    "record-stdstreams": "3.0.70",
+    "record-stdstreams": "3.0.71",
     "roboter": "12.6.0",
     "semantic-release-configuration": "2.0.5",
     "strip-ansi": "6.0.0",
