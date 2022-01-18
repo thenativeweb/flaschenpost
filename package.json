@@ -70,7 +70,7 @@
     "roboter": "12.6.2",
     "semantic-release-configuration": "2.0.5",
     "strip-ansi": "6.0.0",
-    "supertest": "6.1.6"
+    "supertest": "6.2.1"
   },
   "scripts": {},
   "repository": {
