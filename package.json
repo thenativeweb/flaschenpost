@@ -44,7 +44,7 @@
     "@types/express": "4.17.13",
     "@types/find-root": "1.1.2",
     "@types/lodash": "4.14.178",
-    "@types/node": "17.0.15",
+    "@types/node": "17.0.18",
     "@types/on-finished": "2.3.1",
     "@types/stack-trace": "0.0.29",
     "@types/stringify-object": "4.0.1",
