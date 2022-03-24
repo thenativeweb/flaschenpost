@@ -4,7 +4,7 @@ import { Configuration } from './Configuration';
 import { Formatter } from './formatters/Formatter';
 import { getMiddleware } from './middleware/getMiddleware';
 import { Logger } from './Logger';
-import { LogTarget } from './LogTarget';
+import { Output } from './Output';
 import { flaschenpost, Flaschenpost } from './flaschenpost';
 
 export {
@@ -15,6 +15,6 @@ export {
   asHumanReadable,
   asJson,
   Logger,
-  LogTarget,
+  Output,
   getMiddleware
 };

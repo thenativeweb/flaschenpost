@@ -96,7 +96,7 @@ class Logger {
 
     const formattedLogEntry = this.configuration.formatter(logEntry);
 
-    this.configuration.logTarget(formattedLogEntry);
+    this.configuration.output(formattedLogEntry);
   }
 }
 

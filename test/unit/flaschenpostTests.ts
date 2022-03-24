@@ -1,10 +1,10 @@
 import { assert } from 'assertthat';
-import { defaultLogTarget } from '../../lib/defaultLogTarget';
+import { defaultOutput } from '../../lib/defaultOutput';
 import { getLogEntryIdGenerator } from '../../lib/getLogEntryIdGenerator';
 import { nodeenv } from 'nodeenv';
 import { record } from 'record-stdstreams';
 import stripAnsi from 'strip-ansi';
-import { asHumanReadable, Configuration, flaschenpost, Flaschenpost, LogTarget } from '../../lib';
+import { asHumanReadable, Configuration, flaschenpost, Flaschenpost, Output } from '../../lib';
 
 suite('flaschenpost', (): void => {
   test('has configure and getLogger functions.', async (): Promise<void> => {
@@ -80,7 +80,7 @@ suite('flaschenpost', (): void => {
         flaschenpostInstance.configure(new Configuration(
           [ '' ],
           asHumanReadable,
-          defaultLogTarget,
+          defaultOutput,
           'error',
           'localhost',
           getLogEntryIdGenerator()
@@ -98,7 +98,7 @@ suite('flaschenpost', (): void => {
       });
     });
 
-    suite('log target', (): void => {
+    suite('output', (): void => {
       let flaschenpostInstance: Flaschenpost;
       let restore: () => void;
 
@@ -132,14 +132,14 @@ suite('flaschenpost', (): void => {
 
       test('can be set to a custom function.', async (): Promise<void> => {
         const logEntries: string[] = [];
-        const customLogTarget: LogTarget = function (logEntry: string): void {
+        const customOutput: Output = function (logEntry: string): void {
           logEntries.push(logEntry);
         };
 
         const stop = record(false);
 
         flaschenpostInstance.configure(
-          flaschenpostInstance.getConfiguration().withLogTarget(customLogTarget)
+          flaschenpostInstance.getConfiguration().withOutput(customOutput)
         );
         const logger = flaschenpostInstance.getLogger();
 
