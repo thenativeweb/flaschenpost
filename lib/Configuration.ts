@@ -3,6 +3,7 @@ import { cloneDeep } from 'lodash';
 import { Formatter } from './formatters/Formatter';
 import { LogEntryIdGenerator } from './LogEntryIdGenerator';
 import { LogLevel } from './LogLevel';
+import { LogTarget } from './LogTarget';
 import { PackageJson } from './PackageJson';
 import { readPackageJson } from './readPackageJson';
 
@@ -13,6 +14,8 @@ class Configuration {
 
   public formatter: Formatter;
 
+  public logTarget: LogTarget;
+
   public highestEnabledLogLevel: LogLevel;
 
   public hostname: string;
@@ -22,6 +25,7 @@ class Configuration {
   public constructor (
     debugModuleFilter: string[],
     formatter: Formatter,
+    logTarget: LogTarget,
     highestEnabledLogLevel: LogLevel,
     hostname: string,
     logEntryIdGenerator: LogEntryIdGenerator
@@ -29,6 +33,7 @@ class Configuration {
     this.application = readPackageJson(appRootPath.path);
     this.debugModuleFilter = debugModuleFilter;
     this.formatter = formatter;
+    this.logTarget = logTarget;
     this.highestEnabledLogLevel = highestEnabledLogLevel;
     this.hostname = hostname;
     this.logEntryIdGenerator = logEntryIdGenerator;
@@ -54,6 +59,14 @@ class Configuration {
     const newConfiguration = cloneDeep(this);
 
     newConfiguration.formatter = formatter;
+
+    return newConfiguration;
+  }
+
+  public withLogTarget (logTarget: LogTarget): Configuration {
+    const newConfiguration = cloneDeep(this);
+
+    newConfiguration.logTarget = logTarget;
 
     return newConfiguration;
   }

@@ -1,5 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { Configuration } from './Configuration';
+import { defaultLogTarget } from './defaultLogTarget';
 import findRoot from 'find-root';
 import fs from 'fs';
 import { getLogEntryIdGenerator } from './getLogEntryIdGenerator';
@@ -49,6 +50,7 @@ class Flaschenpost {
     this.configuration = new Configuration(
       debugModuleFilter,
       formatter,
+      defaultLogTarget,
       highestEnabledLogLevel,
       hostname,
       logEntryIdGenerator
