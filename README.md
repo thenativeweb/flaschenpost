@@ -217,6 +217,25 @@ import { formatters } from 'flaschenpost';
 
 Then access the `asHumanReadable` or the `asJson` function and hand it over using the `withFormatter` function.
 
+#### Setting a custom output function
+
+To redirect log entries to a custom output, use the `withOutput` function. As a parameter, provide a function that takes a `string` and writes it to wherever you like:
+
+```javascript
+const updatedConfiguration =
+  configuration.withOutput(logEntry => {
+      // Write to a log file, or a database, or just ignore the entry.
+  });
+```
+
+If you use TypeScript, you can use the `Output` interface to type your function:
+
+```typescript
+import { Output } from 'flaschenpost';
+
+const customOutput: Output = ...;
+```
+
 #### Setting the log level
 
 To set the log level, use the `withHighestEnabledLogLevel` function:

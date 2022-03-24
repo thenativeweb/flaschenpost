@@ -1,9 +1,8 @@
-import { asJson } from '../../lib/formatters/asJson';
 import { assert } from 'assertthat';
-import { Configuration } from '../../lib/Configuration';
-import { Formatter } from '../../lib/formatters/Formatter';
+import { defaultOutput } from '../../lib/defaultOutput';
 import { getLogEntryIdGenerator } from '../../lib/getLogEntryIdGenerator';
 import { LogLevel } from '../../lib/LogLevel';
+import { asJson, Configuration, Formatter, Output } from '../../lib';
 
 suite('Configuration', (): void => {
   test('is a function.', async (): Promise<void> => {
@@ -13,6 +12,7 @@ suite('Configuration', (): void => {
   const defaultConfiguration = new Configuration(
     [ '' ],
     asJson,
+    defaultOutput,
     'info',
     'localhost',
     getLogEntryIdGenerator()
@@ -30,6 +30,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.application).is.identicalTo(newApplication);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.output).is.equalTo(defaultConfiguration.output);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
@@ -45,6 +46,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.identicalTo(newDebugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.output).is.equalTo(defaultConfiguration.output);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
@@ -63,6 +65,28 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.identicalTo(newFormatter);
+      assert.that(newConfiguration.output).is.equalTo(defaultConfiguration.output);
+      assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
+      assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
+      assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
+    });
+  });
+
+  suite('withOutput', (): void => {
+    test('returns a clone of the configuration with a new output.', async (): Promise<void> => {
+      /* eslint-disable unicorn/consistent-function-scoping */
+      const newOutput: Output = (): void => {
+        // Intentionally left empty.
+      };
+      /* eslint-enable unicorn/consistent-function-scoping */
+
+      const newConfiguration = defaultConfiguration.withOutput(newOutput);
+
+      assert.that(newConfiguration).is.not.identicalTo(defaultConfiguration);
+      assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
+      assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
+      assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.output).is.identicalTo(newOutput);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
@@ -78,6 +102,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.output).is.equalTo(defaultConfiguration.output);
       assert.that(newConfiguration.highestEnabledLogLevel).is.identicalTo(newHighestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
@@ -93,6 +118,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.output).is.equalTo(defaultConfiguration.output);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.identicalTo(newHostname);
       assert.that(newConfiguration.logEntryIdGenerator).is.equalTo(defaultConfiguration.logEntryIdGenerator);
@@ -114,6 +140,7 @@ suite('Configuration', (): void => {
       assert.that(newConfiguration.application).is.equalTo(defaultConfiguration.application);
       assert.that(newConfiguration.debugModuleFilter).is.equalTo(defaultConfiguration.debugModuleFilter);
       assert.that(newConfiguration.formatter).is.equalTo(defaultConfiguration.formatter);
+      assert.that(newConfiguration.output).is.equalTo(defaultConfiguration.output);
       assert.that(newConfiguration.highestEnabledLogLevel).is.equalTo(defaultConfiguration.highestEnabledLogLevel);
       assert.that(newConfiguration.hostname).is.equalTo(defaultConfiguration.hostname);
       assert.that(newConfiguration.logEntryIdGenerator.next().value).is.equalTo(1_337);
