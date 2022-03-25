@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/thenativeweb/flaschenpost/compare/5.1.0...5.1.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* bump minimist from 1.2.5 to 1.2.6 ([#836](https://github.com/thenativeweb/flaschenpost/issues/836)) ([d4a94d8](https://github.com/thenativeweb/flaschenpost/commit/d4a94d8d0ce0d1ce510833bead82b99ca0ea5704))
+
 # [5.1.0](https://github.com/thenativeweb/flaschenpost/compare/5.0.50...5.1.0) (2022-03-24)
 
 
