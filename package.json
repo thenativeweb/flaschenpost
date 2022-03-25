@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@types/common-tags": "1.8.1",
-    "@types/supertest": "2.0.11",
+    "@types/supertest": "2.0.12",
     "assertthat": "6.4.0",
     "common-tags": "1.8.2",
     "express": "4.17.3",
