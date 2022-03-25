@@ -96,9 +96,7 @@ class Logger {
 
     const formattedLogEntry = this.configuration.formatter(logEntry);
 
-    /* eslint-disable no-console */
-    console.log(formattedLogEntry);
-    /* eslint-enable no-console */
+    this.configuration.output(formattedLogEntry);
   }
 }
 

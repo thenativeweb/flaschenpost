@@ -1,11 +1,10 @@
-import { asHumanReadable } from '../../lib/formatters/asHumanReadable';
 import { assert } from 'assertthat';
-import { Configuration } from '../../lib/Configuration';
+import { defaultOutput } from '../../lib/defaultOutput';
 import { getLogEntryIdGenerator } from '../../lib/getLogEntryIdGenerator';
 import { nodeenv } from 'nodeenv';
 import { record } from 'record-stdstreams';
 import stripAnsi from 'strip-ansi';
-import { flaschenpost, Flaschenpost } from '../../lib/flaschenpost';
+import { asHumanReadable, Configuration, flaschenpost, Flaschenpost, Output } from '../../lib';
 
 suite('flaschenpost', (): void => {
   test('has configure and getLogger functions.', async (): Promise<void> => {
@@ -81,6 +80,7 @@ suite('flaschenpost', (): void => {
         flaschenpostInstance.configure(new Configuration(
           [ '' ],
           asHumanReadable,
+          defaultOutput,
           'error',
           'localhost',
           getLogEntryIdGenerator()
@@ -95,6 +95,61 @@ suite('flaschenpost', (): void => {
 
         assert.that(lines).is.containing('Error message (error)');
         assert.that(lines.length).is.equalTo(5);
+      });
+    });
+
+    suite('output', (): void => {
+      let flaschenpostInstance: Flaschenpost;
+      let restore: () => void;
+
+      setup(async (): Promise<void> => {
+        restore = nodeenv({
+          /* eslint-disable @typescript-eslint/naming-convention */
+          LOG_DEBUG_MODULE_FILTER: '',
+          LOG_FORMATTER: 'human',
+          LOG_LEVEL: 'info'
+          /* eslint-enable @typescript-eslint/naming-convention */
+        });
+
+        flaschenpostInstance = new Flaschenpost();
+      });
+
+      teardown(async (): Promise<void> => {
+        restore();
+      });
+
+      test('logs to stdout by default.', async (): Promise<void> => {
+        const stop = record(false);
+        const logger = flaschenpostInstance.getLogger();
+
+        logger.info('Info message');
+        logger.debug('Debug message');
+
+        const { stdout } = stop();
+
+        assert.that(stdout.length).is.greaterThan(0);
+      });
+
+      test('can be set to a custom function.', async (): Promise<void> => {
+        const logEntries: string[] = [];
+        const customOutput: Output = function (logEntry: string): void {
+          logEntries.push(logEntry);
+        };
+
+        const stop = record(false);
+
+        flaschenpostInstance.configure(
+          flaschenpostInstance.getConfiguration().withOutput(customOutput)
+        );
+        const logger = flaschenpostInstance.getLogger();
+
+        logger.info('Info message');
+        logger.debug('Debug message');
+
+        const { stdout } = stop();
+
+        assert.that(stdout.length).is.equalTo(0);
+        assert.that(logEntries.length).is.greaterThan(0);
       });
     });
   });
