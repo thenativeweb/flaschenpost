@@ -64,7 +64,7 @@
     "@types/supertest": "2.0.12",
     "assertthat": "6.5.2",
     "common-tags": "1.8.2",
-    "express": "4.17.3",
+    "express": "4.18.0",
     "nodeenv": "3.0.74",
     "record-stdstreams": "3.0.73",
     "roboter": "13.1.0",
