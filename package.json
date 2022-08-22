@@ -67,7 +67,7 @@
     "express": "4.18.1",
     "nodeenv": "3.0.74",
     "record-stdstreams": "3.0.73",
-    "roboter": "13.2.0",
+    "roboter": "13.2.1",
     "semantic-release-configuration": "2.0.7",
     "strip-ansi": "6.0.0",
     "supertest": "6.2.4"
