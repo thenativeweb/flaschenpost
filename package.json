@@ -41,7 +41,7 @@
   "types": "build/lib/index.d.ts",
   "dependencies": {
     "@types/app-root-path": "1.2.4",
-    "@types/express": "4.17.13",
+    "@types/express": "4.17.14",
     "@types/find-root": "1.1.2",
     "@types/lodash": "4.14.185",
     "@types/node": "18.7.17",
